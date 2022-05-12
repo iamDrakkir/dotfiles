@@ -31,6 +31,7 @@ local options = {
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
   wrap = false,                            -- display lines as one long line
   scrolloff = 8,                           -- is one of my fav
+  laststatus = 3,                          -- use global status line
   wildmenu = true,
   listchars="tab:▸\\ ,trail:·"
 }

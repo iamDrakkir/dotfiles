@@ -93,6 +93,7 @@ telescope.setup {
       grouped = true,
       sorting_strategy = "ascending",
       layout_strategy = "horizontal",
+      hidden = true,
       layout_config = {
         prompt_position = "top",
         anchor = "W",
