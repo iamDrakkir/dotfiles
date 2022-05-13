@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 local actions = require "telescope.actions"
-local action_layout = require("telescope.actions.layout")
+local action_layout = require "telescope.actions.layout"
 
 telescope.setup {
   defaults = {
@@ -77,6 +77,9 @@ telescope.setup {
     },
   },
   pickers = {
+    find_files = {
+      find_command = {"fd", "--type", "f", "--strip-cwd-prefix"}
+    },
     buffers = {
       sort_lastused = true,
       previewer = false,
@@ -123,4 +126,9 @@ M.edit_neovim = function()
     })
 end
 
+M.project_files = function()
+  local opts = {} -- define here if you want to define something
+  local ok = pcall(require"telescope.builtin".git_files, opts)
+  if not ok then require"telescope.builtin".find_files(opts) end
+end
 return M
