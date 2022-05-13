@@ -41,11 +41,7 @@ zsh_add_file "zsh-prompt"
 # More completions https://github.com/zsh-users/zsh-completions
 
 # Key-bindings
-bindkey -s '^o' 'ranger\n'
-bindkey -s '^f' 'zi\n'
-bindkey -s '^s' 'ncdu\n'
 bindkey -s '^v' 'nvim\n'
-bindkey -s '^z' 'zi\n'
 bindkey '^[[P' delete-char
 bindkey "^p" up-line-or-beginning-search # Up
 bindkey "^n" down-line-or-beginning-search # Down

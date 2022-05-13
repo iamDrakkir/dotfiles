@@ -35,3 +35,27 @@ zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[red]%}%m%u%c%{$fg[yellow]
 PROMPT="%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
 # PROMPT="%{$fg[green]%}%n@%m %~ %{$reset_color%}%#> "
 PROMPT+="\$vcs_info_msg_0_ "
+
+# format right-side prompt with execution time of last command.
+function preexec() {
+  timer=$(($(date +%s%0N)/1000000))
+}
+
+function precmd() {
+  if [ $timer ]; then
+    now=$(($(date +%s%0N)/1000000))
+    elapsed=$(($now-$timer))
+
+    if [ ${elapsed} -gt 60000 ]; then
+      elapsed=$((${elapsed}/60000))
+      unit='min'
+    elif [ ${elapsed} -gt 1000 ]; then
+      elapsed=$((${elapsed}/1000))
+      unit='s'
+    else
+      unit='ms'
+    fi
+    export RPROMPT="%F{blue}${elapsed}${unit} %{$reset_color%}"
+    unset timer
+  fi
+}
