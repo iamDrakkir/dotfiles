@@ -94,6 +94,7 @@ telescope.setup {
       sorting_strategy = "ascending",
       layout_strategy = "horizontal",
       hidden = true,
+      display_stat = false,
       layout_config = {
         prompt_position = "top",
         anchor = "W",
