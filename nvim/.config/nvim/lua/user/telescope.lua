@@ -8,7 +8,19 @@ local action_layout = require "telescope.actions.layout"
 
 telescope.setup {
   defaults = {
-    path_display = { "smart" },
+    path_display = { "truncate" },
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+      '--hidden',
+      '-g',
+      '!.git/'
+    },
     mappings = {
       i = {
         ["<C-n>"] = actions.cycle_history_next,
@@ -127,8 +139,9 @@ M.edit_neovim = function()
 end
 
 M.project_files = function()
-  local opts = {} -- define here if you want to define something
+  local opts = {}
   local ok = pcall(require"telescope.builtin".git_files, opts)
   if not ok then require"telescope.builtin".find_files(opts) end
 end
+
 return M
