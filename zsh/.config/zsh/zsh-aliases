@@ -1,0 +1,49 @@
+#!/bin/sh
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Colorize grep output (good for log files)
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# Confirm before overwriting something
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i'
+
+# Easier to read disk
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+
+# Neovim
+alias vim='nvim'
+alias vi='nvim'
+
+# Folders
+alias dot='$HOME/.dotfiles'
+
+# Quick cd
+alias cdd='cd $HOME/.dotfiles'
+alias cdn='cd $HOME/.dotfiles/nvim/.config/nvim'
+
+# Git aliases
+alias gs='git status'
+alias ga='git add'
+alias gp='git push'
+alias gpo='git push origin'
+alias gtd='git tag --delete'
+alias gtdr='git tag --delete origin'
+alias gr='git branch -r'
+alias gplo='git pull origin'
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias gco='git checkout '
+alias gl='git log'
+alias gr='git remote'
+alias grs='git remote show'
+alias glo='git log --pretty="oneline"'
+alias glol='git log --graph --oneline --decorate'
