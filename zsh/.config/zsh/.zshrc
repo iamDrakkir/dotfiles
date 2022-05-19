@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # Some useful options (man zshoptions)
-setopt autocd extendedglob nomatch menucomplete
-setopt extendedhistory sharehistory
-setopt interactive_comments
+setopt autoCd extendedGlob noMatch menuComplete
+setopt extendedHistory incAppendHistoryTime
+setopt interactiveComments
 stty stop undef		# Disable ctrl-s to freeze terminal.
 zle_highlight=('paste:none')
 
@@ -24,9 +24,8 @@ zsh_add_file "zsh-completion"
 zsh_add_file "zsh-prompt"
 
 # Plugins
-#zsh_add_plugin "zsh-users/zsh-autosuggestions"
-#zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
-#zsh_add_completion "esc/conda-zsh-completion" false
+zsh_add_plugin "zsh-users/zsh-autosuggestions"
+zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 # For more plugins: https://github.com/unixorn/awesome-zsh-plugins
 # More completions https://github.com/zsh-users/zsh-completions
 
