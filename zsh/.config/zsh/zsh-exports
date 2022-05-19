@@ -17,3 +17,6 @@ export VISUAL=nvim
 
 # PATH
 export PATH="$HOME/.local/bin":$PATH
+
+# You-should-use
+export YSU_IGNORED_ALIASES=("vim" "vi")
