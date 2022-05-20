@@ -15,6 +15,8 @@ export MANWIDTH=999
 export EDITOR='nvim'
 export VISUAL=nvim
 
+export BAT_THEME='gruvbox-dark'
+
 # PATH
 export PATH="$HOME/.local/bin":$PATH
 
