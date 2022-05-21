@@ -1,14 +1,4 @@
 #!/bin/sh
-alias ls='ls --color=auto'
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Colorize grep output (good for log files)
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-
 # Confirm before overwriting something
 alias cp="cp -i"
 alias mv='mv -i'
@@ -29,15 +19,15 @@ alias dot='$HOME/.dotfiles'
 alias cdd='cd $HOME/.dotfiles'
 alias cdn='cd $HOME/.dotfiles/nvim/.config/nvim'
 
-# Replace ls 
+# Oxidize 
 alias ls='exa --grid --color auto --icons --sort=type'
 alias ll='exa --long --color always --icons --sort=type'
 alias la='exa --grid --all --color auto --icons --sort=type'
 alias lla='exa --long --all --color auto --icons --sort=type'
 alias tree='exa --tree'
-
-# Replace cat 
 alias cat='batcat'
+alias find='fdfind'
+alias grep='rg'
 
 # Git aliases
 alias gs='git status'
