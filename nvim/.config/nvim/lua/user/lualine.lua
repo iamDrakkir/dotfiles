@@ -33,6 +33,7 @@ end
 
 local diff = {
 	"diff",
+  symbols = { added = " ", modified = " ", removed = " " },
   source = diff_source,
 }
 
@@ -67,8 +68,8 @@ lualine.setup {
       disabled_filetypes = {},
       always_divide_middle = true,
       globalstatus = true,
-    },
-   sections = {
+  },
+  sections = {
     lualine_a = { mode },
     lualine_b = { {'b:gitsigns_head', icon = ''} },
     lualine_c = { diff },
@@ -80,7 +81,7 @@ lualine.setup {
   tabline = {
     lualine_a = {'buffers'},
     lualine_b = {},
-    lualine_c = {'filename'},
+    lualine_c = {},
     lualine_x = {},
     lualine_y = {},
     lualine_z = {'tabs'},
