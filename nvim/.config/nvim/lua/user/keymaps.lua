@@ -38,6 +38,7 @@ keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 -- telescope nevigation
 keymap("n", "<leader>f", "<cmd>lua require('user.telescope').project_files()<cr>", opts)
+keymap("n", "<leader>p", ":Telescope projects<cr>", opts)
 keymap("n", "<leader>gg", ":Telescope live_grep<cr>", opts)
 keymap("n", "<leader>gt", ":Telescope grep_string<cr>", opts)
 keymap("n", "<leader>b", ":Telescope buffers ignore_current_buffer=true<cr>", opts)
