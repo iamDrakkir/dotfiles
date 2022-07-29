@@ -33,7 +33,8 @@ local options = {
   scrolloff = 8,                           -- is one of my fav
   laststatus = 3,                          -- use global status line
   wildmenu = true,
-  listchars="tab:▸\\ ,trail:·"
+  listchars="eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:⋅",
+  list = true,
 }
 
 vim.opt.shortmess:append "c"
