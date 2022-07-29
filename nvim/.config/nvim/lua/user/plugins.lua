@@ -46,6 +46,7 @@ return packer.startup(function(use)
 
   -- Colorschemes
   use "ellisonleao/gruvbox.nvim"
+  use "iamdrakkir/gruvbox-material"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -85,8 +86,8 @@ return packer.startup(function(use)
   use "numToStr/Comment.nvim"
   use "akinsho/toggleterm.nvim"
   use "j-hui/fidget.nvim"
-  use "nvim-lualine/lualine.nvim"
   use "norcalli/nvim-colorizer.lua"
+  use "feline-nvim/feline.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

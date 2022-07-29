@@ -141,6 +141,7 @@ local M = {}
 M.edit_neovim = function()
     require("telescope.builtin").find_files({
         prompt_title = "< edit neovim >",
+        follow = true,
         cwd = CWD_PATH,
         hidden = false,
     })

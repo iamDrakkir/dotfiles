@@ -1,8 +1,10 @@
-local colorscheme = "gruvbox"
+local colorscheme = "gruvbox-material"
 
 vim.g.gruvbox_contrast_dark = "hard"
 vim.g.gruvbox_sign_column = 'bg0'
 vim.g.gruvbox_italicize_comments = 0
+
+vim.g.gruvbox_material_foreground = "original"
 
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not status_ok then
