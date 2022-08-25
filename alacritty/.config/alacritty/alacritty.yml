@@ -27,7 +27,7 @@ font:
     style: Regular
   bold:
     family: JetBrainsMono Nerd Font Mono
-    # style: Bold
+    style: Bold
   italic:
     family: JetBrainsMono Nerd Font Mono
     # style: Italic
