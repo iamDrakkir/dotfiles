@@ -95,7 +95,6 @@ return packer.startup(function(use)
   use "akinsho/toggleterm.nvim"
   use "j-hui/fidget.nvim"
   use "feline-nvim/feline.nvim"
-  use "github/copilot.vim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
