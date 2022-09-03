@@ -4,13 +4,17 @@ alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
 
+# quick history
+alias h="history"
+
 # Easier to read disk
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
+alias df='df -h'       # human-readable sizes
+alias free='free -m'   # show sizes in MB
 
 # Neovim
 alias vim='nvim'
 alias vi='nvim'
+alias v='nvim'
 
 # Folders
 alias dot='$HOME/.dotfiles'

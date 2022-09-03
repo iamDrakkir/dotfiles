@@ -90,7 +90,7 @@ telescope.setup {
   },
   pickers = {
     find_files = {
-      find_command = {"fd", "--type", "f", "--strip-cwd-prefix"}
+      find_command = {"fdfind", "--type", "f", "--strip-cwd-prefix"}
     },
     buffers = {
       sort_lastused = true,
@@ -136,7 +136,7 @@ telescope.load_extension('projects')
 if vim.fn.has('win32') == 1 then
   CWD_PATH = "~/AppData/Local/nvim/"
 else
-  CWD_PATH = "~/.config/nvim/"
+  CWD_PATH = "~/.dotfiles/nvim/.config/nvim/"
 end
 
 local M = {}
