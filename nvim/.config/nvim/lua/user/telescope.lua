@@ -118,20 +118,27 @@ telescope.setup {
       },
       path_display = { truncate = 1 }
     },
-   fzf = {
+    fzf = {
       fuzzy = true,                    -- false will only do exact matching
       override_generic_sorter = true,  -- override the generic sorter
       override_file_sorter = true,     -- override the file sorter
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
                                        -- the default case_mode is "smart_case"
-    }
+    },
+    repo = {
+      list = {
+        fd_opts = {"-E", "packer"},
+        -- search_dirs = {},
+        tail_path = true,
+        -- shorten_path = true,
+      },
+    },
   },
 }
 
 telescope.load_extension("file_browser")
 telescope.load_extension("fzf")
-telescope.load_extension('projects')
--- telescope.load_extension('project')
+telescope.load_extension('repo')
 
 if vim.fn.has('win32') == 1 then
   CWD_PATH = "~/AppData/Local/nvim/"

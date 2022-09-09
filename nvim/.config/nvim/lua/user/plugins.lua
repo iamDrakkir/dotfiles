@@ -69,22 +69,23 @@ return packer.startup(function(use)
   use "nvim-telescope/telescope.nvim"
   use "nvim-telescope/telescope-file-browser.nvim"
   -- use "nvim-telescope/telescope-project.nvim"
-  use {
-    "ahmedkhalf/project.nvim",
-    config = function()
-      require("project_nvim").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
-  }
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  -- use {
+  --   "ahmedkhalf/project.nvim",
+  --   config = function()
+  --     require("project_nvim").setup {
+  --       -- your configuration comes here
+  --       -- or leave it empty to use the default settings
+  --       -- refer to the configuration section below
+  --     }
+  --   end
+  -- }
+  use "cljoly/telescope-repo.nvim"
+  use {"nvim-telescope/telescope-fzf-native.nvim", run = 'make' }
 
   -- Treesitter
   use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 
-  use 'ggandor/lightspeed.nvim'
+  use "ggandor/leap.nvim"
 
   use "sindrets/diffview.nvim"
   use "unblevable/quick-scope"
