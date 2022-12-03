@@ -41,28 +41,23 @@ packer.init {
 -- Install your plugins here
 return packer.startup(function(use)
   use "wbthomason/packer.nvim" -- Have packer manage itself
-  use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
+  use "nvim-lua/popup.nvim"    -- An implementation of the Popup API from vim in Neovim
+  use "nvim-lua/plenary.nvim"  -- Useful lua functions used ny lots of plugins
 
   -- Colorschemes
   use "sainnhe/gruvbox-material"
 
   -- cmp plugins
-  use "hrsh7th/nvim-cmp" -- The completion plugin
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- Path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "hrsh7th/cmp-nvim-lsp" -- Lsp completion
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
-
-  -- Snippets
-  use "L3MON4D3/LuaSnip" -- Snippet engine
-  use "rafamadriz/friendly-snippets" -- A bunch of snippets to use
+  use "hrsh7th/nvim-cmp"         -- The completion plugin
+  use "hrsh7th/cmp-buffer"       -- buffer completions
+  use "hrsh7th/cmp-path"         -- Path completions
+  use "hrsh7th/cmp-cmdline"      -- cmdline completions
+  use "hrsh7th/cmp-nvim-lsp"     -- Lsp completion
 
   -- LSP
-  use "neovim/nvim-lspconfig" -- Enable LSP
+  use "neovim/nvim-lspconfig"           -- Enable LSP
   use "williamboman/nvim-lsp-installer" -- Simple to use language server installer
-  use "tamago324/nlsp-settings.nvim" -- Language server settings defined in json for
+  use "tamago324/nlsp-settings.nvim"    -- Language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- Formatter and linter
 
   -- Telescope
@@ -79,14 +74,16 @@ return packer.startup(function(use)
   use "unblevable/quick-scope"
   use "nacitar/a.vim" -- Switch between header and source 
 
+  -- Pretty
+  use "lewis6991/gitsigns.nvim" -- Git status in signcolum
+  use "j-hui/fidget.nvim"       -- Lsp progress
+  use "feline-nvim/feline.nvim" -- Statusline
+  use "machakann/vim-highlightedyank"
+
   -- Other
   use "sindrets/diffview.nvim"
-  use "machakann/vim-highlightedyank"
-  use "lewis6991/gitsigns.nvim"
   use "numToStr/Comment.nvim"
   use "akinsho/toggleterm.nvim" 
-  use "j-hui/fidget.nvim" -- Lsp progress
-  use "feline-nvim/feline.nvim" -- Statusline
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
