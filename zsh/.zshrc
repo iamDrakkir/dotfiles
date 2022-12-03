@@ -1,4 +1,5 @@
 #!/bin/sh
+#
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 
 zle_highlight=('paste:none')
@@ -13,6 +14,7 @@ plug "zsh-users/zsh-autosuggestions"
 plug "zdharma-continuum/fast-syntax-highlighting"
 plug "zap-zsh/supercharge"
 plug "zap-zsh/fzf"
+plug "zap-zsh/vim"
 
 # FZF
 source /usr/share/doc/fzf/examples/key-bindings.zsh
