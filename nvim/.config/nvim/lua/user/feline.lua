@@ -6,7 +6,7 @@ end
 local status_gruvbox, colors = pcall(require, "gruvbox.colors")
 if not status_gruvbox then
   print("no load")
- colors = {
+  colors = {
    dark0_hard = "#1d2021",
    dark0      = "#282828",
    dark0_soft = "#32302f",
@@ -22,7 +22,7 @@ if not status_gruvbox then
    aqua       = "#689d6a",
    orange     = "#d65d0e",
    grey14     = "#242932",
- }
+  }
 end
 
 local vi_mode_colors = {
