@@ -46,6 +46,7 @@ return packer.startup(function(use)
 
   -- Colorschemes
   use "sainnhe/gruvbox-material"
+  use "rose-pine/neovim"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp"         -- The completion plugin
@@ -71,8 +72,8 @@ return packer.startup(function(use)
 
   -- Navigaton
   use "ggandor/leap.nvim"
-  use "unblevable/quick-scope"
-  use "nacitar/a.vim" -- Switch between header and source 
+  use 'jinh0/eyeliner.nvim' -- f indicators for each work on line
+  use "nacitar/a.vim"       -- Switch between header and source 
 
   -- Pretty
   use "lewis6991/gitsigns.nvim" -- Git status in signcolum

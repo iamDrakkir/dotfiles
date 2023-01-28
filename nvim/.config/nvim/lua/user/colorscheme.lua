@@ -1,3 +1,4 @@
+-- local colorscheme = "rose-pine"
 local colorscheme = "gruvbox-material"
 
 vim.g.gruvbox_contrast_dark = "hard"

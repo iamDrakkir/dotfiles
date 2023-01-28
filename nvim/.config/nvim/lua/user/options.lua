@@ -33,7 +33,7 @@ local options = {
   scrolloff = 8,                           -- is one of my fav
   laststatus = 3,                          -- use global status line
   wildmenu = true,
-  listchars="eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:⋅",
+  listchars="tab:>·,trail:⋅,extends:>,precedes:<,space:⋅",
   list = true,
 }
 
