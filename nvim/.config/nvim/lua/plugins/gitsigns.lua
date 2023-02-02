@@ -1,5 +1,6 @@
 return {
   "lewis6991/gitsigns.nvim",
+  cond = vim.g.vscode == nil,
   event = "BufReadPre",
 
   config = function()

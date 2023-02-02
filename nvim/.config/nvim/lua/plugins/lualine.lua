@@ -1,6 +1,5 @@
 return {
   "nvim-lualine/lualine.nvim",
-  -- enabled = false,
   cond = vim.g.vscode == nil,
 
   config = function()
@@ -30,9 +29,9 @@ return {
       local gitsigns = vim.b.gitsigns_status_dict
       if gitsigns then
         return {
-          added = gitsigns.added,
+          added    = gitsigns.added,
           modified = gitsigns.changed,
-          removed = gitsigns.removed
+          removed  = gitsigns.removed
         }
       end
     end

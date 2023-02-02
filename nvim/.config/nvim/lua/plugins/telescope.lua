@@ -1,5 +1,6 @@
 return {
   "nvim-telescope/telescope.nvim",
+  cond = vim.g.vscode == nil,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
@@ -7,7 +8,6 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", build = 'make', },
   },
   cmd = "Telescope",
-  cond = vim.g.vscode == nil,
 
   config = function()
     local status_ok, telescope = pcall(require, "telescope")

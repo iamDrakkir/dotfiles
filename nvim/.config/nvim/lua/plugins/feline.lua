@@ -1,7 +1,7 @@
 return {
   "feline-nvim/feline.nvim",
-  enabled = false,
   cond = vim.g.vscode == nil,
+  enabled = false,
 
   config = function()
     local status_ok, feline = pcall(require, "feline")

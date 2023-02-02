@@ -1,7 +1,7 @@
 return {
   {
-    -- local colorscheme = "gruvbox-material"
     "sainnhe/gruvbox-material",
+    cond = vim.g.vscode == nil,
     enabled = false,
 
     lazy = false,
@@ -52,6 +52,7 @@ return {
   },
   {
     'rose-pine/neovim',
+    cond = vim.g.vscode == nil,
     name = 'rose-pine',
     lazy = false,
     priority = 1000,

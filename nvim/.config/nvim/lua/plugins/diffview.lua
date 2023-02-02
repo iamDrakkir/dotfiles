@@ -1,7 +1,7 @@
 return {
   "sindrets/diffview.nvim",
-  cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
   cond = vim.g.vscode == nil,
+  cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
 
   config = function()
     local status_ok, diffview = pcall(require, "diffview")

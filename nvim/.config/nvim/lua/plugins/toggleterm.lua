@@ -1,5 +1,6 @@
 return {
   "akinsho/toggleterm.nvim",
+  cond = vim.g.vscode == nil,
   cmd = "ToggleTerm",
 
   config = function()

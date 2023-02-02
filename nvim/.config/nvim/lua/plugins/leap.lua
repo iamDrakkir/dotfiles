@@ -1,7 +1,7 @@
 return {
   "ggandor/leap.nvim",
-  event = "BufReadPre",
   cond = vim.g.vscode == nil,
+  event = "BufReadPre",
 
   config = function()
     local status_ok, leap = pcall(require, "leap")
