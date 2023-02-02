@@ -25,6 +25,12 @@ keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
+keymap("n", "<C-d>", "<C-d>zz", opts)
+keymap("n", "<C-u>", "<C-u>zz", opts)
+keymap("n", "n", "nzzzv", opts)
+keymap("n", "N", "Nzzzv", opts)
+-- Avoid Q
+keymap("n", "Q", "<nop>", opts)
 -- Resize with arrows
 keymap("n", "<C-Up>",    ":resize -2<CR>", opts)
 keymap("n", "<C-Down>",  ":resize +2<CR>", opts)
@@ -38,21 +44,17 @@ keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 -- telescope nevigation
 keymap("n", "<leader>p",  ":Telescope repo list<CR>", opts)
-keymap("n", "<leader>f",  "<cmd>lua require('user.telescope').project_files()<CR>", opts)
+keymap("n", "<leader>f",  ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>gg", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>gt", ":Telescope grep_string<CR>", opts)
 keymap("n", "<leader>b",  ":Telescope buffers ignore_current_buffer=true<CR>", opts)
-keymap("n", "<Leader>ca", ":Telescope lsp_code_actions theme=cursor<CR>", opts)
+-- keymap("n", "<Leader>ca", ":Telescope lsp_code_actions theme=cursor<CR>", opts)
 keymap("n", "<Leader>e",  ":Telescope file_browser path=%:p:h<CR>", opts)
 keymap("n", "<Leader>E",  ":Telescope file_browser<CR>", opts)
-keymap("n", "<leader>n",  "<cmd>lua require('user.telescope').edit_neovim()<CR>", opts)
+keymap("n", "<Leader>r",  ":Telescope repo<CR>", opts)
 -- formatting
-keymap("n", '==', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-keymap("v", '==', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
-
--- Insert --
--- Easy insertion of a trailing ; from insert mode
-keymap("i", ";;", "<Esc>A;<Esc>", opts)
+-- keymap("n", '==', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+-- keymap("v", '==', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
 
 -- Visual --
 -- Stay in indent mode

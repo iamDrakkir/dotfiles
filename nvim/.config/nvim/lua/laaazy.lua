@@ -1,0 +1,66 @@
+-- Automatically install lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- Use a protected call so we don't error out on first use
+local status_ok, lazy = pcall(require, "lazy")
+if not status_ok then
+  return
+end
+
+-- options for lazy
+local opts = {
+  ui = {
+    border = "none",
+    icons = {
+      cmd =  "⋗ ", -- " "
+      -- config = "",
+      event = "Ω ", -- ""
+      -- ft = " ",
+      -- init = " ",
+      -- import = " ",
+      -- keys = " ",
+      -- lazy = "鈴 ",
+      -- loaded = "●",
+      -- not_loaded = "○",
+      -- plugin = " ",
+      -- runtime = " ",
+      -- source = " ",
+      -- start = "",
+      -- task = "✔ ",
+      -- list = {
+      --   "●",
+      --   "➜",
+      --   "★",
+      --   "‒",
+      -- },
+    },
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
+}
+
+-- Install plugins
+lazy.setup("plugins", opts)
