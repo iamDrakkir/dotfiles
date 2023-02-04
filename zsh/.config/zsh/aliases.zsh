@@ -30,7 +30,6 @@ alias la='exa --grid --all --color auto --icons --sort=type'
 alias lla='exa --long --all --color auto --icons --sort=type'
 alias tree='exa --tree'
 alias cat='batcat'
-alias find='fdfind'
 alias grep='rg'
 
 # Git aliases
