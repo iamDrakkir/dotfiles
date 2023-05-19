@@ -1,7 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
   cond = vim.g.vscode == nil,
-
+  event = "VeryLazy",
   config = function()
     local status_ok, lualine = pcall(require, "lualine")
     if not status_ok then
@@ -9,20 +9,22 @@ return {
     end
 
     local function lsp_text_provider()
-      local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+      local filetype = vim.api.nvim_buf_get_option(0, "filetype")
       local clients = vim.lsp.get_active_clients()
-      if next(clients) == nil then
-          return buf_ft
-      end
+      local lsp_info = ""
+      local copilot_icon = ""
       for _, client in ipairs(clients) do
         local filetypes = client.config.filetypes
         if filetypes
-        and vim.fn.index(filetypes, buf_ft) ~= -1
-        and client.name ~= "null-ls" then
-          return buf_ft .. " - " .. client.name
+            and vim.fn.index(filetypes, filetype) ~= -1
+            and client.name ~= "null-ls" then
+          lsp_info = lsp_info .. " - " .. client.name
+        end
+        if client.name == "copilot" then
+          copilot_icon = " "
         end
       end
-      return buf_ft
+      return filetype .. lsp_info .. copilot_icon
     end
 
     local function diff_source()
@@ -54,44 +56,31 @@ return {
       padding = 0,
     }
 
-    local progress = function()
-      local current_line = vim.fn.line(".")
-      local total_lines = vim.fn.line("$")
-      -- local chars = {" ", "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"}
-      local chars = {"█", "▇", "▆", "▅", "▄", "▃", "▂", "▁", " "}
-      local line_ratio = current_line / total_lines
-      local index = math.ceil(line_ratio * #chars)
-      return chars[index]
-    end
-
     lualine.setup {
       options = {
-          icons_enabled = true,
-          theme = 'auto',
-          component_separators = { left = '/', right = '/'},
-          section_separators = { left = '', right = ''},
-          disabled_filetypes = {},
-          always_divide_middle = true,
-          globalstatus = true,
+        theme = 'auto',
+        component_separators = { left = '/', right = '/' },
+        section_separators = { left = '', right = '' },
+        globalstatus = true,
       },
       sections = {
         lualine_a = { mode },
-        lualine_b = { {'b:gitsigns_head', icon = ''} },
+        lualine_b = { { 'b:gitsigns_head', icon = '' } },
         lualine_c = { diff },
-        lualine_x = {'diagnostics' },
+        lualine_x = { 'diagnostics' },
         lualine_y = { lsp_text_provider, 'encoding' },
-        lualine_z = { location, progress }
+        lualine_z = { location, 'progress' }
       },
       inactive_sections = {},
       tabline = {
-        lualine_a = {'buffers'},
+        lualine_a = { 'buffers' },
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
-        lualine_z = {'tabs'},
+        lualine_z = { 'tabs' },
       },
-      extensions = {}
+      extensions = { 'lazy' }
     }
   end
 }

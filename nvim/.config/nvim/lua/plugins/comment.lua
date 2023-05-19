@@ -3,8 +3,8 @@ return {
   keys = {
     "gcc",
     "gcb",
-    {"gc", mode ="v"},
-    {"gb", mode = "v"},
+    { "gc", mode = "v" },
+    { "gb", mode = "v" },
   },
   config = true,
 }

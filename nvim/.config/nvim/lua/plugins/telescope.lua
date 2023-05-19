@@ -5,10 +5,61 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
     "cljoly/telescope-repo.nvim",
+    "debugloop/telescope-undo.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = 'make', },
   },
   cmd = "Telescope",
-
+  keys = {
+    -- find/files
+    { "<leader>ff", "<cmd>Telescope find_files<cr>",                         desc = "Find Files (root dir)" },
+    { "<leader>fb", "<cmd>Telescope buffers ignore_current_buffer=true<cr>", desc = "Switch Buffer" },
+    { "<leader>,",  "<cmd>Telescope buffers ignore_current_buffer=true<cr>", desc = "Switch Buffer" },
+    { "<Leader>fe", "<cmd>Telescope file_browser path=%:p:h<cr>",            desc = "Explore Files (cwd)" },
+    { "<Leader>fE", "<cmd>Telescope file_browser<cr>",                       desc = "Explore Files (root dir)" },
+    { "<Leader>fr", "<cmd>Telescope repo<cr>",                               desc = "Find Repos" },
+    { "<leader>fo", "<cmd>Telescope oldfiles<cr>",                           desc = "Old files" },
+    { "<leader>/",  "<cmd>Telescope live_grep<cr>",                          desc = "Find in Files (Grep)" },
+    -- { "<leader><space>", Util.telescope("files"), desc = "Find Files (root dir)" },
+    -- git
+    { "<leader>gc", "<cmd>Telescope git_commits<cr>",                        desc = "commits" },
+    { "<leader>gs", "<cmd>Telescope git_status<cr>",                         desc = "status" },
+    -- search
+    { "<leader>sa", "<cmd>Telescope autocommands<cr>",                       desc = "Auto Commands" },
+    { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>",          desc = "Buffer" },
+    { "<leader>sc", "<cmd>Telescope command_history<cr>",                    desc = "Command History" },
+    { "<leader>s:", "<cmd>Telescope command_history<cr>",                    desc = "Command History" },
+    { "<leader>sC", "<cmd>Telescope commands<cr>",                           desc = "Commands" },
+    { "<leader>sd", "<cmd>Telescope diagnostics<cr>",                        desc = "Diagnostics" },
+    { "<leader>sg", "<cmd>Telescope live_grep<cr>",                          desc = "Grep (root dir)" },
+    -- { "<leader>sG", "<cmd>Telescope live_grep cwd=false<cr>", desc = "Grep (cwd)" },
+    { "<leader>sh", "<cmd>Telescope help_tags<cr>",                          desc = "Help Pages" },
+    { "<leader>sH", "<cmd>Telescope highlights<cr>",                         desc = "Search Highlight Groups" },
+    { "<leader>sk", "<cmd>Telescope keymaps<cr>",                            desc = "Key Maps" },
+    { "<leader>sM", "<cmd>Telescope man_pages<cr>",                          desc = "Man Pages" },
+    { "<leader>sm", "<cmd>Telescope marks<cr>",                              desc = "Jump to Mark" },
+    { "<leader>so", "<cmd>Telescope vim_options<cr>",                        desc = "Options" },
+    { "<leader>sw", "<cmd>Telescope grep_string<cr>",                        desc = "Word (root dir)" },
+    -- { "<leader>sW", "<cmd>Telescope grep_string cwd=false<cr>", desc = "Word (cwd)" },
+    { "<leader>uC", "<cmd>Telescope colorscheme enable_preview=true<cr>",    desc = "Colorscheme with preview" },
+    { "<leader>fu", "<cmd>Telescope undo<cr>",                               desc = "Undo tree" },
+    -- {
+    --   "<leader>ss",
+    --   Util.telescope("lsp_document_symbols", {
+    --     symbols = {
+    --       "Class",
+    --       "Function",
+    --       "Method",
+    --       "Constructor",
+    --       "Interface",
+    --       "Module",
+    --       "Struct",
+    --       "Trait",
+    --       "Field",
+    --       "Property",
+    --     },
+    --   }),
+    --   desc = "Goto Symbol",
+  },
   config = function()
     local status_ok, telescope = pcall(require, "telescope")
     if not status_ok then
@@ -20,76 +71,26 @@ return {
     telescope.setup {
       defaults = {
         path_display = { "truncate" },
-        vimgrep_arguments = {
-          'rg',
-          '--color=never',
-          '--no-heading',
-          '--with-filename',
-          '--line-number',
-          '--column',
-          '--smart-case',
-          '--hidden',
-          '-g',
-          '!.git/'
-        },
+        prompt_prefix = " ",
+        selection_caret = " ",
         mappings = {
           i = {
-            ["<C-n>"] = actions.cycle_history_next,
-            ["<C-p>"] = actions.cycle_history_prev,
+            ["<C-?>"] = actions.which_key, -- keys from pressing <C-/>
             ["<C-P>"] = action_layout.toggle_preview,
-            ["<C-j>"] = actions.move_selection_next,
-            ["<C-k>"] = actions.move_selection_previous,
-            ["<C-c>"] = actions.close,
-            ["<Down>"] = actions.move_selection_next,
-            ["<Up>"] = actions.move_selection_previous,
-            ["<CR>"] = actions.select_default,
-            ["<C-x>"] = actions.select_horizontal,
-            ["<C-v>"] = actions.select_vertical,
-            ["<C-t>"] = actions.select_tab,
-            ["<C-u>"] = actions.preview_scrolling_up,
-            ["<C-d>"] = actions.preview_scrolling_down,
-            ["<PageUp>"] = actions.results_scrolling_up,
-            ["<PageDown>"] = actions.results_scrolling_down,
-            ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-            ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-            ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-            ["<C-l>"] = actions.complete_tag,
-            ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+            ["<C-k>"] = actions.cycle_history_next,
+            ["<C-j>"] = actions.cycle_history_prev,
           },
           n = {
-            ["<esc>"] = actions.close,
-            ["<CR>"] = actions.select_default,
-            ["<C-x>"] = actions.select_horizontal,
-            ["<C-v>"] = actions.select_vertical,
-            ["<C-t>"] = actions.select_tab,
             ["<C-P>"] = action_layout.toggle_preview,
-            ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-            ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-            ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-            ["j"] = actions.move_selection_next,
-            ["k"] = actions.move_selection_previous,
-            ["H"] = actions.move_to_top,
-            ["M"] = actions.move_to_middle,
-            ["L"] = actions.move_to_bottom,
-            ["<Down>"] = actions.move_selection_next,
-            ["<Up>"] = actions.move_selection_previous,
-            ["gg"] = actions.move_to_top,
-            ["G"] = actions.move_to_bottom,
-            ["<C-u>"] = actions.preview_scrolling_up,
-            ["<C-d>"] = actions.preview_scrolling_down,
-            ["<PageUp>"] = actions.results_scrolling_up,
-            ["<PageDown>"] = actions.results_scrolling_down,
-            ["?"] = actions.which_key,
+            ["<C-k>"] = actions.cycle_history_next,
+            ["<C-j>"] = actions.cycle_history_prev,
           },
         },
-        file_ignore_patterns = {},
       },
 
       pickers = {
         find_files = {
-          find_command = {"fdfind", "--type", "f", "--strip-cwd-prefix"}
+          find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
         },
         buffers = {
           sort_lastused = true,
@@ -107,27 +108,23 @@ return {
           previewer = false,
           grouped = true,
           sorting_strategy = "ascending",
-          layout_strategy = "horizontal",
           hidden = true,
           display_stat = false,
           layout_config = {
             prompt_position = "top",
-            anchor = "W",
+            anchor = "CENTER",
             width = 40,
             height = 40,
           },
-          path_display = { truncate = 1 }
         },
         fzf = {
-          fuzzy = true,                    -- false will only do exact matching
-          override_generic_sorter = true,  -- override the generic sorter
-          override_file_sorter = true,     -- override the file sorter
-          case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                           -- the default case_mode is "smart_case"
+          fuzzy = true,                   -- false will only do exact matching
+          override_generic_sorter = true, -- override the generic sorter
+          override_file_sorter = true,    -- override the file sorter
         },
         repo = {
           list = {
-            fd_opts = {"-E", "packer"},
+            fd_opts = { "-E", "packer" },
             -- search_dirs = {},
             tail_path = true,
             -- shorten_path = true,
@@ -139,5 +136,6 @@ return {
     telescope.load_extension("file_browser")
     telescope.load_extension("fzf")
     telescope.load_extension('repo')
+    telescope.load_extension("undo")
   end
 }

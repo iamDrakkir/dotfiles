@@ -14,7 +14,8 @@ plug "zsh-users/zsh-autosuggestions"
 plug "zdharma-continuum/fast-syntax-highlighting"
 plug "zap-zsh/supercharge"
 plug "zap-zsh/fzf"
-plug "zap-zsh/vim"
+# plug "zap-zsh/vim"
+plug "jeffreytse/zsh-vi-mode"
 
 # FZF
 source /usr/share/doc/fzf/examples/key-bindings.zsh

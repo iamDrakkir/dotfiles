@@ -3,23 +3,19 @@ return {
     "sainnhe/gruvbox-material",
     cond = vim.g.vscode == nil,
     enabled = false,
-
     lazy = false,
     priority = 1000,
-
     config = function()
       vim.o.background = "dark"
       vim.g.gruvbox_material_background = "hard"
       vim.g.gruvbox_material_better_performance = 1
+      vim.g.gruvbox_contrast_dark = "hard"
+      vim.g.gruvbox_sign_column = 'bg0'
+      vim.g.gruvbox_italicize_comments = 0
+      vim.g.gruvbox_material_foreground = "original"
 
       vim.cmd('colorscheme gruvbox-material')
     end,
-
-    --vim.g.gruvbox_contrast_dark = "hard"
-    --vim.g.gruvbox_sign_column = 'bg0'
-    --vim.g.gruvbox_italicize_comments = 0
-    --vim.g.gruvbox_material_foreground = "original"
-
     --vim.cmd([[
     --    function! s:gruvbox_material_custom() abort
     --        " Link a highlight group to a predefined highlight group.
@@ -51,18 +47,23 @@ return {
     --]])
   },
   {
-    'rose-pine/neovim',
+    "rose-pine/neovim",
     cond = vim.g.vscode == nil,
-    name = 'rose-pine',
+    name = "rose-pine",
     lazy = false,
     priority = 1000,
     config = function()
-        require("rose-pine").setup{
-          dark_variant = 'main', -- 'main' | 'moon'
-        }
-        vim.cmd('colorscheme rose-pine')
+      require("rose-pine").setup {
+        dark_variant = "main", -- "main" | "moon"
+      }
+      vim.cmd("colorscheme rose-pine")
     end
+  },
+  {
+    "arturgoms/moonbow.nvim",
+    cond = vim.g.vscode == nil,
+    enabled = false,
+    lazy = false,
+    priority = 1000,
   }
 }
-
-
