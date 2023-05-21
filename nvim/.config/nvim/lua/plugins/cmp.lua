@@ -2,13 +2,13 @@ return {
   "hrsh7th/nvim-cmp",
   cond = vim.g.vscode == nil,
   dependencies = {
-    "hrsh7th/cmp-nvim-lsp",     -- Lsp completion
-    "hrsh7th/cmp-buffer",       -- buffer completions
-    "hrsh7th/cmp-path",         -- Path completions
-    "hrsh7th/cmp-cmdline",      -- Cmdline completions
-    "hrsh7th/cmp-nvim-lua",     -- Nvim api competions
-    "hrsh7th/cmp-git",          -- Git completions
-    "L3MON4D3/LuaSnip",         -- Snippets
+    "hrsh7th/cmp-nvim-lsp", -- Lsp completion
+    "hrsh7th/cmp-buffer", -- buffer completions
+    "hrsh7th/cmp-path", -- Path completions
+    "hrsh7th/cmp-cmdline", -- Cmdline completions
+    "hrsh7th/cmp-nvim-lua", -- Nvim api competions
+    "hrsh7th/cmp-git", -- Git completions
+    "L3MON4D3/LuaSnip", -- Snippets
     "saadparwaiz1/cmp_luasnip", -- Snippets completion
     {
       "zbirenbaum/copilot-cmp",

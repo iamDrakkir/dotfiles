@@ -22,7 +22,7 @@ end
 local opts = {
   change_detection = {
     enable = true,
-    notify = false
+    notify = false,
   },
   performance = {
     rtp = {

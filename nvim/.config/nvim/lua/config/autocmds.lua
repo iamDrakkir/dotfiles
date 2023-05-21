@@ -1,17 +1,17 @@
-local augroup             = vim.api.nvim_create_augroup
-local autocmd             = vim.api.nvim_create_autocmd
-local removeTrailingGroup = augroup('RemoveTrailing', {})
-local yankGroup           = augroup('HighlightYank', {})
-local wrapSpellGroup      = augroup('WrapSpell', {})
-local closeWithQGroup     = augroup('CloseWithQ', {})
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+local removeTrailingGroup = augroup("RemoveTrailing", {})
+local yankGroup = augroup("HighlightYank", {})
+local wrapSpellGroup = augroup("WrapSpell", {})
+local closeWithQGroup = augroup("CloseWithQ", {})
 -- local startup             = augroup('telescope', {})
 
-autocmd('TextYankPost', {
+autocmd("TextYankPost", {
   group = yankGroup,
-  pattern = '*',
-  desc = 'Highlight yanked text',
+  pattern = "*",
+  desc = "Highlight yanked text",
   callback = function()
-    vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 40, })
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 40 })
   end,
 })
 
@@ -27,7 +27,7 @@ autocmd("BufReadPost", {
 })
 
 local function trim_trailing_whitespaces()
-  if not vim.o.binary and vim.o.filetype ~= 'diff' then
+  if not vim.o.binary and vim.o.filetype ~= "diff" then
     local current_view = vim.fn.winsaveview()
     vim.api.nvim_command([[keeppatterns %s/\s\+$//e]])
     vim.fn.winrestview(current_view)
@@ -38,7 +38,7 @@ autocmd({ "BufWritePre" }, {
   group = removeTrailingGroup,
   pattern = "*",
   desc = "Remove trailing whitespaces",
-  callback = trim_trailing_whitespaces
+  callback = trim_trailing_whitespaces,
 })
 
 autocmd("FileType", {
@@ -55,10 +55,12 @@ autocmd("BufWinEnter", {
   pattern = "*",
   desc = "Remove some formatoptions",
   callback = function()
-    vim.opt.formatoptions:remove { 'c', -- No autowrap comments
-      'r',                              -- No commet leader on 'enter'
-      'o',                              -- No comment leader on o/O
-      'q' }                             -- No formatting of comments
+    vim.opt.formatoptions:remove({
+      "c", -- No autowrap comments
+      "r", -- No commet leader on 'enter'
+      "o", -- No comment leader on o/O
+      "q", -- No formatting of comments
+    })
   end,
 })
 

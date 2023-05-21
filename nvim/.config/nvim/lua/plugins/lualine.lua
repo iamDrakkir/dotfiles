@@ -15,9 +15,7 @@ return {
       local copilot_icon = ""
       for _, client in ipairs(clients) do
         local filetypes = client.config.filetypes
-        if filetypes
-            and vim.fn.index(filetypes, filetype) ~= -1
-            and client.name ~= "null-ls" then
+        if filetypes and vim.fn.index(filetypes, filetype) ~= -1 and client.name ~= "null-ls" then
           lsp_info = lsp_info .. " - " .. client.name
         end
         if client.name == "copilot" then
@@ -31,9 +29,9 @@ return {
       local gitsigns = vim.b.gitsigns_status_dict
       if gitsigns then
         return {
-          added    = gitsigns.added,
+          added = gitsigns.added,
           modified = gitsigns.changed,
-          removed  = gitsigns.removed
+          removed = gitsigns.removed,
         }
       end
     end
@@ -48,7 +46,7 @@ return {
       "mode",
       fmt = function(str)
         return str:sub(1, 3)
-      end
+      end,
     }
 
     local location = {
@@ -56,31 +54,31 @@ return {
       padding = 0,
     }
 
-    lualine.setup {
+    lualine.setup({
       options = {
-        theme = 'auto',
-        component_separators = { left = '/', right = '/' },
-        section_separators = { left = '', right = '' },
+        theme = "auto",
+        component_separators = { left = "/", right = "/" },
+        section_separators = { left = "", right = "" },
         globalstatus = true,
       },
       sections = {
         lualine_a = { mode },
-        lualine_b = { { 'b:gitsigns_head', icon = '' } },
+        lualine_b = { { "b:gitsigns_head", icon = "" } },
         lualine_c = { diff },
-        lualine_x = { 'diagnostics' },
-        lualine_y = { lsp_text_provider, 'encoding' },
-        lualine_z = { location, 'progress' }
+        lualine_x = { "diagnostics" },
+        lualine_y = { lsp_text_provider, "encoding" },
+        lualine_z = { location, "progress" },
       },
       inactive_sections = {},
       tabline = {
-        lualine_a = { 'buffers' },
+        lualine_a = { "buffers" },
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
-        lualine_z = { 'tabs' },
+        lualine_z = { "tabs" },
       },
-      extensions = { 'lazy' }
-    }
-  end
+      extensions = { "lazy" },
+    })
+  end,
 }

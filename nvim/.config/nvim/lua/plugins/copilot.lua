@@ -9,7 +9,7 @@ return {
   event = "InsertEnter",
   build = ":Copilot auth",
   config = function()
-    require('copilot').setup({
+    require("copilot").setup({
       suggestion = {
         enabled = false,
         auto_trigger = true,
@@ -22,7 +22,7 @@ return {
           -- dismiss = "<M-c>",
         },
       },
-      panel ={
+      panel = {
         enabled = false,
       },
       filetypes = {
@@ -30,5 +30,5 @@ return {
         markdown = true,
       },
     })
-  end
+  end,
 }
