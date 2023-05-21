@@ -20,10 +20,10 @@ map("n", "N", "Nzzzv", { desc = "Go to previous match" })
 -- Avoid Q
 map("n", "Q", "<nop>", { desc = "disable Q" })
 -- Resize with arrows
-map("n", "<C-Up>",    "<cmd>resize +2<cr>", { desc = "Increase window height" })
-map("n", "<C-Down>",  "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
-map("n", "<C-Left>",  "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
 -- Move text up and down
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
 map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
@@ -33,8 +33,10 @@ map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 -- lazy
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
--- lazy
+-- Mason
 map("n", "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason" })
+-- LspInfo
+map("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "LspInfo" })
 -- Stay in indent mode
 map("v", ">", ">gv", { desc = "Increase indentation" })
 map("v", "<", "<gv", { desc = "Decrease indentation" })

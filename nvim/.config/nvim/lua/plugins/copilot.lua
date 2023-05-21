@@ -11,6 +11,7 @@ return {
   config = function()
     require('copilot').setup({
       suggestion = {
+        enabled = false,
         auto_trigger = true,
         keymap = {
           accept = "<Tab>",
@@ -20,6 +21,9 @@ return {
           -- prev = "<M-[>",
           -- dismiss = "<M-c>",
         },
+      },
+      panel ={
+        enabled = false,
       },
       filetypes = {
         yaml = true,

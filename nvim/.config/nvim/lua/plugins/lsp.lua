@@ -2,6 +2,7 @@ return {
   "neovim/nvim-lspconfig",
   cond = vim.g.vscode == nil,
   event = { "BufReadPre", "BufNewFile" },
+  cmd = { "LspInfo" },
   dependencies = {
     {
       "williamboman/mason.nvim",
