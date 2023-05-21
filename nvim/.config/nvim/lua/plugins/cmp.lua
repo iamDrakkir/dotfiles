@@ -44,6 +44,7 @@ return {
         { name = "path" },
       }),
       formatting = {
+        fields = {'abbr', 'menu', 'kind'},
         format = function(_, item)
           local kinds = {
             Array = " ",

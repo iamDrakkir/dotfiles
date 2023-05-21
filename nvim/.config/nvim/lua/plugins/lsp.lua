@@ -3,46 +3,69 @@ return {
   cond = vim.g.vscode == nil,
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "williamboman/mason.nvim",
+    {
+      "williamboman/mason.nvim",
+      cmd = "Mason",
+      config = true
+    },
     "williamboman/mason-lspconfig.nvim",
     { "folke/neodev.nvim", config = true },
   },
   config = function()
-    require("mason").setup()
+    local mason_lspconfig = require("mason-lspconfig")
+    local lsp_config = require("lspconfig")
+    local lsp_defaults = lsp_config.util.default_config
 
-    require("mason-lspconfig").setup({
-      automatic_installation = true
-    })
-
-    require("mason-lspconfig").setup_handlers({
-      function(server_name)
-        require("lspconfig")[server_name].setup {}
-      end
-    })
-
-    local lsp_defaults = require("lspconfig").util.default_config
     lsp_defaults.capabilities = vim.tbl_deep_extend(
       "force",
       lsp_defaults.capabilities,
       require("cmp_nvim_lsp").default_capabilities()
     )
 
-    -- vim.api.nvim_create_autocmd("BufWritePre", {
-    --   desc = "Format on Save",
-    --   callback = function()
-    --     local client = vim.lsp.get_active_clients({ name = "eslint" })
-    --
-    --     if client and #client > 0 then
-    --       vim.cmd("silent! EslintFixAll")
-    --     else
-    --       vim.lsp.buf.format({ async = true })
-    --     end
-    --   end,
-    --   pattern = { "*" }
-    -- })
+    mason_lspconfig.setup({
+      ensure_installed = {
+        "pylsp",
+        "bashls",
+        "dockerls",
+        "jsonls",
+        "yamlls",
+        "lua_ls",
+        "azure_pipelines_ls",
+        "rust_analyzer",
+        "ansiblels",
+      },
+      automatic_installation = true
+    })
+
+    mason_lspconfig.setup_handlers({
+      function(server_name)
+        lsp_config[server_name].setup {}
+      end,
+
+      ["pyright"] = function()
+        lsp_config.pyright.setup({
+          settings = {
+            python = {
+              analysis = {
+                typeCheckingMode = "basic",
+              }
+            }
+          }
+        })
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      desc = "Format on Save",
+      callback = function()
+        vim.lsp.buf.format({ async = true })
+      end,
+      pattern = { "*" }
+    })
 
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+      desc = 'LSP Attach',
       callback = function(ev)
         -- Enable completion triggered by <c-x><c-o>
         vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'

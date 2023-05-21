@@ -33,6 +33,8 @@ map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 -- lazy
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+-- lazy
+map("n", "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason" })
 -- Stay in indent mode
 map("v", ">", ">gv", { desc = "Increase indentation" })
 map("v", "<", "<gv", { desc = "Decrease indentation" })

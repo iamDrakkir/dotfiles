@@ -20,6 +20,10 @@ end
 
 -- options for lazy
 local opts = {
+  change_detection = {
+    enable = true,
+    notify = false
+  },
   performance = {
     rtp = {
       disabled_plugins = {
