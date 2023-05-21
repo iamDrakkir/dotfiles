@@ -15,7 +15,7 @@ return {
       config = function()
         require("copilot_cmp").setup()
       end,
-    } -- Copilot completions
+    }, -- Copilot completions
   },
   event = "InsertEnter",
   config = function()
@@ -24,7 +24,7 @@ return {
       return
     end
 
-    cmp.setup {
+    cmp.setup({
       completion = {
         completeopt = "menu,menuone,noinsert",
       },
@@ -35,7 +35,7 @@ return {
       },
       window = {
         documentation = cmp.config.window.bordered(),
-        completion    = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered(),
       },
       mapping = cmp.mapping.preset.insert({
         ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -58,7 +58,7 @@ return {
         { name = "path" },
       }),
       formatting = {
-        fields = { 'abbr', 'menu', 'kind' },
+        fields = { "abbr", "menu", "kind" },
         format = function(_, item)
           local kinds = {
             Array = " ",
@@ -108,30 +108,30 @@ return {
           hl_group = "LspCodeLens",
         },
       },
-    }
-
-    cmp.setup.filetype('gitcommit', {
-      sources = cmp.config.sources({
-        { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-      }, {
-        { name = 'buffer' },
-      })
     })
 
-    cmp.setup.cmdline({ '/', '?' }, {
+    cmp.setup.filetype("gitcommit", {
+      sources = cmp.config.sources({
+        { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
+      }, {
+        { name = "buffer" },
+      }),
+    })
+
+    cmp.setup.cmdline({ "/", "?" }, {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
-        { name = 'buffer' }
-      }
+        { name = "buffer" },
+      },
     })
 
-    cmp.setup.cmdline(':', {
+    cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
-        { name = 'path' }
+        { name = "path" },
       }, {
-        { name = 'cmdline' }
-      })
+        { name = "cmdline" },
+      }),
     })
   end,
 }

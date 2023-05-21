@@ -10,11 +10,11 @@ return {
       vim.g.gruvbox_material_background = "hard"
       vim.g.gruvbox_material_better_performance = 1
       vim.g.gruvbox_contrast_dark = "hard"
-      vim.g.gruvbox_sign_column = 'bg0'
+      vim.g.gruvbox_sign_column = "bg0"
       vim.g.gruvbox_italicize_comments = 0
       vim.g.gruvbox_material_foreground = "original"
 
-      vim.cmd('colorscheme gruvbox-material')
+      vim.cmd("colorscheme gruvbox-material")
     end,
     --vim.cmd([[
     --    function! s:gruvbox_material_custom() abort
@@ -53,11 +53,11 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      require("rose-pine").setup {
+      require("rose-pine").setup({
         dark_variant = "main", -- "main" | "moon"
-      }
+      })
       vim.cmd("colorscheme rose-pine")
-    end
+    end,
   },
   {
     "arturgoms/moonbow.nvim",
@@ -65,5 +65,5 @@ return {
     enabled = false,
     lazy = false,
     priority = 1000,
-  }
+  },
 }
