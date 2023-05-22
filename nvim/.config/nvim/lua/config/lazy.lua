@@ -26,7 +26,6 @@ local opts = {
   },
   checker = {
     enable = true,
-    -- feq = 1,
   },
   performance = {
     rtp = {
