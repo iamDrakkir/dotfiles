@@ -54,6 +54,11 @@ return {
       padding = 0,
     }
 
+    local lazy = {
+      require("lazy.status").updates,
+      cond = require("lazy.status").has_updates,
+    }
+
     lualine.setup({
       options = {
         theme = "auto",
@@ -62,7 +67,7 @@ return {
         globalstatus = true,
       },
       sections = {
-        lualine_a = { mode },
+        lualine_a = { mode, lazy },
         lualine_b = { { "b:gitsigns_head", icon = "" } },
         lualine_c = { diff },
         lualine_x = { "diagnostics" },
@@ -78,7 +83,7 @@ return {
         lualine_y = {},
         lualine_z = { "tabs" },
       },
-      extensions = { "lazy" },
+      extensions = { "lazy", "quickfix", "toggleterm" },
     })
   end,
 }

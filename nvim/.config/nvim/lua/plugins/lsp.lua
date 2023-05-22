@@ -24,19 +24,19 @@ return {
     local lsp_defaults = lsp_config.util.default_config
 
     lsp_defaults.capabilities =
-      vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+        vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
 
     mason_lspconfig.setup({
       ensure_installed = {
-        "pylsp",
+        "ansiblels",
+        "azure_pipelines_ls",
         "bashls",
         "dockerls",
         "jsonls",
-        "yamlls",
         "lua_ls",
-        "azure_pipelines_ls",
+        "pylsp",
         "rust_analyzer",
-        "ansiblels",
+        "yamlls",
       },
       automatic_installation = true,
     })

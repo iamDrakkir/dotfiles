@@ -24,6 +24,10 @@ local opts = {
     enable = true,
     notify = false,
   },
+  checker = {
+    enable = true,
+    -- feq = 1,
+  },
   performance = {
     rtp = {
       disabled_plugins = {
