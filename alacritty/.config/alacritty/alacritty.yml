@@ -18,3 +18,12 @@ window:
   decorations: none
   save_to_clipboard: true
   live_config_reload: true
+
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+# key_bindings:
+# - { key: V,        mods: Control, action: Paste }
+#   - { key: C,        mods: Control, action: Copy  }
+

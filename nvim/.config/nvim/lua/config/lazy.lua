@@ -20,31 +20,12 @@ end
 
 -- options for lazy
 local opts = {
-  ui = {
-    border = "none",
-    icons = {
-      cmd =  "⋗ ", -- " "
-      -- config = "",
-      event = "Ω ", -- ""
-      -- ft = " ",
-      -- init = " ",
-      -- import = " ",
-      -- keys = " ",
-      -- lazy = "鈴 ",
-      -- loaded = "●",
-      -- not_loaded = "○",
-      -- plugin = " ",
-      -- runtime = " ",
-      -- source = " ",
-      -- start = "",
-      -- task = "✔ ",
-      -- list = {
-      --   "●",
-      --   "➜",
-      --   "★",
-      --   "‒",
-      -- },
-    },
+  change_detection = {
+    enable = true,
+    notify = false,
+  },
+  checker = {
+    enable = true,
   },
   performance = {
     rtp = {
