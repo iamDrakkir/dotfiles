@@ -16,7 +16,7 @@ return {
       },
     },
     "williamboman/mason-lspconfig.nvim",
-    { "folke/neodev.nvim", config = true },
+    { "folke/neodev.nvim", opts = {} },
   },
   config = function()
     local mason_lspconfig = require("mason-lspconfig")
@@ -59,13 +59,13 @@ return {
       end,
     })
 
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      desc = "Format on Save",
-      callback = function()
-        vim.lsp.buf.format({ async = true })
-      end,
-      pattern = { "*" },
-    })
+    -- vim.api.nvim_create_autocmd("BufWritePre", {
+    --   desc = "Format on Save",
+    --   callback = function()
+    --     vim.lsp.buf.format({ async = true })
+    --   end,
+    --   pattern = { "*" },
+    -- })
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
