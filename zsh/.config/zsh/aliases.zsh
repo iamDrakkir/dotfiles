@@ -23,7 +23,7 @@ alias dot='$HOME/.dotfiles'
 alias cdd='cd $HOME/.dotfiles'
 alias cdn='cd $HOME/.dotfiles/nvim/.config/nvim'
 
-# Oxidize 
+# Oxidize
 alias ls='exa --grid --color auto --icons --sort=type'
 alias ll='exa --long --color always --icons --sort=type'
 alias la='exa --grid --all --color auto --icons --sort=type'
