@@ -50,7 +50,7 @@ mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
 key_bindings:
-  - { key: V,            mods: Control,       action: Paste }
+  - { key: V,            mods: Control|shift, action: Paste }
   - { key: C,            mods: Control|shift, action: Copy }
   - { key: Insert,       mods: Control,       action: Paste }
   - { key: Insert,       mods: Shift,         action: Copy }

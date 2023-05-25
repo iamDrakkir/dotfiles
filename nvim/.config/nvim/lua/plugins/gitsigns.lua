@@ -3,33 +3,26 @@ return {
   cond = vim.g.vscode == nil,
   event = "BufReadPre",
   keys = {
-    { "]h", ":Gitsigns next_hunk<cr>", desc = "Next Hunk" },
-    { "[h", ":Gitsigns prev_hunk<cr>", desc = "Prev Hunk" },
-    { "<leader>ghs", ":Gitsigns stage_hunk<cr>", mode = { "n", "v" }, desc = "Stage Hunk" },
-    { "<leader>ghr", ":Gitsigns reset_hunk<cr>", mode = { "n", "v" }, desc = "Reset Hunk" },
-    { "<leader>ghS", ":Gitsigns stage_buffer<cr>", desc = "Stage Buffer" },
-    { "<leader>ghu", ":Gitsigns undo_stage_hunk<cr>", desc = "Undo Stage Hunk" },
-    { "<leader>ghR", ":Gitsigns reset_buffer<cr>", desc = "Reset Buffer" },
-    { "<leader>ghp", ":Gitsigns preview_hunk<cr>", desc = "Preview Hunk" },
-    { "<leader>ghd", ":Gitsigns diffthis<cr>", desc = "Diff This" },
-    { "ih", ":<C-U>Gitsigns select_hunk<cr>", mode = { "o", "x" }, desc = "GitSigns Select Hunk" },
+    { "]h",          ":Gitsigns next_hunk<cr>",        desc = "Next Hunk" },
+    { "[h",          ":Gitsigns prev_hunk<cr>",        desc = "Prev Hunk" },
+    { "<leader>ghs", ":Gitsigns stage_hunk<cr>",       mode = { "n", "v" },     desc = "Stage Hunk" },
+    { "<leader>ghr", ":Gitsigns reset_hunk<cr>",       mode = { "n", "v" },     desc = "Reset Hunk" },
+    { "<leader>ghS", ":Gitsigns stage_buffer<cr>",     desc = "Stage Buffer" },
+    { "<leader>ghu", ":Gitsigns undo_stage_hunk<cr>",  desc = "Undo Stage Hunk" },
+    { "<leader>ghR", ":Gitsigns reset_buffer<cr>",     desc = "Reset Buffer" },
+    { "<leader>ghp", ":Gitsigns preview_hunk<cr>",     desc = "Preview Hunk" },
+    { "<leader>ghd", ":Gitsigns diffthis<cr>",         desc = "Diff This" },
+    { "ih",          ":<C-U>Gitsigns select_hunk<cr>", mode = { "o", "x" },     desc = "GitSigns Select Hunk" },
   },
-  config = function()
-    local status_ok, gitsigns = pcall(require, "gitsigns")
-    if not status_ok then
-      return
-    end
-
-    gitsigns.setup({
-      signs = {
-        add = { text = "▎" },
-        change = { text = "▎" },
-        delete = { text = "契" },
-        topdelete = { text = "契" },
-        changedelete = { text = "▎" },
-        untracked = { text = "┆" },
-      },
-      current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-    })
-  end,
+  opts = {
+    signs = {
+      add = { text = "▎" },
+      change = { text = "▎" },
+      delete = { text = "契" },
+      topdelete = { text = "契" },
+      changedelete = { text = "▎" },
+      untracked = { text = "┆" },
+    },
+    current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  }
 }
