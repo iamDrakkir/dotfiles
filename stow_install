@@ -1,10 +1,17 @@
 #!/usr/bin/env zsh
-if [[ -z $STOW_FOLDERS ]]; then
-    STOW_FOLDERS="nvim,zsh,alacritty,tmux,awesome,rofi"
-fi
 
 if [[ -z $DOTFILES ]]; then
     DOTFILES=$HOME/.dotfiles
 fi
 
-STOW_FOLDERS=$STOW_FOLDERS DOTFILES=$DOTFILES $DOTFILES/install
+pushd $DOTFILES
+
+STOW_FOLDERS=$(ls -d */ | sed 's#/##' | tr '\n' ',' | sed 's/,$//')
+
+for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g"); do
+    stow -D $folder
+    stow $folder
+done
+
+popd
+

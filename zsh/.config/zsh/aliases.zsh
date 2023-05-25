@@ -50,3 +50,6 @@ alias gr='git remote'
 alias grs='git remote show'
 alias glo='git log --pretty="oneline"'
 alias glol='git log --graph --oneline --decorate'
+
+# Zellij
+alias zz='zellij a $(zellij list-sessions | fzf)'
