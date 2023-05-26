@@ -57,6 +57,16 @@ return {
         dark_variant = "main", -- "main" | "moon"
       })
       vim.cmd("colorscheme rose-pine")
+
+      local p = require('rose-pine.palette')
+      local h = require('rose-pine.util').highlight
+
+      h("Whitespace", { fg = p.overlay })
+      h("EndOfBuffer", { fg = p.base })
+
+      h("IndentBlanklineChar", { fg = p.overlay })
+      h("IndentBlanklineSpaceChar", { fg = p.overlay })
+      h("IndentBlanklineContextChar", { fg = p.muted })
     end,
   },
   {
