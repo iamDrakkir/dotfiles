@@ -6,6 +6,8 @@ return {
     "nvim-telescope/telescope-file-browser.nvim",
     "cljoly/telescope-repo.nvim",
     "debugloop/telescope-undo.nvim",
+    "tsakirist/telescope-lazy.nvim",
+    { "AckslD/nvim-neoclip.lua",                  config = true },
     { "nvim-telescope/telescope-fzf-native.nvim", build = 'make', },
   },
   cmd = "Telescope",
@@ -19,6 +21,7 @@ return {
     { "<Leader>fr", "<cmd>Telescope repo list<cr>",                          desc = "Find Repos" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>",                           desc = "Old files" },
     { "<leader>/",  "<cmd>Telescope live_grep<cr>",                          desc = "Find in Files (Grep)" },
+    { "<leader>p",  "<cmd>Telescope neoclip<cr>",                            desc = "Open neoclip" },
     -- git
     { "<leader>gc", "<cmd>Telescope git_commits<cr>",                        desc = "commits" },
     { "<leader>gs", "<cmd>Telescope git_status<cr>",                         desc = "status" },
@@ -38,6 +41,7 @@ return {
     { "<leader>sm", "<cmd>Telescope marks<cr>",                              desc = "Jump to Mark" },
     { "<leader>so", "<cmd>Telescope vim_options<cr>",                        desc = "Options" },
     { "<leader>sw", "<cmd>Telescope grep_string<cr>",                        desc = "Word (root dir)" },
+    { "<leader>sl", "<cmd>Telescope lazy<cr>",                               desc = "Open Lazy extensions" },
     -- { "<leader>sW", "<cmd>Telescope grep_string cwd=false<cr>", desc = "Word (cwd)" },
     { "<leader>uC", "<cmd>Telescope colorscheme enable_preview=true<cr>",    desc = "Colorscheme with preview" },
     { "<leader>fu", "<cmd>Telescope undo<cr>",                               desc = "Undo tree" },
@@ -136,5 +140,7 @@ return {
     telescope.load_extension("fzf")
     telescope.load_extension('repo')
     telescope.load_extension("undo")
+    telescope.load_extension("lazy")
+    telescope.load_extension("neoclip")
   end
 }
