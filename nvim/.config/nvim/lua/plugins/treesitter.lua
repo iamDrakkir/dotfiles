@@ -13,22 +13,16 @@ return {
       },
     },
   },
-  config = function()
-    local status_ok, treesitter = pcall(require, "nvim-treesitter.configs")
-    if not status_ok then
-      return
-    end
-    treesitter.setup({
-      ensure_installed = "all", -- one of "all", or a list of languages (https://github.com/nvim-treesitter/nvim-treesitter#supported-languages)
-      sync_install = true, -- install languages synchronously (only applied to `ensure_installed`)
-      ignore_install = { "" }, -- List of parsers to ignore installing
-      highlight = {
-        enable = true,
-      },
-      indent = {
-        enable = true,
-        disable = { "yaml" },
-      },
-    })
-  end,
+  opts = {
+    ensure_installed = "all",   -- one of "all", or a list of languages (https://github.com/nvim-treesitter/nvim-treesitter#supported-languages)
+    sync_install = true,        -- install languages synchronously (only applied to `ensure_installed`)
+    ignore_install = { "" },    -- List of parsers to ignore installing
+    highlight = {
+      enable = true,
+    },
+    indent = {
+      enable = true,
+      disable = { "yaml" },
+    },
+  }
 }

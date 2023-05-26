@@ -27,7 +27,8 @@ opt.listchars      = {
   precedes = "<",
   nbsp = "+",
   space = "⋅",
-  trail = "⋅"
+  trail = "⋅",
+  -- eol = "↴",
 }
 opt.mouse          = "a"         -- Allow mouse in to be used
 opt.number         = true        -- Show line number
