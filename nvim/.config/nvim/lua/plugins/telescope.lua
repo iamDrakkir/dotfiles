@@ -16,7 +16,7 @@ return {
     { "<leader>,",  "<cmd>Telescope buffers ignore_current_buffer=true<cr>", desc = "Switch Buffer" },
     { "<Leader>fe", "<cmd>Telescope file_browser path=%:p:h<cr>",            desc = "Explore Files (cwd)" },
     { "<Leader>fE", "<cmd>Telescope file_browser<cr>",                       desc = "Explore Files (root dir)" },
-    { "<Leader>fr", "<cmd>Telescope repo<cr>",                               desc = "Find Repos" },
+    { "<Leader>fr", "<cmd>Telescope repo list<cr>",                          desc = "Find Repos" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>",                           desc = "Old files" },
     { "<leader>/",  "<cmd>Telescope live_grep<cr>",                          desc = "Find in Files (Grep)" },
     -- git
@@ -74,12 +74,12 @@ return {
         selection_caret = " ",
         mappings = {
           i = {
-            ["<C-?>"] = actions.which_key, -- keys from pressing <C-/>
             ["<C-P>"] = action_layout.toggle_preview,
             ["<C-k>"] = actions.cycle_history_next,
             ["<C-j>"] = actions.cycle_history_prev,
           },
           n = {
+            ["g?"] = actions.which_key, -- keys from pressing <C-/>
             ["<C-P>"] = action_layout.toggle_preview,
             ["<C-k>"] = actions.cycle_history_next,
             ["<C-j>"] = actions.cycle_history_prev,
@@ -89,7 +89,7 @@ return {
 
       pickers = {
         find_files = {
-          find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
+          find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "-E", ".git" },
         },
         buffers = {
           sort_lastused = true,
@@ -123,7 +123,7 @@ return {
         },
         repo = {
           list = {
-            fd_opts = { "-E", "packer" },
+            fd_opts = { "-E", "lazy", "-E", "zap" },
             -- search_dirs = {},
             tail_path = true,
             -- shorten_path = true,
