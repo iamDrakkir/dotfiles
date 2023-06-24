@@ -1,9 +1,10 @@
 return {
+  enabled = false,
   "ggandor/leap.nvim",
   cond = vim.g.vscode == nil,
   keys = {
-    { "s", mode = { "n", "v" } },
-    { "S", mode = { "n", "v" } },
+    { "s",  mode = { "n", "v" } },
+    { "S",  mode = { "n", "v" } },
     { "gs", mode = { "n", "v" } },
     { "gS", mode = { "n", "v" } },
   },
