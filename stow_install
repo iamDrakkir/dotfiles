@@ -9,6 +9,7 @@ pushd $DOTFILES
 STOW_FOLDERS=$(ls -d */ | sed 's#/##' | tr '\n' ',' | sed 's/,$//')
 
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g"); do
+    echo "$folder"
     stow -D $folder
     stow $folder
 done

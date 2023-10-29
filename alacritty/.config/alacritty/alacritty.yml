@@ -1,5 +1,6 @@
 import:
-  - ~/.config/alacritty/rose-pine.yml
+  # - ~/.config/alacritty/rose-pine.yml
+  - ~/.cache/wal/colors-alacritty.yml
 
 font:
   normal:
