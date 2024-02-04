@@ -1,8 +1,3 @@
--- return {
---   "github/copilot.vim",
---   cond = vim.g.vscode == nil,
---   event = "VeryLazy",
--- }
 return {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",

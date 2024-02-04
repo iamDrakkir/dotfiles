@@ -1,9 +1,8 @@
 return {
   "folke/which-key.nvim",
   cond = vim.g.vscode == nil,
-  -- event = "VeryLazy",
   keys = { "<leader>", "g", "z", "[", "]" },
-  lazy = true,
+  -- lazy = true,
   config = function(_, opts)
     local wk = require("which-key")
     wk.setup(opts)

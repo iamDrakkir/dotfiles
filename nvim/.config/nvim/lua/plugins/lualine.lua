@@ -19,7 +19,7 @@ return {
           lsp_info = lsp_info .. " - " .. client.name
         end
         if client.name == "copilot" then
-          copilot_icon = " "
+          copilot_icon = " "
         end
       end
       return filetype .. lsp_info .. copilot_icon
@@ -76,14 +76,15 @@ return {
       },
       inactive_sections = {},
       tabline = {
-        lualine_a = { "buffers" },
+        lualine_a = { "filename" },
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
         lualine_z = { "tabs" },
       },
-      extensions = { "lazy", "quickfix", "toggleterm" },
+      winbar = {},
+      extensions = { "lazy", "quickfix" },
     })
   end,
 }

@@ -1,9 +1,0 @@
-{
-    "workspace.checkThirdParty": false,
-    "workspace.library": [
-        "/home/drakkir/.local/share/nvim/lazy/neodev.nvim/types/stable",
-        "/usr/local/share/nvim/runtime/lua",
-        "./lua",
-        "/home/drakkir/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/56c06312"
-    ]
-}

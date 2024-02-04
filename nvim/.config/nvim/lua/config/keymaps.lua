@@ -37,10 +37,10 @@ map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 map("v", ">", ">gv", { desc = "Increase indentation" })
 map("v", "<", "<gv", { desc = "Decrease indentation" })
 -- better paste
-map("v", "p", '"_dP', { desc = "" })
+map("v", "p", '"_dP', { desc = "Paste without yanking" })
 -- Maintain the cursor position when yanking a visual selection
-map("v", "y", "myy`y", { desc = "" })
-map("v", "Y", "myY`y", { desc = "" })
+map("v", "y", "myy`y", { desc = "Yank without changing cursor position" })
+map("v", "Y", "myY`y", { desc = "Yank without changing cursor position" })
 -- Lists
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
@@ -57,8 +57,6 @@ map("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete window" })
 map("n", "<leader>w-", "<C-W>s", { desc = "Split window below" })
 map("n", "<leader>w|", "<C-W>v", { desc = "Split window right" })
-map("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
-map("n", "<leader>|", "<C-W>v", { desc = "Split window right" })
 -- tabs
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
 map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })

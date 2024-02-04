@@ -11,6 +11,7 @@ return {
   {
     "m4xshen/hardtime.nvim",
     event = "bufReadPost",
+    enabled = false,
     opts = {
       max_time = 1000,
       max_count = 5,
@@ -23,5 +24,5 @@ return {
       disabled_keys = {},
       disabled_filetypes = { "telescope", "qf", "netrw", "NvimTree", "lazy", "mason" }
     }
-  }
+  },
 }

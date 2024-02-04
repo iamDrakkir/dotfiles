@@ -1,10 +1,28 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
-  cond = vim.g.vscode == nil,
+  -- cond = vim.g.vscode == nil,
   event = "BufRead",
   opts = {
-    -- space_char_blankline = " ",
-    show_current_context = true,
-    show_current_context_start = true,
+    indent = {
+      char = "│",
+      tab_char = "│",
+    },
+    scope = { enabled = false },
+    exclude = {
+      filetypes = {
+        "help",
+        "alpha",
+        "dashboard",
+        "neo-tree",
+        "Trouble",
+        "trouble",
+        "lazy",
+        "mason",
+        "notify",
+        "toggleterm",
+        "lazyterm",
+      },
+    },
   },
+  main = "ibl",
 }

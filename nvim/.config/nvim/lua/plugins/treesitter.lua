@@ -14,9 +14,10 @@ return {
     },
   },
   opts = {
-    ensure_installed = "all",   -- one of "all", or a list of languages (https://github.com/nvim-treesitter/nvim-treesitter#supported-languages)
-    sync_install = true,        -- install languages synchronously (only applied to `ensure_installed`)
-    ignore_install = { "" },    -- List of parsers to ignore installing
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+    sync_install = true,     -- install languages synchronously (only applied to `ensure_installed`)
+    auto_install = true,     -- automatically install or update missing parsers
+    ignore_install = { "" }, -- List of parsers to ignore installing
     highlight = {
       enable = true,
     },

@@ -15,7 +15,7 @@ return {
       config = function()
         require("copilot_cmp").setup()
       end,
-    }, -- Copilot completions
+    },
   },
   event = "InsertEnter",
   config = function()
@@ -80,47 +80,47 @@ return {
         fields = { "abbr", "menu", "kind" },
         format = function(_, item)
           local kinds = {
-            Array = " ",
-            boolean = " ",
-            Class = "",
-            Color = " ",
-            Constant = " ",
+            Array = "",
+            boolean = "",
+            Class = "󰌗",
+            Color = "",
+            Constant = "",
             Constructor = "",
-            Copilot = " ",
+            Copilot = "",
             Enum = "",
             EnumMember = "",
-            Event = " ",
+            Event = "",
             Field = "",
-            File = " ",
-            Folder = "",
-            Function = "",
+            File = "",
+            Folder = "󰉋",
+            Function = "󰊕",
             Interface = "",
-            Key = " ",
-            Keyword = "",
+            Key = "",
+            Keyword = "󰌋",
             Method = "m",
             Module = "",
-            Namespace = " ",
-            Null = " ",
-            Number = " ",
-            Object = " ",
-            Operator = " ",
-            Package = " ",
-            Property = " ",
+            Namespace = "",
+            Null = "",
+            Number = "",
+            Object = "",
+            Operator = "",
+            Package = "",
+            Property = "",
             Reference = "",
             Snippet = "",
-            String = " ",
+            String = "",
             Struct = "",
-            Text = "",
-            TypeParameter = " ",
+            Text = "󰉿",
+            TypeParameter = "",
             Unit = "",
-            Value = "",
-            Variable = "",
+            Value = "󰎠",
+            Variable = "󰆧",
           }
           if kinds[item.kind] then
             item.kind = kinds[item.kind] .. item.kind
           end
           return item
-        end,
+        end
       },
       experimental = {
         ghost_text = {

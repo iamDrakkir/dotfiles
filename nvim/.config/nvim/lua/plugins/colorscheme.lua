@@ -50,6 +50,7 @@ return {
     "rose-pine/neovim",
     cond = vim.g.vscode == nil,
     name = "rose-pine",
+    enabled = true,
     lazy = false,
     priority = 1000,
     config = function()
@@ -58,15 +59,15 @@ return {
       })
       vim.cmd("colorscheme rose-pine")
 
-      local p = require('rose-pine.palette')
-      local h = require('rose-pine.util').highlight
-
-      h("Whitespace", { fg = p.overlay })
-      h("EndOfBuffer", { fg = p.base })
-
-      h("IndentBlanklineChar", { fg = p.overlay })
-      h("IndentBlanklineSpaceChar", { fg = p.overlay })
-      h("IndentBlanklineContextChar", { fg = p.muted })
+      -- local p = require('rose-pine.palette')
+      -- local h = require('rose-pine.util').highlight
+      --
+      -- h("Whitespace", { fg = p.overlay })
+      -- h("EndOfBuffer", { fg = p.base })
+      --
+      -- h("IndentBlanklineChar", { fg = p.overlay })
+      -- h("IndentBlanklineSpaceChar", { fg = p.overlay })
+      -- h("IndentBlanklineContextChar", { fg = p.muted })
     end,
   },
   {
@@ -87,5 +88,15 @@ return {
       }
       require('bamboo').load()
     end,
-  }
+  },
+  {
+    "folke/tokyonight.nvim",
+    enabled = false,
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      -- load the colorscheme here
+      vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
 }

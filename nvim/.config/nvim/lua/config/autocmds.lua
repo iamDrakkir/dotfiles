@@ -1,11 +1,8 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-local removeTrailingGroup = augroup("RemoveTrailing", {})
-local yankGroup = augroup("HighlightYank", {})
-local wrapSpellGroup = augroup("WrapSpell", {})
-local closeWithQGroup = augroup("CloseWithQ", {})
--- local startup             = augroup('telescope', {})
 
+-- Highlight yanked text
+local yankGroup = augroup("HighlightYank", {})
 autocmd("TextYankPost", {
   group = yankGroup,
   pattern = "*",
@@ -15,6 +12,7 @@ autocmd("TextYankPost", {
   end,
 })
 
+-- Go to last loc when opening a buffer
 autocmd("BufReadPost", {
   desc = "Go to last loc when opening a buffer",
   callback = function()
@@ -26,6 +24,8 @@ autocmd("BufReadPost", {
   end,
 })
 
+-- Remove trailing whitespaces
+local removeTrailingGroup = augroup("RemoveTrailing", {})
 local function trim_trailing_whitespaces()
   if not vim.o.binary and vim.o.filetype ~= "diff" then
     local current_view = vim.fn.winsaveview()
@@ -33,7 +33,6 @@ local function trim_trailing_whitespaces()
     vim.fn.winrestview(current_view)
   end
 end
-
 autocmd({ "BufWritePre" }, {
   group = removeTrailingGroup,
   pattern = "*",
@@ -41,6 +40,8 @@ autocmd({ "BufWritePre" }, {
   callback = trim_trailing_whitespaces,
 })
 
+-- spell correction and wrap for git commits and markdown files
+local wrapSpellGroup = augroup("WrapSpell", {})
 autocmd("FileType", {
   group = wrapSpellGroup,
   pattern = { "gitcommit", "markdown" },
@@ -51,6 +52,7 @@ autocmd("FileType", {
   end,
 })
 
+-- Remove some formatoptions
 autocmd("BufWinEnter", {
   pattern = "*",
   desc = "Remove some formatoptions",
@@ -64,6 +66,8 @@ autocmd("BufWinEnter", {
   end,
 })
 
+-- Close more filetypes with <q> and <esc>
+local closeWithQGroup = augroup("CloseWithQ", {})
 autocmd("FileType", {
   group = closeWithQGroup,
   pattern = {
@@ -86,24 +90,3 @@ autocmd("FileType", {
     vim.keymap.set("n", "<esc>", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
-
--- autocmd("VimEnter", {
---   group = startup,
---   pattern = "*",
---   desc = "Open telescope on startup",
---   callback = function()
---     vim.defer_fn(function()
---       -- Dropdown menu
---       local opts = {
---         previewer = false,
---         shorten_path = false,
---         layout_config = {
---           prompt_position = "top",
---         },
---         sorting_strategy = "ascending",
---         prompt_prefix = "🔍 ",
---       }
---       require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ winblend = 10, previewer = false }))
---     end, 100)
---   end,
--- })
