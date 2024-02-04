@@ -1,5 +1,4 @@
 #!/bin/sh
-#
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 
 zle_highlight=('paste:none')
@@ -15,13 +14,6 @@ plug "zdharma-continuum/fast-syntax-highlighting"
 plug "zap-zsh/supercharge"
 plug "zap-zsh/fzf"
 plug "jeffreytse/zsh-vi-mode"
-
-# FZF
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
-
-# Rust
-source "$HOME/.cargo/env"
 
 # Edit line in nvim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
