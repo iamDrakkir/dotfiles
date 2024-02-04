@@ -15,6 +15,9 @@ plug "zap-zsh/supercharge"
 plug "zap-zsh/fzf"
 plug "jeffreytse/zsh-vi-mode"
 
+# Rust
+source "$HOME/.cargo/env"
+
 # Edit line in nvim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
