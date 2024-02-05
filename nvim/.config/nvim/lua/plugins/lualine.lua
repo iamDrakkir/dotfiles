@@ -9,8 +9,8 @@ return {
     end
 
     local function lsp_text_provider()
-      local filetype = vim.api.nvim_buf_get_option(0, "filetype")
-      local clients = vim.lsp.get_active_clients()
+      local filetype = vim.api.nvim_get_option_value("filetype", {})
+      local clients = vim.lsp.get_clients()
       local lsp_info = ""
       local copilot_icon = ""
       for _, client in ipairs(clients) do
