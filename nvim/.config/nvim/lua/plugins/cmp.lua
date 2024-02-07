@@ -12,17 +12,12 @@ return {
     "saadparwaiz1/cmp_luasnip", -- Snippets completion
     {
       "zbirenbaum/copilot-cmp",
-      config = function()
-        require("copilot_cmp").setup()
-      end,
+      config = true
     },
   },
   event = "InsertEnter",
   config = function()
-    local status_ok, cmp = pcall(require, "cmp")
-    if not status_ok then
-      return
-    end
+    local cmp = require("cmp")
     local luasnip = require 'luasnip'
     require('luasnip.loaders.from_vscode').lazy_load()
     luasnip.config.setup {}

@@ -1,11 +1,11 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
-  -- cond = vim.g.vscode == nil,
+  cond = vim.g.vscode == nil,
   event = "BufRead",
   opts = {
     indent = {
-      char = "│",
-      tab_char = "│",
+      char = "", -- │
+      tab_char = "",
     },
     scope = { enabled = false },
     exclude = {

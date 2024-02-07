@@ -1,13 +1,13 @@
 return {
   "jay-babu/mason-null-ls.nvim",
+  dependencies = {
+    "williamboman/mason.nvim",
+    { "jose-elias-alvarez/null-ls.nvim", config = true },
+  },
   event = { "BufReadPre", "BufNewFile" },
   cmd = { "NullLsInfo", "NullLsAttach" },
   keys = {
     { "<leader>cn", "<cmd>NullLsInfo<cr>", desc = "NullLsInfo open" },
-  },
-  dependencies = {
-    "williamboman/mason.nvim",
-    { "jose-elias-alvarez/null-ls.nvim", config = true },
   },
   config = function()
     -- local null_ls = require("null-ls")

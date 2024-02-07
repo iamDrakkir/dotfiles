@@ -4,5 +4,5 @@ return {
   keys = {
     { "<leader>dt", "<cmd>DuckyType<cr>", desc = "Duckytype" }
   },
-  config = true
+  config = true,
 }

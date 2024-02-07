@@ -20,10 +20,9 @@ end
 
 -- options for lazy
 local opts = {
-  change_detection = {
-    enable = true,
-    notify = false,
-  },
+  -- ui = {
+  --   border = "rounded",
+  -- },
   checker = {
     enable = true,
   },

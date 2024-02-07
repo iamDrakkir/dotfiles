@@ -1,22 +1,22 @@
 return {
   "neovim/nvim-lspconfig",
+  dependencies = {
+    {
+      "williamboman/mason.nvim",
+      cmd = "Mason",
+      keys = {
+        { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason open" },
+      },
+      config = true,
+    },
+    "williamboman/mason-lspconfig.nvim",
+    { "folke/neodev.nvim", opts = {} },
+  },
   cond = vim.g.vscode == nil,
   event = { "BufReadPre", "BufNewFile" },
   cmd = { "LspInfo" },
   keys = {
     { "<leader>cl", "<cmd>LspInfo<cr>", desc = "LspInfo open" },
-  },
-  dependencies = {
-    {
-      "williamboman/mason.nvim",
-      cmd = "Mason",
-      config = true,
-      keys = {
-        { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason open" },
-      },
-    },
-    "williamboman/mason-lspconfig.nvim",
-    { "folke/neodev.nvim", opts = {} },
   },
   config = function()
     local mason_lspconfig = require("mason-lspconfig")
