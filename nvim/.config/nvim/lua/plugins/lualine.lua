@@ -1,28 +1,23 @@
 return {
   "nvim-lualine/lualine.nvim",
+  dependencies = {
+    'AndreM222/copilot-lualine'
+  },
   cond = vim.g.vscode == nil,
   event = "VeryLazy",
   config = function()
-    local status_ok, lualine = pcall(require, "lualine")
-    if not status_ok then
-      return
-    end
+    local lualine = require("lualine")
 
-    local function lsp_text_provider()
-      local filetype = vim.api.nvim_get_option_value("filetype", {})
-      local clients = vim.lsp.get_clients()
-      local lsp_info = ""
-      local copilot_icon = ""
-      for _, client in ipairs(clients) do
+    local function lsp_provider()
+      local filetype = vim.bo.filetype
+      local clients = {}
+      for _, client in ipairs(vim.lsp.get_active_clients()) do
         local filetypes = client.config.filetypes
         if filetypes and vim.fn.index(filetypes, filetype) ~= -1 and client.name ~= "null-ls" then
-          lsp_info = lsp_info .. " - " .. client.name
-        end
-        if client.name == "copilot" then
-          copilot_icon = " "
+          clients[#clients + 1] = client.name
         end
       end
-      return filetype .. lsp_info .. copilot_icon
+      return table.concat(clients, '-')
     end
 
     local function diff_source()
@@ -40,6 +35,9 @@ return {
       "diff",
       symbols = { added = " ", modified = " ", removed = " " },
       source = diff_source,
+      on_click = function()
+        require("telescope.builtin").git_status()
+      end,
     }
 
     local mode = {
@@ -47,6 +45,28 @@ return {
       fmt = function(str)
         return str:sub(1, 3)
       end,
+    }
+
+    local branch = {
+      "branch",
+      icon = "",
+      on_click = function()
+        require("telescope.builtin").git_branches()
+      end
+    }
+
+    local copilot = {
+      "copilot",
+      symbols = {
+        status = {
+          icons = {
+            enabled = "",
+            disabled = "",
+            warning = "",
+            unknown = ""
+          }
+        }
+      }
     }
 
     local location = {
@@ -59,6 +79,17 @@ return {
       cond = require("lazy.status").has_updates,
     }
 
+    local telescope_extension = {
+      sections = {
+        lualine_a = { mode },
+        lualine_b = { function()
+          return "Telescope"
+        end
+        }
+      },
+      filetypes = { "TelescopePrompt" }
+    }
+
     lualine.setup({
       options = {
         theme = "auto",
@@ -68,10 +99,15 @@ return {
       },
       sections = {
         lualine_a = { mode, lazy },
-        lualine_b = { { "b:gitsigns_head", icon = "" } },
+        lualine_b = { branch },
         lualine_c = { diff },
-        lualine_x = { "diagnostics" },
-        lualine_y = { lsp_text_provider, "encoding" },
+        lualine_x = { {
+          "diagnostics",
+          on_click = function()
+            require("telescope.builtin").diagnostics()
+          end
+        } },
+        lualine_y = { "filetype", { lsp_provider, separator = "" }, copilot, "encoding" },
         lualine_z = { location, "progress" },
       },
       inactive_sections = {},
@@ -84,7 +120,7 @@ return {
         lualine_z = { "tabs" },
       },
       winbar = {},
-      extensions = { "lazy", "quickfix" },
+      extensions = { "lazy", "quickfix", "mason", "oil", telescope_extension },
     })
   end,
 }

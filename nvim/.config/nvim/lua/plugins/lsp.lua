@@ -10,7 +10,7 @@ return {
       config = true,
     },
     "williamboman/mason-lspconfig.nvim",
-    { "folke/neodev.nvim", opts = {} },
+    { "folke/neodev.nvim", config = true, },
   },
   cond = vim.g.vscode == nil,
   event = { "BufReadPre", "BufNewFile" },
@@ -75,7 +75,7 @@ return {
 
     mason_lspconfig.setup {
       ensure_installed = vim.tbl_keys(servers),
-      automatic_installation = true,
+      automatic_installation = false,
     }
 
     mason_lspconfig.setup_handlers {

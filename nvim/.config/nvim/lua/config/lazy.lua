@@ -20,9 +20,9 @@ end
 
 -- options for lazy
 local opts = {
-  -- ui = {
-  --   border = "rounded",
-  -- },
+  ui = {
+    border = "rounded",
+  },
   checker = {
     enable = true,
   },
