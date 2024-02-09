@@ -74,6 +74,14 @@ return {
       padding = 0,
     }
 
+    local function show_macro_recording()
+      local recording_register = vim.fn.reg_recording()
+      if recording_register == "" then
+        return ""
+      end
+      return "Recording @" .. recording_register
+    end
+
     local lazy = {
       require("lazy.status").updates,
       cond = require("lazy.status").has_updates,
@@ -100,26 +108,28 @@ return {
       sections = {
         lualine_a = { mode, lazy },
         lualine_b = { branch },
-        lualine_c = { diff },
-        lualine_x = { {
-          "diagnostics",
-          on_click = function()
-            require("telescope.builtin").diagnostics()
-          end
-        } },
+        lualine_c = { diff, show_macro_recording },
+        lualine_x = {
+          {
+            "diagnostics",
+            on_click = function()
+              require("telescope.builtin").diagnostics()
+            end
+          }
+        },
         lualine_y = { "filetype", { lsp_provider, separator = "" }, copilot, "encoding" },
         lualine_z = { location, "progress" },
       },
       inactive_sections = {},
-      tabline = {
-        lualine_a = { "filename" },
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = { "tabs" },
-      },
-      winbar = {},
+      -- tabline = {
+      --   lualine_a = { "filename" },
+      --   lualine_b = {},
+      --   lualine_c = {},
+      --   lualine_x = {},
+      --   lualine_y = {},
+      --   lualine_z = { "tabs" },
+      -- },
+      -- winbar = {},
       extensions = { "lazy", "quickfix", "mason", "oil", telescope_extension },
     })
   end,

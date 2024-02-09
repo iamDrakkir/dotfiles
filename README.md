@@ -6,7 +6,7 @@ Write a proper readme
 
 - [ ] Fix hidden files
 - [ ] Fix yml schemas
-- [ ] Change from config -> opts
+- [x] Change from config -> opts
 
 # Alacritty TODO:
 
