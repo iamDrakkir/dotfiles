@@ -12,19 +12,19 @@ return {
     "saadparwaiz1/cmp_luasnip", -- Snippets completion
     {
       "zbirenbaum/copilot-cmp",
-      config = true
+      config = true,
     },
   },
   event = "InsertEnter",
   config = function()
     local cmp = require("cmp")
-    local luasnip = require 'luasnip'
-    require('luasnip.loaders.from_vscode').lazy_load()
-    luasnip.config.setup {}
+    local luasnip = require("luasnip")
+    require("luasnip.loaders.from_vscode").lazy_load()
+    luasnip.config.setup({})
 
     cmp.setup({
       completion = {
-        completeopt = "menu,menuone,noselect",
+        completeopt = "menu,menuone,noinsert",
       },
       snippet = {
         expand = function(args)
@@ -35,35 +35,27 @@ return {
         documentation = cmp.config.window.bordered(),
         completion = cmp.config.window.bordered(),
       },
-      mapping = cmp.mapping.preset.insert {
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete {},
-        ['<CR>'] = cmp.mapping.confirm {
+      mapping = cmp.mapping.preset.insert({
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete({}),
+        ["CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
-        },
-        ['<Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_locally_jumpable() then
+        }),
+        ["<C-l>"] = cmp.mapping(function()
+          if luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
-          else
-            fallback()
           end
-        end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.locally_jumpable(-1) then
+        end, { "i", "s" }),
+        ["<C-h>"] = cmp.mapping(function()
+          if luasnip.locally_jumpable(-1) then
             luasnip.jump(-1)
-          else
-            fallback()
           end
-        end, { 'i', 's' }),
-      },
+        end, { "i", "s" }),
+      }),
       sources = cmp.config.sources({
         { name = "copilot" },
         { name = "nvim_lsp" },
@@ -115,7 +107,7 @@ return {
             item.kind = kinds[item.kind] .. item.kind
           end
           return item
-        end
+        end,
       },
       experimental = {
         ghost_text = {
@@ -126,7 +118,7 @@ return {
 
     cmp.setup.filetype("gitcommit", {
       sources = cmp.config.sources({
-        { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
+        { name = "cmp_git" },
       }, {
         { name = "buffer" },
       }),

@@ -13,11 +13,20 @@ return {
       local clients = {}
       for _, client in ipairs(vim.lsp.get_active_clients()) do
         local filetypes = client.config.filetypes
-        if filetypes and vim.fn.index(filetypes, filetype) ~= -1 and client.name ~= "null-ls" then
+        if filetypes and vim.fn.index(filetypes, filetype) ~= -1 then
           clients[#clients + 1] = client.name
         end
       end
       return table.concat(clients, '-')
+    end
+
+    local function formatter()
+      local status_ok, conform = pcall(require, "conform")
+      if not status_ok then
+        return
+      end
+      local bufnr = vim.api.nvim_get_current_buf()
+      return table.concat(conform.list_formatters_for_buffer(bufnr))
     end
 
     local function diff_source()
@@ -117,7 +126,7 @@ return {
             end
           }
         },
-        lualine_y = { "filetype", { lsp_provider, separator = "" }, copilot, "encoding" },
+        lualine_y = { "filetype", formatter, { lsp_provider, separator = "" }, copilot, "encoding" },
         lualine_z = { location, "progress" },
       },
       inactive_sections = {},

@@ -37,6 +37,7 @@ return {
       pylsp = {},
       rust_analyzer = {},
       yamlls = {},
+      luaformatter = {},
     }
 
     local on_attach = function(_, bufnr)
