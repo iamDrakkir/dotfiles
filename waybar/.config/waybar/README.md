@@ -25,7 +25,7 @@ A good starting point is to copy the the waybar starter theme.
 
 Copy the folder ~/dotfiles/waybar/themes/starter and name the copy for example to mytheme.
 
-Open the file ~/dotfiles/waybar/themes/mytheme/config.sh and give your theme a name 
+Open the file ~/dotfiles/waybar/themes/mytheme/config.sh and give your theme a name
 
 ```
 #!/bin/bash
@@ -34,7 +34,7 @@ theme_name="MyTheme"
 
 Select your new theme by clicking in the ... icon or with <kbd>SUPER</kbd> + <kbd>CTRL</kbd> + <kbd>T</kbd>
 
-To customize your theme, you can edit the files config, style.css and modules.json 
+To customize your theme, you can edit the files config, style.css and modules.json
 
 You can reload the waybar theme with <kbd>SUPER</kbd> + <kbd>SHIFT</kbd> + <kbd>B</kbd>
 
