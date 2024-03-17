@@ -41,10 +41,10 @@ case $1 in
     # Select wallpaper with rofi
     "select")
 
-        selected=$( find "$HOME/wallpaper" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec basename {} \; | sort -R | while read rfile
+        selected=$( fd . --type f --extension jpg --extension jpeg --extension png "$HOME/wallpaper" | shuf | xargs -I {} basename {} | while read -r rfile;
         do
             echo -en "$rfile\x00icon\x1f$HOME/wallpaper/${rfile}\n"
-        done | rofi -dmenu -replace -config ~/dotfiles/rofi/config-wallpaper.rasi)
+        done | rofi -dmenu -replace -config ~/.config/rofi/config-wallpaper.rasi)
         if [ ! "$selected" ]; then
             echo "No wallpaper selected"
             exit
@@ -79,7 +79,7 @@ newwall=$(echo $wallpaper | sed "s|$HOME/wallpaper/||g")
 # -----------------------------------------------------
 # Reload waybar with new colors
 # -----------------------------------------------------
-~/dotfiles/waybar/launch.sh
+~/.config/waybar/launch.sh
 
 # -----------------------------------------------------
 # Set the new wallpaper
@@ -87,7 +87,7 @@ newwall=$(echo $wallpaper | sed "s|$HOME/wallpaper/||g")
 transition_type="wipe"
 
 swww img $wallpaper \
-    --transition-fps=60  \
+    --transition-fps=60 \
     --transition-bezier .4,.7,.73,.6 \
     --transition-type="grow" \
     --transition-duration=1.2 \

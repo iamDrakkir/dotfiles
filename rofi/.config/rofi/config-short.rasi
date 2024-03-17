@@ -1,12 +1,12 @@
 /*
-#  ____        __ _  
-# |  _ \ ___  / _(_) 
-# | |_) / _ \| |_| | 
-# |  _ < (_) |  _| | 
-# |_| \_\___/|_| |_| 
-#                    
-# by Stephan Raabe (2023) 
-# ----------------------------------------------------- 
+#  ____        __ _
+# |  _ \ ___  / _(_)
+# | |_) / _ \| |_| |
+# |  _ < (_) |  _| |
+# |_| \_\___/|_| |_|
+#
+# by Stephan Raabe (2023)
+# -----------------------------------------------------
 */
 
 /* ---- Configuration ---- */
@@ -19,18 +19,18 @@ configuration {
     display-run:                "RUN";
     display-filebrowser:        "FILES";
     display-window:             "WINDOW";
-	hover-select:               true;
+    hover-select:               true;
     me-select-entry:            "";
     me-accept-entry:            "MousePrimary";
     drun-display-format:        "{name}";
     window-format:              "{w} · {c} · {t}";
-    
+
 }
 
 /* ---- Load pywal colors (custom wal template) ---- */
 @import "~/.cache/wal/colors-rofi-pywal"
 @import "~/.cache/current_wallpaper.rasi"
-@import "~/dotfiles/.settings/rofi-border.rasi"
+@import "~/.config/rofi/rofi-border.rasi"
 
 /* ---- Window ---- */
 window {
@@ -40,7 +40,7 @@ window {
     y-offset:                     65px;
     spacing:                      0px;
     padding:                      0px;
-    margin:                       0px; 
+    margin:                       0px;
     color:                        #FFFFFF;
     border:                       @border-width;
     border-color:                 #FFFFFF;
