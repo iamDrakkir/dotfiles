@@ -1,0 +1,5 @@
+[user]
+	email = Hagelin.Rickard@gmail.com
+	name = iamDrakkir
+[core]
+	editor = nvim
