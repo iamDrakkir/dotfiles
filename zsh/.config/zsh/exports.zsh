@@ -7,6 +7,8 @@ export XDG_STATE_HOME=$HOME/.local/state
 HISTSIZE=100000
 SAVEHIST=100000
 
+PATH=$HOME/.local/bin:$PATH
+
 # Man pages
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999

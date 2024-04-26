@@ -4,9 +4,11 @@
 install_system_packages() {
     distribution=$(awk -F= '/^NAME/{print $2}' /etc/os-release)
     case $distribution in
+
         *"Debian"* | *"Ubuntu"*)
             sudo apt-get update
-            sudo apt-get install -y "${packages[@]}"
+            sudo apt-get install -y nala
+            sudo nala install -y "${packages[@]}"
             ;;
         *"Arch"*)
             sudo pacman -Syu --noconfirm "${packages[@]}"
@@ -51,18 +53,18 @@ remove_neovim() {
 
 # Function to clone Neovim
 clone_neovim() {
-    git clone --depth 1 --branch nightly https://github.com/neovim/neovim.git "$HOME/neovim"
+    git clone --depth 1 --branch nightly https://github.com/neovim/neovim.git "$HOME/git/neovim"
 }
 
 # Function to build Neovim
 build_neovim() {
-    cd "$HOME/neovim" || exit 1
+    cd "$HOME/git/neovim" || exit 1
     make -j 20
 }
 
 # Function to install Neovim
 install_neovim() {
-    sudo make install -C "$HOME/neovim"
+    sudo make install -C "$HOME/git/neovim"
 }
 
 # Function to install Vim plugins
@@ -71,6 +73,10 @@ install_vim_plugins() {
 }
 
 add_private_ssh_key() {
+  #todo: add check if user exist
+  #todo check if user is signin
+  op account add
+  eval $(op signin)
   # Retrieve private key and save it to file
   op read "op://private/github ssh key/private key" > ~/.ssh/github_private_key
 
@@ -84,54 +90,64 @@ add_private_ssh_key() {
 # Main function
 main() {
     packages=(
+      nala
+      firefox
       zsh
       stow
-      base-devel
+      #base-devel
       cmake
       pkgconf
-      lua
+      #lua
       unzip
-      libtool
+      #libtool
       gettext
       alacritty
       tmux
       ripgrep
-      exa
+      eza
       bat
       fzf
       zoxide
       entr
-      fd
-      python
-      python-pip
+      fd-find
+      python3
+      python3-pip
+      curl
+      steam
+      discord
     )
-    install_paru
-    paru_packages=(
-      1password
-      1password-cli
-      swww
-      pywal
-    )
-    install_system_packages
+    # todo: gettext is deps for neovim
+    # todo: fix fd-find symlink
+    #install_paru
+    #paru_packages=(
+    #  1password
+    #  1password-cli
+    #  swww
+    #  pywal
+    #)
+    #install_system_packages
 
     #zsh
-    install_zsh
-    install_zsh_zap
-    create_history_file
-    change_shell_to_zsh
+    #install_zsh
+    #install_zsh_zap
+    #create_history_file
+    #change_shell_to_zsh
 
     #neovim
-    remove_neovim
-    clone_neovim
-    build_neovim
-    install_neovim
-    install_vim_plugins
+    #remove_neovim
+    #clone_neovim
+    #build_neovim
+    #install_neovim
+    #install_vim_plugins #todo: stow is not done at this point, so lazy does not exist.
 
     #ssh
     add_private_ssh_key
 
     #change checkout from https to ssh
-    git remote set-url origin git@github.com:iamDrakkir/dotfiles.git
+    # git remote set-url origin git@github.com:iamDrakkir/dotfiles.git
+
+    # enable super+p
+    settings set org.gnome.mutter.keybindings switch-monitor "['XF86Display']"
 }
 
 main "$@"
