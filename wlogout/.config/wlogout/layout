@@ -5,15 +5,9 @@
     "keybind" : "l"
 }
 {
-    "label" : "hibernate",
-    "action" : "sleep 1; systemctl hibernate",
-    "text" : "Hibernate",
-    "keybind" : "h"
-}
-{
     "label" : "logout",
-    "action" : "$HOME/dotfiles/hypr/scripts/exit.sh",
-    "text" : "Exit",
+    "action" : "sleep 1; killall -9 Hyprland",
+    "text" : "Logout",
     "keybind" : "e"
 }
 {
@@ -21,12 +15,6 @@
     "action" : "sleep 1; systemctl poweroff",
     "text" : "Shutdown",
     "keybind" : "s"
-}
-{
-    "label" : "suspend",
-    "action" : "sleep 1; systemctl suspend",
-    "text" : "Suspend",
-    "keybind" : "u"
 }
 {
     "label" : "reboot",

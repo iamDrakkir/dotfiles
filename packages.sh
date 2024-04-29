@@ -87,6 +87,15 @@ add_private_ssh_key() {
   ssh-add ~/.ssh/github_private_key
 }
 
+install_nerd_font() {
+  wget https:// github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraMono.zip
+  # extract to firaMono folder
+  unzip FiraMono.zip -d FiraMono
+  rm FiraMono.zip
+  sudo mv FiraMono /usr/share/fonts/
+  sudo fc-cache -fv
+}
+
 # Main function
 main() {
     packages=(
@@ -94,14 +103,12 @@ main() {
       firefox
       zsh
       stow
-      #base-devel
       cmake
       pkgconf
-      #lua
       unzip
-      #libtool
       gettext
       alacritty
+      foot
       tmux
       ripgrep
       eza
@@ -112,9 +119,20 @@ main() {
       fd-find
       python3
       python3-pip
+      pipx
       curl
       steam
       discord
+      vlc
+      bibata-cursor-theme
+      wl-clipboard
+      #breeze-icon-theme maybe?
+      fonts-noto
+      fonts-font-awesome
+      dunst
+      #base-devel
+      #lua
+      #libtool
     )
     # todo: gettext is deps for neovim
     # todo: fix fd-find symlink
@@ -126,6 +144,9 @@ main() {
     #  pywal
     #)
     #install_system_packages
+    pipx install pywal
+    install_nerd_font
+
 
     #zsh
     #install_zsh
@@ -141,13 +162,13 @@ main() {
     #install_vim_plugins #todo: stow is not done at this point, so lazy does not exist.
 
     #ssh
-    add_private_ssh_key
+    # add_private_ssh_key
 
     #change checkout from https to ssh
     # git remote set-url origin git@github.com:iamDrakkir/dotfiles.git
 
     # enable super+p
-    settings set org.gnome.mutter.keybindings switch-monitor "['XF86Display']"
+    # settings set org.gnome.mutter.keybindings switch-monitor "['XF86Display']"
 }
 
 main "$@"

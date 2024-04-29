@@ -1,14 +1,4 @@
 #!/bin/bash
-#                _ _
-# __      ____ _| | |_ __   __ _ _ __   ___ _ __
-# \ \ /\ / / _` | | | '_ \ / _` | '_ \ / _ \ '__|
-#  \ V  V / (_| | | | |_) | (_| | |_) |  __/ |
-#   \_/\_/ \__,_|_|_| .__/ \__,_| .__/ \___|_|
-#                   |_|         |_|
-#
-# by Stephan Raabe (2023)
-# -----------------------------------------------------
-
 # Cache file for holding the current wallpaper
 cache_file="$HOME/.cache/current_wallpaper"
 rasi_file="$HOME/.cache/current_wallpaper.rasi"
@@ -28,7 +18,6 @@ fi
 current_wallpaper=$(cat "$cache_file")
 
 case $1 in
-
     # Load wallpaper from .cache of last session
     "init")
         if [ -f $cache_file ]; then
@@ -40,7 +29,6 @@ case $1 in
 
     # Select wallpaper with rofi
     "select")
-
         selected=$( fd . --type f --extension jpg --extension jpeg --extension png "$HOME/wallpaper" | shuf | xargs -I {} basename {} | while read -r rfile;
         do
             echo -en "$rfile\x00icon\x1f$HOME/wallpaper/${rfile}\n"
@@ -84,14 +72,30 @@ newwall=$(echo $wallpaper | sed "s|$HOME/wallpaper/||g")
 # -----------------------------------------------------
 # Set the new wallpaper
 # -----------------------------------------------------
-transition_type="wipe"
 
-swww img $wallpaper \
-    --transition-fps=60 \
-    --transition-bezier .4,.7,.73,.6 \
-    --transition-type="grow" \
-    --transition-duration=1.2 \
-    --transition-pos "$( hyprctl cursorpos )"
+wallpaper_engine=hyprpaper
+if [ "$wallpaper_engine" == "swww" ] ;then
+    echo ":: Using swww"
+    transition_type="wipe"
+    swww img $wallpaper \
+      --transition-fps=60 \
+      --transition-bezier .4,.7,.73,.6 \
+      --transition-type="grow" \
+      --transition-duration=1.2 \
+      --transition-pos "$( hyprctl cursorpos )"
+elif [ "$wallpaper_engine" == "hyprpaper" ] ;then
+    # hyprpaper
+    echo ":: Using hyprpaper"
+    killall hyprpaper
+    wal_tpl="\
+      preload = $wallpaper
+      wallpaper = ,$wallpaper
+      splash = false"
+    echo "$output" > $HOME/.config/hypr/hyprpaper.conf
+    hyprpaper &
+else
+    echo ":: Wallpaper Engine disabled"
+fi
 
 # -----------------------------------------------------
 # Send notification
