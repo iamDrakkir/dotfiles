@@ -1,15 +1,22 @@
 #!/bin/bash
 
+# Hyprland ecosystem
 HYPRLAND_VERSION='0.39.1'
-HYPRLANG_VERSION='0.5.0'
-HYPRCURSOR_VERSION='0.1.7'
+HYPRCURSOR_VERSION='0.1.8'
 HYPRPAPER_VERSION='0.6.0'
 HYPRIDLE_VERSION='0.1.2'
 HYPRLOCK_VERSION='0.3.0'
+HYPRPICKER_VERSION='0.1.0'
+# dependencies
+HYPRLANG_VERSION='0.5.0'
+XDG_DESKTOP_PORTAL_HYPRLAND_VERSION='0.1.0'
 WAYLAND_VERSION='1.22.91'
 WAYLAND_PROTOCOLS_VERSION='1.36'
 LIBDISPLAY_INFO_VERSION='0.1.1'
 TOMLPLUSPLUS_VERSION='3.4.0'
+MESA_DRM_VERSION='2.4.120'
+SDBUS_CPP_VERSION='1.6.0'
+
 
 clone-or-pull() {
   if [ -d $2 ]; then
@@ -203,16 +210,13 @@ build-hyprpicker() {
   cd ..
 }
 
-list_include_item() {
-  local list="$1"
-  local item="$2"
-  if [[ $list =~ (^|[[:space:]])"$item"($|[[:space:]]) ]] ; then
-    # yes, list include item
-    result=0
-  else
-    result=1
-  fi
-  return $result
+build-hyprcursor() {
+  clone-or-pull https://github.com/hyprwm/hyprcursor hyprcursor
+
+  cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
+  cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
+  sudo cmake --install build
+  cd ..
 }
 
 mkdir ~/HyprSource
@@ -224,5 +228,6 @@ build-hyprpaper
 build-hypridle
 build-hyprlock
 build-hyprpicker
+build-hyprcursor
 build-xdg-desktop-portal-hyprland
 
