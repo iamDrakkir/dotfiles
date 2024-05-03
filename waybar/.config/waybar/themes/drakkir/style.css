@@ -1,28 +1,25 @@
-/*
- * __        __          _                  ____  _         _       
- * \ \      / /_ _ _   _| |__   __ _ _ __  / ___|| |_ _   _| | ___  
- *  \ \ /\ / / _` | | | | '_ \ / _` | '__| \___ \| __| | | | |/ _ \ 
- *   \ V  V / (_| | |_| | |_) | (_| | |     ___) | |_| |_| | |  __/ 
- *    \_/\_/ \__,_|\__, |_.__/ \__,_|_|    |____/ \__|\__, |_|\___| 
- *                 |___/                              |___/         
- *  
- * by Stephan Raabe (2023) 
- * ----------------------------------------------------- 
-*/
-
 /* -----------------------------------------------------
- * Import Pywal colors 
- * ----------------------------------------------------- */
-/* @import 'style-light.css'; */
-
-/* -----------------------------------------------------
- * General 
+ * Import Pywal colors
  * ----------------------------------------------------- */
 
+/* -----------------------------------------------------
+ * General
+ * ----------------------------------------------------- */
+/* * { */
+/*     font-family: "Fira Sans Semibold", FontAwesome, Roboto, Helvetica, Arial, sans-serif; */
+/*     font-family: "JetBrainsMono Nerd Font Mono", FontAwesome, Roboto, Helvetica, Arial, sans-serif; */
+/*     font-family: "JetBrainsMono Nerd Font Mono"; */
+/*     font-family: "Fira Sans Semibold"; */
+/*     font-family: "JetBrainsMono NF"; */
+/*     border: none; */
+/*     border-radius: 0px; */
+/* } */
 * {
-    font-family: "Fira Sans Semibold", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    border: none;
-    border-radius: 0px;
+  border: none;
+  border-radius: 0;
+  font-family: FiraCode Nerd Font, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  min-height: 0;
 }
 
 window#waybar {
@@ -35,9 +32,8 @@ window#waybar {
 }
 
 /* -----------------------------------------------------
- * Workspaces 
+ * Workspaces
  * ----------------------------------------------------- */
-
 #workspaces {
     background: @workspacesbackground1;
     margin: 2px 1px 3px 1px;
@@ -81,7 +77,6 @@ window#waybar {
 /* -----------------------------------------------------
  * Tooltips
  * ----------------------------------------------------- */
-
 tooltip {
     border-radius: 10px;
     background-color: @backgroundlight;
@@ -97,7 +92,6 @@ tooltip label {
 /* -----------------------------------------------------
  * Window
  * ----------------------------------------------------- */
-
 #window {
     background: @backgroundlight;
     margin: 5px 15px 5px 0px;
@@ -116,7 +110,6 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  * Taskbar
  * ----------------------------------------------------- */
-
 #taskbar {
     background: @backgroundlight;
     margin: 3px 15px 3px 0px;
@@ -137,7 +130,6 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  * Modules
  * ----------------------------------------------------- */
-
 .modules-left > widget:first-child > #workspaces {
     margin-left: 0;
 }
@@ -149,20 +141,19 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  * Custom Quicklinks
  * ----------------------------------------------------- */
-
-#custom-brave, 
-#custom-browser, 
-#custom-keybindings, 
-#custom-outlook, 
-#custom-filemanager, 
-#custom-teams, 
-#custom-chatgpt, 
-#custom-calculator, 
-#custom-windowsvm, 
-#custom-cliphist, 
-#custom-wallpaper, 
-#custom-settings, 
-#custom-wallpaper, 
+#custom-brave,
+#custom-browser,
+#custom-keybindings,
+#custom-outlook,
+#custom-filemanager,
+#custom-teams,
+#custom-chatgpt,
+#custom-calculator,
+#custom-windowsvm,
+#custom-cliphist,
+#custom-wallpaper,
+#custom-settings,
+#custom-wallpaper,
 #custom-system,
 #custom-waybarthemes {
     margin-right: 23px;
@@ -203,7 +194,6 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  * Idle Inhibator
  * ----------------------------------------------------- */
-
 #idle_inhibitor {
     margin-right: 15px;
     font-size: 22px;
@@ -223,7 +213,6 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  * Custom Modules
  * ----------------------------------------------------- */
-
 #custom-appmenu, #custom-appmenuwlr {
     background-color: @backgrounddark;
     font-size: 16px;
@@ -238,7 +227,6 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  * Custom Exit
  * ----------------------------------------------------- */
-
 #custom-exit {
     margin: 0px 20px 0px 0px;
     padding:0px;
@@ -249,7 +237,6 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  * Custom Updates
  * ----------------------------------------------------- */
-
 #custom-updates {
     background-color: @backgroundlight;
     font-size: 16px;
@@ -277,7 +264,6 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  * Custom Youtube
  * ----------------------------------------------------- */
-
 #custom-youtube {
     background-color: @backgroundlight;
     font-size: 16px;
@@ -291,7 +277,6 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  * Hardware Group
  * ----------------------------------------------------- */
-
 #disk,#memory,#cpu,#language {
     margin:0px;
     padding:0px;
@@ -315,13 +300,12 @@ window#waybar.empty #window {
     padding: 1px 10px 0px 10px;
     margin: 3px 15px 3px 0px;
     opacity:0.8;
-    border:3px solid @bordercolor;   
+    border:3px solid @bordercolor;
 }
 
 /* -----------------------------------------------------
  * Pulseaudio
  * ----------------------------------------------------- */
-
 #pulseaudio {
     background-color: @backgroundlight;
     font-size: 16px;
@@ -364,7 +348,6 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  * Bluetooth
  * ----------------------------------------------------- */
-
 #bluetooth, #bluetooth.on, #bluetooth.connected {
     background-color: @backgroundlight;
     font-size: 16px;
@@ -384,7 +367,6 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  * Battery
  * ----------------------------------------------------- */
-
 #battery {
     background-color: @backgroundlight;
     font-size: 16px;
@@ -420,7 +402,6 @@ window#waybar.empty #window {
 /* -----------------------------------------------------
  * Tray
  * ----------------------------------------------------- */
-
 #tray {
     padding: 0px 15px 0px 0px;
 }

@@ -4,10 +4,9 @@
 # -----------------------------------------------------
 killall waybar
 pkill waybar
-sleep 0.2
+sleep 0.1
 
 # -----------------------------------------------------
 # Loading the configuration
 # -----------------------------------------------------
-
-waybar -c ~/.config/waybar/themes/ml4w/config -s ~/.config/waybar/themes/ml4w/style.css &
+waybar -c ~/.config/waybar/themes/drakkir/config -s ~/.config/waybar/themes/drakkir/style.css &
