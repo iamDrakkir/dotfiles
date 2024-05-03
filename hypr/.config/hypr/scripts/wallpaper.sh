@@ -88,10 +88,13 @@ elif [ "$wallpaper_engine" == "hyprpaper" ] ;then
     echo ":: Using hyprpaper"
     killall hyprpaper
     wal_tpl="\
-      preload = $wallpaper
-      wallpaper = ,$wallpaper
-      splash = false"
-    echo "$output" > $HOME/.config/hypr/hyprpaper.conf
+      preload = ~/wallpaper/nature.jpg
+      wallpaper = ,~/wallpaper/nature.jpg
+      splash = false
+      # preload = $wallpaper
+      # wallpaper = ,$wallpaper
+      # splash = false"
+    echo "$wal_tpl" > $HOME/.config/hypr/hyprpaper.conf
     hyprpaper &
 else
     echo ":: Wallpaper Engine disabled"
