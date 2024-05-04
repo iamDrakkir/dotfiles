@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Hyprland ecosystem
-HYPRLAND_VERSION='0.39.1'
+HYPRLAND_VERSION='0.40.0'
 HYPRCURSOR_VERSION='0.1.8'
 HYPRPAPER_VERSION='0.6.0'
 HYPRIDLE_VERSION='0.1.2'
@@ -9,6 +9,7 @@ HYPRLOCK_VERSION='0.3.0'
 HYPRPICKER_VERSION='0.1.0'
 # dependencies
 HYPRLANG_VERSION='0.5.0'
+HYPRWAYLAND_SCANNER_VERSION='0.3.4'
 XDG_DESKTOP_PORTAL_HYPRLAND_VERSION='0.1.0'
 WAYLAND_VERSION='1.22.91'
 WAYLAND_PROTOCOLS_VERSION='1.36'
@@ -90,6 +91,18 @@ build-wayland-protocols() {
   cd ../..
 }
 
+
+build-hypwayland-scanner() {
+  clone-or-pull https://github.com/hyprwm/hyprwayland-scanner
+
+  cmake -DCMAKE_INSTALL_PREFIX=/usr -B build
+  cmake --build build -j `nproc`
+
+  sudo cmake --install build
+
+  cd ..
+}
+
 build-libdisplayinfo() {
   wget https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/0.1.1/downloads/libdisplay-info-0.1.1.tar.xz
   tar -xvJf libdisplay-info-0.1.1.tar.xz
@@ -132,6 +145,7 @@ build-deps () {
   build-libdrm
   build-wayland
   build-wayland-protocols
+  build-hypwayland-scanner
   build-libdisplayinfo
   build-sdbus-cpp
 }
