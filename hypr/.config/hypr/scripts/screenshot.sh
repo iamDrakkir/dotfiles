@@ -7,16 +7,16 @@ option3="Fullscreen (delay 3 sec)"
 
 options="$option2\n$option3"
 
-choice=$(echo -e "$options" | rofi -dmenu -replace -config ~/dotfiles/rofi/config-screenshot.rasi -i -no-show-icons -l 2 -width 30 -p "Take Screenshot")
+choice=$(echo -e "$options" | rofi -dmenu -replace -config ~/.config/rofi/config-screenshot.rasi -i -no-show-icons -l 2 -width 30 -p "Take Screenshot")
 
 case $choice in
     $option2)
-        grim -g "$(slurp)" - | swappy -f -
+        grim -g "$(slurp)" - | satty -f - --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png
         notify-send "Screenshot created" "Mode: Selected area"
     ;;
     $option3)
         sleep 3
-        grim - | swappy -f -
+        grim - | satty -f - --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png
         notify-send "Screenshot created" "Mode: Fullscreen"
     ;;
 esac

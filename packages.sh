@@ -131,14 +131,14 @@ main() {
       vlc
       bibata-cursor-theme
       wl-clipboard
-      #breeze-icon-theme maybe?
+      cliphist
+      pavucontrol
+      grim
       fonts-noto
       fonts-font-awesome
       dunst
-      #base-devel
-      #lua
-      #libtool
     )
+    # todo: rustup and rustup default stable
     # todo: gettext is deps for neovim
     # todo: fix fd-find symlink
     #install_paru
@@ -149,9 +149,8 @@ main() {
     #  pywal
     #)
     #install_system_packages
-    pipx install pywal
+    sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install pywal
     install_nerd_font
-
 
     #zsh
     #install_zsh

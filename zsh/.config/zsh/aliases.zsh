@@ -29,7 +29,9 @@ alias ll='exa --long --color always --icons --sort=type'
 alias la='exa --grid --all --color auto --icons --sort=type'
 alias lla='exa --long --all --color auto --icons --sort=type'
 alias tree='exa --tree'
-alias cat='bat'
+if command -v batcat &> /dev/null; then
+    alias bat='batcat'
+fi
 
 # Git aliases
 alias gs='git status'

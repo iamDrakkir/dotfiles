@@ -1,51 +1,108 @@
 #!/bin/bash
-_isInstalledYay() {
-    package="$1";
-    check="$(yay -Qs --color always "${package}" | grep "local" | grep "${package} ")";
-    if [ -n "${check}" ] ; then
-        echo 0; #'0' means 'true' in Bash
-        return; #true
-    fi;
-    echo 1; #'1' means 'false' in Bash
-    return; #false
+# ------------------------------------------------------
+# Function to detect package manager
+# ------------------------------------------------------
+_detectPackageManager() {
+    if command -v yay &> /dev/null; then
+        echo "yay"
+    elif command -v nala &> /dev/null; then
+        echo "nala"
+    elif command -v apt &> /dev/null; then
+        echo "apt"
+    elif command -v dnf &> /dev/null; then
+        echo "dnf"
+    else
+        echo "none"
+    fi
+}
+
+# ------------------------------------------------------
+# Function to prompt for confirmation
+# ------------------------------------------------------
+_confirm() {
+    read -p "$1 [y/N]: " response
+    case "$response" in
+        [yY][eE][sS]|[yY])
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+# ------------------------------------------------------
+# Function to prompt for input
+# ------------------------------------------------------
+_input() {
+    read -p "$1: " response
+    echo "$response"
 }
 
 # ------------------------------------------------------
 # Confirm Start
 # ------------------------------------------------------
-
-if gum confirm "DO YOU WANT TO START THE UPDATE NOW?" ;then
+if _confirm "DO YOU WANT TO START THE UPDATE NOW?"; then
     echo
     echo ":: Update started."
-elif [ $? -eq 130 ]; then
-        exit 130
 else
     echo
     echo ":: Update canceled."
-    exit;
+    exit
 fi
 
-if [[ $(_isInstalledYay "timeshift") == "0" ]] ;then
-    if gum confirm "DO YOU WANT TO CREATE A SNAPSHOT?" ;then
+package_manager=$(_detectPackageManager)
+
+# ------------------------------------------------------
+# Create a snapshot if timeshift is installed
+# ------------------------------------------------------
+if command -v timeshift &> /dev/null; then
+    if _confirm "DO YOU WANT TO CREATE A SNAPSHOT?"; then
         echo
-        c=$(gum input --placeholder "Enter a comment for the snapshot...")
+        c=$(_input "Enter a comment for the snapshot")
         sudo timeshift --create --comments "$c"
         sudo timeshift --list
-        sudo grub-mkconfig -o /boot/grub/grub.cfg
+        case "$package_manager" in
+            "yay"|"apt")
+                sudo grub-mkconfig -o /boot/grub/grub.cfg
+                ;;
+            "dnf")
+                sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+                ;;
+        esac
         echo ":: DONE. Snapshot $c created!"
         echo
-    elif [ $? -eq 130 ]; then
-        echo ":: Snapshot canceled."
-        exit 130
     else
         echo ":: Snapshot canceled."
     fi
-    echo
+else
+  echo "Timeshift is not installed. Skipping snapshot creation."
 fi
 
-yay
+# ------------------------------------------------------
+# Perform the system update
+# ------------------------------------------------------
+case "$package_manager" in
+    "yay")
+        yay
+        ;;
+    "nala")
+        sudo nala update && sudo nala upgrade -y
+        ;;
+    "apt")
+        sudo apt update && sudo apt upgrade -y
+        ;;
+    "dnf")
+        sudo dnf update -y
+        ;;
+    *)
+        echo "Unsupported package manager."
+        exit 1
+        ;;
+esac
 
 notify-send "Update complete"
 echo
 echo ":: Update complete"
 sleep 2
+

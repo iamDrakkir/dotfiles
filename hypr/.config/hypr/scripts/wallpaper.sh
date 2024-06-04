@@ -16,7 +16,6 @@ if [ ! -f $rasi_file ] ;then
 fi
 
 current_wallpaper=$(cat "$cache_file")
-
 case $1 in
     # Load wallpaper from .cache of last session
     "init")
@@ -29,10 +28,11 @@ case $1 in
 
     # Select wallpaper with rofi
     "select")
-        selected=$( fd . --type f --extension jpg --extension jpeg --extension png "$HOME/wallpaper" | shuf | xargs -I {} basename {} | while read -r rfile;
+        selected=$( find "$HOME/wallpaper/" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec basename {} \; | sort -R | while read rfile
         do
-            echo -en "$rfile\x00icon\x1f$HOME/wallpaper/${rfile}\n"
-        done | rofi -dmenu -replace -config ~/.config/rofi/config-wallpaper.rasi)
+            echo -en "${rfile}\x00icon\x1f$HOME/wallpaper/${rfile}\n"
+        done | rofi -dmenu -replace -config $HOME/.config/rofi/config-wallpaper.rasi)
+        echo "Selected wallpaper" "$selected"
         if [ ! "$selected" ]; then
             echo "No wallpaper selected"
             exit
@@ -67,7 +67,7 @@ newwall=$(echo $wallpaper | sed "s|$HOME/wallpaper/||g")
 # -----------------------------------------------------
 # Reload waybar with new colors
 # -----------------------------------------------------
-~/.config/waybar/launch.sh
+# ~/.config/waybar/launch.sh
 
 # -----------------------------------------------------
 # Set the new wallpaper
@@ -84,16 +84,13 @@ if [ "$wallpaper_engine" == "swww" ] ;then
       --transition-duration=1.2 \
       --transition-pos "$( hyprctl cursorpos )"
 elif [ "$wallpaper_engine" == "hyprpaper" ] ;then
-    # hyprpaper
     echo ":: Using hyprpaper"
     killall hyprpaper
+    sleep 0.1
     wal_tpl="\
-      preload = ~/wallpaper/nature.jpg
-      wallpaper = ,~/wallpaper/nature.jpg
-      splash = false
-      # preload = $wallpaper
-      # wallpaper = ,$wallpaper
-      # splash = false"
+      preload = $wallpaper
+      wallpaper = ,$wallpaper
+      splash = false"
     echo "$wal_tpl" > $HOME/.config/hypr/hyprpaper.conf
     hyprpaper &
 else

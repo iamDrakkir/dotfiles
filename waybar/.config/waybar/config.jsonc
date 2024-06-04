@@ -1,0 +1,29 @@
+{
+  "layer": "top",
+  "margin-top": 0,
+  "margin-bottom": 0,
+  "include": [
+    "~/.config/waybar/modules.jsonc"
+  ],
+  "modules-left": [
+    "custom/appmenu",
+    // "group/quicklinks",
+    "wlr/taskbar",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "tray",
+    "custom/updates",
+    "pulseaudio",
+    "bluetooth",
+    "battery",
+    "network",
+    "group/hardware",
+    "custom/cliphist",
+    "custom/exit",
+    "clock"
+  ]
+}
