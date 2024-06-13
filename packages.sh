@@ -1,6 +1,17 @@
 #!/bin/bash
 
-# Function to install system packages
+confirm() {
+  read -r -p "$1 [Y/n] " response
+  case "$response" in
+    [nN][oO]|[nN])
+      false
+      ;;
+    *)
+      true
+      ;;
+  esac
+}
+
 install_system_packages() {
     distribution=$(awk -F= '/^NAME/{print $2}' /etc/os-release)
     case $distribution in
@@ -73,18 +84,40 @@ install_vim_plugins() {
 }
 
 add_private_ssh_key() {
-  #todo: add check if user exist
-  #todo check if user is signin
-  op account add
-  eval $(op signin)
+  # Check if the user is signed in to 1Password
+  if ! op whoami >/dev/null 2>&1; then
+    echo "User is not signed in to 1Password."
+    # Sign in to 1Password
+    eval $(op signin)
+    if [ $? -ne 0 ]; then
+      echo "Failed to sign in to 1Password."
+      return 1
+    fi
+  fi
+
+  # Add 1Password account if not already added
+  if ! op account list | grep -q "my"; then
+    op account add
+  fi
+
   # Retrieve private key and save it to file
   op read "op://private/github ssh key/private key" > ~/.ssh/github_private_key
+  if [ $? -ne 0 ]; then
+    echo "Failed to retrieve the private key."
+    return 1
+  fi
 
   # Set appropriate permissions on the private key file
   chmod 600 ~/.ssh/github_private_key
 
   # Add the private key to SSH agent
   ssh-add ~/.ssh/github_private_key
+  if [ $? -ne 0 ]; then
+    echo "Failed to add the private key to SSH agent."
+    return 1
+  fi
+
+  echo "Private SSH key added successfully."
 }
 
 install_nerd_font() {
@@ -126,8 +159,6 @@ main() {
       python3-pip
       pipx
       curl
-      steam
-      discord
       vlc
       bibata-cursor-theme
       wl-clipboard
@@ -138,9 +169,14 @@ main() {
       fonts-font-awesome
       dunst
     )
+    if confirm "Do you want to install packages?"; then
+      install_system_packages
+    fi
     # todo: rustup and rustup default stable
     # todo: gettext is deps for neovim
     # todo: fix fd-find symlink
+    # steam
+    # discord
     #install_paru
     #paru_packages=(
     #  1password
@@ -148,30 +184,33 @@ main() {
     #  swww
     #  pywal
     #)
-    #install_system_packages
-    sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install pywal
-    install_nerd_font
+    # sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install pywal
+    if confirm "Do you want to install Nerd Font?"; then
+      install_nerd_font
+    fi
 
-    #zsh
-    #install_zsh
-    #install_zsh_zap
-    #create_history_file
-    #change_shell_to_zsh
+    if confirm "Do you want to install Zsh and setup Zap?"; then
+      install_zsh
+      install_zsh_zap
+      create_history_file
+      change_shell_to_zsh
+    fi
 
-    #neovim
-    #remove_neovim
-    #clone_neovim
-    #build_neovim
-    #install_neovim
-    #install_vim_plugins #todo: stow is not done at this point, so lazy does not exist.
+    if confirm "Do you want to install Neovim?"; then
+      remove_neovim
+      clone_neovim
+      build_neovim
+      install_neovim
+      install_vim_plugins #todo: stow is not done at this point, so lazy does not exist.
+    fi
 
-    #ssh
-    # add_private_ssh_key
+    if confirm "Do you want to setup 1pass and ssh key?"; then
+      add_private_ssh_key
+      #change checkout from https to ssh
+      git remote set-url origin git@github.com:iamDrakkir/dotfiles.git
+    fi
 
-    #change checkout from https to ssh
-    # git remote set-url origin git@github.com:iamDrakkir/dotfiles.git
-
-    # enable super+p
+    # disable super+p default behaviour
     # settings set org.gnome.mutter.keybindings switch-monitor "['XF86Display']"
 }
 
