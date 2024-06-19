@@ -1,17 +1,24 @@
 #!/bin/bash
 
-if [[ -z $DOTFILES ]]; then
-    DOTFILES=$HOME/.dotfiles
-fi
+# Use parameter expansion for DOTFILES with a default value
+DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
 
-pushd $DOTFILES
+# Navigate to the DOTFILES directory, exit if it fails
+pushd "$DOTFILES" || { echo "Failed to change directory to $DOTFILES"; exit 1; }
 
-STOW_FOLDERS=$(ls -d */ | sed 's#/##' | tr '\n' ',' | sed 's/,$//')
+# Generate a list of directories
+STOW_FOLDERS=$(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*' -exec basename {} \;)
 
-for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g"); do
-    stow -D $folder
-    stow $folder
+# Loop through each folder and apply stow commands
+for folder in $STOW_FOLDERS; do
+    read -p "Do you want to stow the folder '$folder'? [y/N] " confirm
+    if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
+        stow -D "$folder"
+        stow "$folder"
+    else
+        echo "Skipping '$folder'"
+    fi
 done
 
-popd
-
+# Return to the original directory
+popd || { echo "Failed to return to the original directory"; exit 1; }

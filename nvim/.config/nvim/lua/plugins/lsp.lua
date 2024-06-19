@@ -34,10 +34,11 @@ return {
           telemetry = { enable = false },
         },
       },
-      pylsp = {},
+      ruff = {},
+      ruff_lsp = {},
       rust_analyzer = {},
       yamlls = {},
-      luaformatter = {},
+      bicep = {},
     }
 
     local on_attach = function(_, bufnr)
