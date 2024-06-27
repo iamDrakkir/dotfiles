@@ -63,8 +63,6 @@ action = "ToggleFullscreen"
 key = "F11"
 mods = "Control"
 
-[mouse]
-hide_when_typing = true
 
 [[mouse.bindings]]
 action = "ExpandSelection"

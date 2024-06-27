@@ -17,6 +17,9 @@ map("n", "<C-d>", "<C-d>zz", { desc = "Scroll window downwards" })
 map("n", "<C-u>", "<C-u>zz", { desc = "Scroll window upwards" })
 map("n", "n", "nzzzv", { desc = "Go to next match" })
 map("n", "N", "Nzzzv", { desc = "Go to previous match" })
+-- Navigate wrapped lines
+map("n", "<Down>", "gj", { desc = "Move down visual line" })
+map("n", "<Up>", "gk", { desc = "Move up visual line" })
 -- Avoid Q
 map("n", "Q", "<nop>", { desc = "disable Q" })
 -- Resize with arrows

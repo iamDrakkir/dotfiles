@@ -7,6 +7,7 @@ HYPRPAPER_VERSION='0.6.0'
 HYPRIDLE_VERSION='0.1.2'
 HYPRLOCK_VERSION='0.3.0'
 HYPRPICKER_VERSION='0.1.0'
+HYPRUTILS_VERSION='0.1.0'
 # dependencies
 HYPRLANG_VERSION='0.5.0'
 HYPRWAYLAND_SCANNER_VERSION='0.3.4'
@@ -21,6 +22,19 @@ SDBUS_CPP_VERSION='1.6.0'
 # Screenshot annotation tool
 SWAPPY_VERSION='1.5.1'
 SATTY_VERSION='0.12.0'
+
+
+confirm() {
+  read -r -p "$1 [Y/n] " response
+  case "$response" in
+    [nN][oO]|[nN])
+      false
+      ;;
+    *)
+      true
+      ;;
+  esac
+}
 
 clone-or-pull() {
   if [ -d $2 ]; then
@@ -94,9 +108,19 @@ build-wayland-protocols() {
   cd ../..
 }
 
+build-hyprutils() {
+  clone-or-pull https://github.com/hyprwm/hyprutils hyprutils
+
+  cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
+  cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf _NPROCESSORS_CONF`
+
+  sudo cmake --install build
+
+  cd ..
+}
 
 build-hypwayland-scanner() {
-  clone-or-pull https://github.com/hyprwm/hyprwayland-scanner
+  clone-or-pull https://github.com/hyprwm/hyprwayland-scanner hyprwayland-scanner
 
   cmake -DCMAKE_INSTALL_PREFIX=/usr -B build
   cmake --build build -j `nproc`
@@ -142,15 +166,25 @@ build-deps () {
     libegl1-mesa-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev \
     libxcb-ewmh2 libxcb-ewmh-dev libxcb-icccm4-dev libxcb-present-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev \
     libpango1.0-dev xdg-desktop-portal-wlr hwdata libx11-xcb-dev libxdamage-dev libxcomposite-dev libxtst-dev libliftoff-dev \
-    libwlroots-dev libpipewire-0.3-dev qt6-base-dev
+    libwlroots-dev libpipewire-0.3-dev qt6-base-dev librsvg2-dev libpam0g-dev libmagic-dev libzip-dev waybar wlogout
 
+  echo "------------ tomlplusplus ---------------"
   build-tomlpp
+  echo "------------ libdrm ---------------"
   build-libdrm
+  echo "------------ wayland ---------------"
   build-wayland
+  echo "------------ wayland-protocols ---------------"
   build-wayland-protocols
+  echo "------------ hyprutils ---------------"
+  build-hyprutils
+  echo "------------ hypwayland-scanner ---------------"
   build-hypwayland-scanner
+  echo "------------ libdisplayinfo ---------------"
   build-libdisplayinfo
+  echo "------------ sdbus-cpp ---------------"
   build-sdbus-cpp
+  echo "------------ deps done ---------------"
 }
 
 ## Building Hyprland
@@ -167,7 +201,6 @@ build-hyprland () {
 
 builtHyprlang=0
 build-hyprlang() {
-  if [ $builtHyprlang -eq 1 ]; then
     clone-or-pull https://github.com/hyprwm/hyprlang.git hyprlang
 
     cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
@@ -175,7 +208,6 @@ build-hyprlang() {
     sudo cmake --install ./build
     cd ..
     builtHyprlang=1
-  fi
 }
 
 build-hyprpaper() {
@@ -241,6 +273,7 @@ build-swappy() {
   meson build
   ninja -C build
   sudo ninja -C build install
+  cd ..
 }
 
 build-satty() {
@@ -248,18 +281,39 @@ build-satty() {
   sudo nala install libepoxy-dev librust-gdk4-sys-dev libadwaita-1-dev slurp
   make build-release
   sudo PREFIX=/usr/local make install
+  cd ..
 }
 
 mkdir ~/HyprSource
 cd ~/HyprSource
 
-# build-deps
-# build-hyprland
-# build-hyprpaper
-# build-hypridle
-# build-hyprlock
-# build-hyprpicker
-# build-hyprcursor
-# build-xdg-desktop-portal-hyprland
-# build-swappy
-build-satty
+if confirm "Do you want to install dependencies?"; then
+  build-deps
+fi
+if confirm "Do you want to build Hyprland?"; then
+  build-hyprland
+fi
+if confirm "Do you want to build Hyprpaper?"; then
+  build-hyprpaper
+fi
+if confirm "Do you want to build Hypridle?"; then
+  build-hypridle
+fi
+if confirm "Do you want to build Hyprlock?"; then
+  build-hyprlock
+fi
+if confirm "Do you want to build Hyprpicker?"; then
+  build-hyprpicker
+fi
+if confirm "Do you want to build Hyprcursor?"; then
+  build-hyprcursor
+fi
+if confirm "Do you want to build xdg-desktop-portal-hyprland?"; then
+  build-xdg-desktop-portal-hyprland
+fi
+if confirm "Do you want to build Swappy?"; then
+  build-swappy
+fi
+if confirm "Do you want to build Satty?"; then
+  build-satty
+fi
