@@ -12,8 +12,8 @@ plug "$HOME/.config/zsh/prompt.zsh"
 plug "zsh-users/zsh-autosuggestions"
 plug "zdharma-continuum/fast-syntax-highlighting"
 plug "zap-zsh/supercharge"
+plug "zap-zsh/vim"
 plug "zap-zsh/fzf"
-plug "jeffreytse/zsh-vi-mode"
 
 # Edit line in nvim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line

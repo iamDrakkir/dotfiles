@@ -29,5 +29,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
 
 export BAT_THEME='gruvbox-dark'
 
+# export MANGOHUD=1
+
 # Load zoxide
 eval "$(zoxide init zsh)"

@@ -168,6 +168,8 @@ main() {
       fonts-noto
       fonts-font-awesome
       dunst
+      lactd
+      mangohud
     )
     if confirm "Do you want to install packages?"; then
       install_system_packages
