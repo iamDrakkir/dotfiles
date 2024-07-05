@@ -11,6 +11,7 @@ opt.scrolloff = 8         -- Lines of context
 opt.showmode = false      -- Dont show mode in cmd line, It is in statusline
 opt.cursorline = true     -- Highligting the current line
 opt.signcolumn = "yes"    -- Always show the signcolumn, otherwise it would shift the text each time
+opt.conceallevel = 1      -- conceral text
 opt.wrap = false          -- No line wrap
 opt.splitbelow = true     -- Put new windows below current
 opt.splitright = true     -- Put new windows right of current

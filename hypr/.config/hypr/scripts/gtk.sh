@@ -1,5 +1,4 @@
 #!/bin/bash
-
 config="$HOME/.config/gtk-3.0/settings.ini"
 if [ ! -f "$config" ]; then exit 1; fi
 
@@ -23,6 +22,5 @@ gsettings set "$gnome_schema" font-name "$font_name"
 gsettings set "$gnome_schema" color-scheme "prefer-dark"
 
 if [ -f ~/dotfiles/hypr/conf/cursor.conf ] ;then
-    echo "exec-once = hyprctl setcursor $cursor_theme $cursor_size" > ~/dotfiles/hypr/conf/cursor.conf
     hyprctl setcursor $cursor_theme $cursor_size
 fi

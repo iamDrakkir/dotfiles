@@ -51,5 +51,5 @@ alias glo='git log --pretty="oneline"'
 alias glol='git log --graph --oneline --decorate'
 
 # Zellij
-alias z='zellij'
+alias ze='zellij'
 alias zz='zellij a $(zellij list-sessions | fzf)'
