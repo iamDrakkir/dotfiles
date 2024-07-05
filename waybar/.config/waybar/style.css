@@ -16,91 +16,7 @@
   font-weight: bold;
   font-size: 13px;
   color: @textcolorBlack;
-  /* min-height: 0; */
 }
-
-window#waybar {
-    background-color: transparent;
-    transition-property: background-color;
-    transition-duration: .5s;
-}
-
-#workspaces {
-    margin: 4px 15px 0px 5px;
-    padding: 0px 1px;
-    border: 0px;
-    background-color: @backgroundlight;
-    font-weight: bold;
-    font-style: normal;
-    color: @textcolor3;
-}
-#workspaces button {
-    padding: 0px 5px;
-    margin: 4px 3px;
-    border: 0px;
-    transition: all 0.3s ease-in-out;
-}
-#workspaces button.active {
-    background: @workspacesbackground1;
-    min-width: 40px;
-    transition: all 0.3s ease-in-out;
-}
-#workspaces button:hover {
-    background: @workspacesbackground1;
-}
-
-tooltip {
-    background-color: @backgrounddark;
-    color: @textcolorWhite;
-    opacity: 0.9;
-    padding: 20px;
-    margin: 0px;
-}
-tooltip * {
-  color: white;
-  text-shadow: none;
-}
-tooltip label {
-    color: @textcolorWhite;
-}
-
-#taskbar {
-    margin: 4px 5px 0px 5px;
-    padding: 0px 1px;
-    border-radius: 15px;
-    border: 0px;
-    background-color: @backgroundlight;
-    font-weight: bold;
-    font-style: normal;
-    color: @textcolor3;
-}
-#taskbar.empty {
-    background-color: transparent;
-}
-#taskbar button {
-    padding: 0px 5px;
-    margin: 2px 3px 2px 3px;
-    border-radius: 15px;
-    border: 0px;
-    transition: all 0.3s ease-in-out;
-}
-#taskbar button.active {
-    background: @workspacesbackground1;
-    border-radius: 15px;
-    transition: all 0.3s ease-in-out;
-}
-#taskbar button:hover {
-    background: @workspacesbackground1;
-    border-radius: 15px;
-}
-
-window#waybar.empty #window {
-  background-color: transparent;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
 
 #battery,
 #battery.charging,
@@ -133,26 +49,105 @@ window#waybar.empty #window {
 #custom-exit,
 #custom-updates,
 #custom-updates.green {
-    background: @backgroundlight;
-    border-radius: 15px;
-    padding: 0px 14px 0px 9px;
-    margin: 4px 3px 0px 3px;
+  background: @backgroundlight;
+  border-radius: 15px;
+  padding: 0px 14px 0px 9px;
+  margin: 4px 3px 0px 3px;
+}
+
+window#waybar {
+  background-color: transparent;
+  transition-property: background-color;
+  transition-duration: .5s;
+}
+window#waybar.empty #window {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+#workspaces {
+  margin: 4px 15px 0px 5px;
+  padding: 0px 1px;
+  border: 0px;
+  background-color: @backgroundlight;
+  font-weight: bold;
+  font-style: normal;
+  color: @textcolor3;
+}
+#workspaces button {
+  padding: 0px 5px;
+  margin: 4px 3px;
+  border: 0px;
+  transition: all 0.3s ease-in-out;
+}
+#workspaces button.active {
+  background: @workspacesbackground1;
+  min-width: 40px;
+  transition: all 0.3s ease-in-out;
+}
+#workspaces button:hover {
+  background: @workspacesbackground1;
+}
+
+tooltip {
+  background-color: @backgrounddark;
+  color: @textcolorWhite;
+  opacity: 0.9;
+  padding: 20px;
+  margin: 0px;
+}
+tooltip * {
+  color: white;
+  text-shadow: none;
+}
+tooltip label {
+  color: @textcolorWhite;
+}
+
+#taskbar {
+  margin: 4px 5px 0px 5px;
+  padding: 0px 1px;
+  border-radius: 15px;
+  border: 0px;
+  background: @backgroundlight;
+  font-weight: bold;
+  font-style: normal;
+  color: @textcolor3;
+}
+#taskbar button {
+  padding: 0px 5px;
+  margin: 2px 3px 2px 3px;
+  border-radius: 15px;
+  border: 0px;
+  transition: all 0.3s ease-in-out;
+}
+#taskbar button.active {
+  background: @workspacesbackground1;
+  border-radius: 15px;
+  transition: all 0.3s ease-in-out;
+}
+#taskbar button:hover {
+  background: @workspacesbackground1;
+  border-radius: 15px;
+}
+#taskbar.empty {
+  background: transparent;
 }
 
 #custom-updates.yellow {
-    background: #FF9A3C;
+  background: #FF9A3C;
 }
-
 #custom-updates.red {
-    background: #DC2F2F;
+  background: #DC2F2F;
 }
 
 #tray menu * {
   color: @textcolorWhite;
 }
-
 #tray menu separator {
-    min-height: 3px;
+  min-height: 3px;
 }
 #tray menu :hover {
   background-color: @workspacesbackground1;

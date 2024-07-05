@@ -47,6 +47,11 @@ map("v", "Y", "myY`y", { desc = "Yank without changing cursor position" })
 -- Lists
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
+-- Diagnostic
+map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous [D]iagnostic message' })
+map('n', ']d', vim.diagnostic.goto_next, { desc = 'Next [D]iagnostic message' })
+map('n', '<leader>xe', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+map('n', '<leader>xq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 -- toggle options
 -- map("n", "<leader>uf", require("lazyvim.plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
 -- map("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
