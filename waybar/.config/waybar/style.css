@@ -10,7 +10,6 @@
 /* General */
 * {
   border: none;
-  border-radius: 0;
   border-radius: 15px;
   font-family: "JetBrainsMono Nerd Font";
   font-weight: bold;
@@ -61,31 +60,27 @@ window#waybar {
   transition-duration: .5s;
 }
 window#waybar.empty #window {
-  background-color: transparent;
   margin: 0;
   padding: 0;
   border: 0;
 }
 
 #workspaces {
-  margin: 4px 15px 0px 5px;
-  padding: 0px 1px;
+  margin: 4px 3px 0px 3px;
   border: 0px;
   background-color: @backgroundlight;
   font-weight: bold;
   font-style: normal;
-  color: @textcolor3;
 }
 #workspaces button {
   padding: 0px 5px;
-  margin: 4px 3px;
+  margin: 2px 3px;
   border: 0px;
   transition: all 0.3s ease-in-out;
 }
 #workspaces button.active {
   background: @workspacesbackground1;
   min-width: 40px;
-  transition: all 0.3s ease-in-out;
 }
 #workspaces button:hover {
   background: @workspacesbackground1;
@@ -99,10 +94,6 @@ tooltip {
   margin: 0px;
 }
 tooltip * {
-  color: white;
-  text-shadow: none;
-}
-tooltip label {
   color: @textcolorWhite;
 }
 
@@ -114,23 +105,17 @@ tooltip label {
   background: @backgroundlight;
   font-weight: bold;
   font-style: normal;
-  color: @textcolor3;
 }
 #taskbar button {
   padding: 0px 5px;
-  margin: 2px 3px 2px 3px;
-  border-radius: 15px;
-  border: 0px;
+  margin: 2px 3px;
   transition: all 0.3s ease-in-out;
 }
 #taskbar button.active {
   background: @workspacesbackground1;
-  border-radius: 15px;
-  transition: all 0.3s ease-in-out;
 }
 #taskbar button:hover {
   background: @workspacesbackground1;
-  border-radius: 15px;
 }
 #taskbar.empty {
   background: transparent;
