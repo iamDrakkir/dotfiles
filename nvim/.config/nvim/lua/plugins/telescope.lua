@@ -88,7 +88,7 @@ return {
 
       pickers = {
         find_files = {
-          find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "-E", ".git" },
+          find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "-E", ".git", "-E", ".venv" },
         },
         buffers = {
           sort_lastused = true,
