@@ -7,7 +7,7 @@ export XDG_STATE_HOME=$HOME/.local/state
 HISTSIZE=100000
 SAVEHIST=100000
 
-PATH=$HOME/.local/bin:$PATH
+PATH=$HOME/.local/bin:/lib/security:$PATH
 
 # Man pages
 export MANPAGER='nvim +Man!'
@@ -19,7 +19,7 @@ export VISUAL=nvim
 
 # FZF
 export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --ansi'
 # FZF rosepine
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
  --color=fg:#e0def4,bg:#1f1d2e,hl:#6e6a86
@@ -33,3 +33,11 @@ export BAT_THEME='gruvbox-dark'
 
 # Load zoxide
 eval "$(zoxide init zsh)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# export NVM_DIR="$HOME/.config/nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

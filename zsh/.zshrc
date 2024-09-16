@@ -4,9 +4,10 @@
 zle_highlight=('paste:none')
 
 # source
+plug "$HOME/.config/zsh/options.zsh"
 plug "$HOME/.config/zsh/aliases.zsh"
 plug "$HOME/.config/zsh/exports.zsh"
-plug "$HOME/.config/zsh/prompt.zsh"
+# plug "$HOME/.config/zsh/prompt.zsh"
 
 # Plugins
 plug "zsh-users/zsh-autosuggestions"
@@ -19,6 +20,6 @@ plug "zap-zsh/fzf"
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source /etc/bash_completion.d/azure-cli
+
+eval "$(starship init zsh)"
