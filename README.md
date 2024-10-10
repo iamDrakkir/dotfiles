@@ -14,3 +14,8 @@ git remote set-url origin git@github.com:iamDrakkir/dotfiles.git
 # Alacritty TODO:
 
 - [ ] Fix keybindings
+
+echo "options cfg80211 ieee80211_regdom=SE"|sudo tee /etc/modprobe.d/cfg80211.conf
+
+cargo install --git https://github.com/knarkzel/raise
+
