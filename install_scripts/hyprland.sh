@@ -1,21 +1,25 @@
 #!/bin/bash
 
 # Hyprland ecosystem
-HYPRLAND_VERSION='0.40.0'
-HYPRCURSOR_VERSION='0.1.8'
+HYPRLAND_VERSION='v0.43.0'
+HYPRCURSOR_VERSION='v0.1.9'
 HYPRPAPER_VERSION='0.6.0'
 HYPRIDLE_VERSION='0.1.2'
 HYPRLOCK_VERSION='0.3.0'
 HYPRPICKER_VERSION='0.1.0'
-HYPRUTILS_VERSION='0.1.0'
-# dependencies
-HYPRLANG_VERSION='0.5.0'
-HYPRWAYLAND_SCANNER_VERSION='0.3.4'
+HYPRUTILS_VERSION='v0.2.1'
+AQUAMARINE_VERSION='v0.4.1'
+LIBINPUT_VERSION='1.26.2'
+LIBXCB_ERROR_VERSION='xcb-util-errors-1.0.1'
+
+# Dependencies
+HYPRLANG_VERSION='v0.5.2'
+HYPRWAYLAND_SCANNER_VERSION='v0.4.0'
 XDG_DESKTOP_PORTAL_HYPRLAND_VERSION='0.1.0'
 WAYLAND_VERSION='1.22.91'
 WAYLAND_PROTOCOLS_VERSION='1.36'
 LIBDISPLAY_INFO_VERSION='0.1.1'
-TOMLPLUSPLUS_VERSION='3.4.0'
+TOMLPLUSPLUS_VERSION='v3.4.0'
 MESA_DRM_VERSION='2.4.120'
 SDBUS_CPP_VERSION='1.6.0'
 
@@ -38,32 +42,33 @@ confirm() {
 
 clone-or-pull() {
   if [ -d $2 ]; then
-    cd $2
+    pushd "$2" || { echo "Failed to change directory to $2"; exit 1; }
     git pull
+    git checkout $3
   else
-    git clone "$1" $2
-    cd $2
+    git clone --branch $3 "$1" $2
+    pushd "$2" || { echo "Failed to clone to $2"; exit 1; }
   fi
 }
 
 build-tomlpp() {
-  clone-or-pull https://github.com/marzer/tomlplusplus.git tomlplusplus
+  clone-or-pull https://github.com/marzer/tomlplusplus.git tomlplusplus $TOMLPLUSPLUS_VERSION
   mkdir build
   cd build
   meson setup .. --prefix=/usr
   ninja
   sudo ninja install
-  cd ../..
+  popd
 }
 
 build-libdrm() {
-  clone-or-pull https://gitlab.freedesktop.org/mesa/drm.git drm
+  clone-or-pull https://gitlab.freedesktop.org/mesa/drm.git drm MESA_DRM_VERSION
   mkdir build
   cd build
   meson setup .. --prefix=/usr
   ninja
   sudo ninja install
-  cd ../..
+  popd
 }
 
 build-wayland() {
@@ -78,7 +83,7 @@ build-wayland() {
   ninja
   sudo ninja install
 
-  cd ../..
+  popd
 }
 
 build-wayland-protocols() {
@@ -93,7 +98,7 @@ build-wayland-protocols() {
   ninja
   sudo ninja install
 
-  cd ../..
+  popd
 
   # we also build hyprland protocols here
   clone-or-pull https://github.com/hyprwm/hyprland-protocols.git hyprland-protocols
@@ -105,108 +110,142 @@ build-wayland-protocols() {
   ninja
   sudo ninja install
 
-  cd ../..
+  popd
 }
 
 build-hyprutils() {
-  clone-or-pull https://github.com/hyprwm/hyprutils hyprutils
-
+  clone-or-pull https://github.com/hyprwm/hyprutils.git hyprutils $HYPRUTILS_VERSION
   cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
   cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf _NPROCESSORS_CONF`
-
   sudo cmake --install build
-
-  cd ..
+  popd
 }
 
 build-hypwayland-scanner() {
-  clone-or-pull https://github.com/hyprwm/hyprwayland-scanner hyprwayland-scanner
-
+  clone-or-pull https://github.com/hyprwm/hyprwayland-scanner hyprwayland-scanner $HYPRWAYLAND_SCANNER_VERSION
+  sudo nala install libpugixml-dev -y
   cmake -DCMAKE_INSTALL_PREFIX=/usr -B build
   cmake --build build -j `nproc`
-
   sudo cmake --install build
-
-  cd ..
+  popd
 }
 
 build-libdisplayinfo() {
   wget https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/0.1.1/downloads/libdisplay-info-0.1.1.tar.xz
   tar -xvJf libdisplay-info-0.1.1.tar.xz
-
   cd libdisplay-info-0.1.1/
-
   mkdir build
   cd build
-
   meson setup --prefix=/usr --buildtype=release
   ninja
-
   sudo ninja install
-
-  cd ../..
+  popd
 }
 
 build-sdbus-cpp() {
-  clone-or-pull https://github.com/Kistler-Group/sdbus-cpp.git sdbus-cpp
+  clone-or-pull https://github.com/Kistler-Group/sdbus-cpp.git sdbus-cpp $SDBUS_CPP_VERSION
   git checkout v1.6.0
   mkdir build
   cd build
   cmake .. -DCMAKE_BUILD_TYPE=Release
   make
   sudo make install
-  cd ../..
+  popd
+}
+
+build-aquamarine() {
+  sudo nala install -y libdisplay-info-dev libgbm-dev
+  clone-or-pull https://github.com/hyprwm/aquamarine.git aquamarine $AQUAMARINE_VERSION
+  cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
+  cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf _NPROCESSORS_CONF`
+  sudo cmake --install ./build
+  popd
+}
+
+build-libinput() {
+  sudo nala install -y build-essential libgtk-3-dev check
+  clone-or-pull https://gitlab.freedesktop.org/libinput/libinput libinput $LIBINPUT_VERSION
+  meson setup --prefix=/usr builddir/
+  ninja -C builddir/
+  sudo ninja -C builddir/ install
+  popd
+}
+build-libxcb-errors() {
+  # clone-or-pull https://gitlab.freedesktop.org/xorg/lib/libxcb-errors libxcb-errors $LIBXCB_ERROR_VERSION
+  rm -rf libxcb-errors
+  git clone https://gitlab.freedesktop.org/xorg/lib/libxcb-errors --recursive
+  cd libxcb-errors
+  sudo nala install -y dh-autoreconf
+  ./autogen.sh --prefix=/usr
+  make install
+  cd ..
 }
 
 build-deps () {
   sudo apt-get install -y nala
-  sudo nala install -y meson wget build-essential ninja-build cmake-extras cmake gettext gettext-base fontconfig libfontconfig-dev \
-    libffi-dev libxml2-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd \
-    libxcb-dri3-dev libvulkan-dev libvulkan-volk-dev vulkan-utility-libraries-dev libvkfft-dev libgulkan-dev libegl-dev libgles2 \
-    libegl1-mesa-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev \
-    libxcb-ewmh2 libxcb-ewmh-dev libxcb-icccm4-dev libxcb-present-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev \
-    libpango1.0-dev xdg-desktop-portal-wlr hwdata libx11-xcb-dev libxdamage-dev libxcomposite-dev libxtst-dev libliftoff-dev \
-    libwlroots-dev libpipewire-0.3-dev qt6-base-dev librsvg2-dev libpam0g-dev libmagic-dev libzip-dev waybar wlogout
+  sudo nala install -y meson wget build-essential ninja-build cmake-extras \
+    cmake gettext gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev \
+    libdrm-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev \
+    libudev-dev libseat-dev seatd libxcb-dri3-dev libegl-dev libgles2 libegl1-mesa-dev \
+    glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev \
+    libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev \
+    libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev \
+    xdg-desktop-portal-wlr libtomlplusplus3
+  #  missing? :
+  # libvulkan-dev libvulkan-volk-dev vulkan-utility-libraries-dev libvkfft-dev libgulkan-dev
+  # libxcb-icccm4-dev
+  # sudo nala install -y meson wget build-essential ninja-build cmake-extras cmake gettext gettext-base fontconfig libfontconfig-dev \
+  #   libffi-dev libxml2-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd \
+  #   libxcb-dri3-dev libvulkan-dev libvulkan-volk-dev vulkan-utility-libraries-dev libvkfft-dev libgulkan-dev libegl-dev libgles2 \
+  #   libegl1-mesa-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev \
+  #   libxcb-ewmh2 libxcb-ewmh-dev libxcb-icccm4-dev libxcb-present-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev \
+  #   libpango1.0-dev xdg-desktop-portal-wlr hwdata libx11-xcb-dev libxdamage-dev libxcomposite-dev libxtst-dev libliftoff-dev \
+  #   libwlroots-dev libpipewire-0.3-dev qt6-base-dev librsvg2-dev libpam0g-dev libmagic-dev libzip-dev waybar wlogout
 
   echo "------------ tomlplusplus ---------------"
-  build-tomlpp
+  build-tomlpp # in nala, but not working?
   echo "------------ libdrm ---------------"
-  build-libdrm
-  echo "------------ wayland ---------------"
-  build-wayland
-  echo "------------ wayland-protocols ---------------"
-  build-wayland-protocols
+  # build-libdrm, in nala
+  # echo "------------ wayland ---------------"
+  # build-wayland
+  # echo "------------ wayland-protocols ---------------"
+  # build-wayland-protocols
   echo "------------ hyprutils ---------------"
   build-hyprutils
   echo "------------ hypwayland-scanner ---------------"
   build-hypwayland-scanner
-  echo "------------ libdisplayinfo ---------------"
-  build-libdisplayinfo
-  echo "------------ sdbus-cpp ---------------"
-  build-sdbus-cpp
+  # echo "------------ libdisplayinfo ---------------"
+  # build-libdisplayinfo
+  # echo "------------ sdbus-cpp ---------------"
+  # build-sdbus-cpp
+  echo "------------ libinput >=1.26 ---------------"
+  build-libinput
+  echo "------------ aquamarine ---------------"
+  build-aquamarine
+  echo "------------ aquamarine ---------------"
+  build-libxcb-errors
   echo "------------ deps done ---------------"
+
 }
 
 ## Building Hyprland
 build-hyprland () {
-  wget https://github.com/hyprwm/Hyprland/releases/download/v0.35.0/source-v0.35.0.tar.gz
-  tar -xvf source-v0.35.0.tar.gz
+  build-hyprlang
 
-  cd hyprland-source/
-
+  sudo nala install -y libxcb-util-dev
+  clone-or-pull https://github.com/hyprwm/Hyprland hyprland $HYPRLAND_VERSION
   make all && sudo make install
-
-  cd ../..
+  popd
 }
 
 builtHyprlang=0
 build-hyprlang() {
-    clone-or-pull https://github.com/hyprwm/hyprlang.git hyprlang
+    clone-or-pull https://github.com/hyprwm/hyprlang.git hyprlang $HYPRLANG_VERSION
 
     cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
     cmake --build ./build --config Release --target hyprlang -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
     sudo cmake --install ./build
-    cd ..
+    popd
     builtHyprlang=1
 }
 
@@ -217,7 +256,7 @@ build-hyprpaper() {
   cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
   cmake --build ./build --config Release --target hyprpaper -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
   sudo cmake --install ./build/
-  cd ..
+  popd
 }
 
 build-hypridle() {
@@ -228,7 +267,7 @@ build-hypridle() {
   cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -B ./build
   cmake --build ./build --config Release --target hypridle -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
   sudo cmake --install build
-  cd ..
+  popd
 }
 
 build-xdg-desktop-portal-hyprland() {
@@ -238,7 +277,7 @@ build-xdg-desktop-portal-hyprland() {
   cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build
   cmake --build build
   sudo cmake --install build
-  cd ..
+  popd
 }
 
 build-hyprlock() {
@@ -247,7 +286,7 @@ build-hyprlock() {
   cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -B ./build
   cmake --build ./build --config Release --target hyprlock -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
   sudo cmake --install build
-  cd ..
+  popd
 }
 
 build-hyprpicker() {
@@ -256,16 +295,17 @@ build-hyprpicker() {
   cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
   cmake --build ./build --config Release --target hyprpicker -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
   sudo cmake --install ./build
-  cd ..
+  popd
 }
 
 build-hyprcursor() {
-  clone-or-pull https://github.com/hyprwm/hyprcursor hyprcursor
+  sudo nala install -y libzip-dev librsvg2-dev
+  clone-or-pull https://github.com/hyprwm/hyprcursor hyprcursor $HYPRCURSOR_VERSION
 
   cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
   cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
   sudo cmake --install build
-  cd ..
+  popd
 }
 
 build-swappy() {
@@ -273,7 +313,7 @@ build-swappy() {
   meson build
   ninja -C build
   sudo ninja -C build install
-  cd ..
+  popd
 }
 
 build-satty() {
@@ -281,14 +321,19 @@ build-satty() {
   sudo nala install libepoxy-dev librust-gdk4-sys-dev libadwaita-1-dev slurp
   make build-release
   sudo PREFIX=/usr/local make install
-  cd ..
+  popd
 }
 
-mkdir ~/HyprSource
-cd ~/HyprSource
+if [ ! -d ~/git/hyprSource ]; then
+  mkdir ~/git/hyprSource
+fi
+cd ~/git/hyprSource
 
 if confirm "Do you want to install dependencies?"; then
   build-deps
+fi
+if confirm "Do you want to build Hyprcursor?"; then
+  build-hyprcursor
 fi
 if confirm "Do you want to build Hyprland?"; then
   build-hyprland
@@ -304,9 +349,6 @@ if confirm "Do you want to build Hyprlock?"; then
 fi
 if confirm "Do you want to build Hyprpicker?"; then
   build-hyprpicker
-fi
-if confirm "Do you want to build Hyprcursor?"; then
-  build-hyprcursor
 fi
 if confirm "Do you want to build xdg-desktop-portal-hyprland?"; then
   build-xdg-desktop-portal-hyprland

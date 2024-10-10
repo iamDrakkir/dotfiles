@@ -3,11 +3,14 @@
 # Use parameter expansion for DOTFILES with a default value
 DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
 
+# Ensure stow is installed
+sudo nala install stow -y
+
 # Navigate to the DOTFILES directory, exit if it fails
 pushd "$DOTFILES" || { echo "Failed to change directory to $DOTFILES"; exit 1; }
 
 # Generate a list of directories
-STOW_FOLDERS=$(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*' -exec basename {} \;)
+STOW_FOLDERS=$(find . -maxdepth 1 -mindepth 1 -type d -not -name '.*' -not -name 'install_scripts' -exec basename {} \;)
 
 # Loop through each folder and apply stow commands
 for folder in $STOW_FOLDERS; do

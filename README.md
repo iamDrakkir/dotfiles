@@ -2,6 +2,9 @@
 
 Write a proper readme
 
+
+git remote set-url origin git@github.com:iamDrakkir/dotfiles.git
+
 # Nvim TODO:
 
 - [ ] Fix hidden files

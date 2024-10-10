@@ -59,7 +59,7 @@ change_shell_to_zsh() {
 
 # Function to remove Neovim
 remove_neovim() {
-    rm -rf "$HOME/neovim"
+    rm -rf "$HOME/git/neovim"
 }
 
 # Function to clone Neovim
@@ -175,41 +175,24 @@ main() {
       install_system_packages
     fi
     # todo: rustup and rustup default stable
-    # todo: gettext is deps for neovim
+    # todo: gettext, make, cmake is deps for neovim
     # todo: fix fd-find symlink
     # steam
     # discord
-    #install_paru
-    #paru_packages=(
-    #  1password
-    #  1password-cli
-    #  swww
-    #  pywal
-    #)
-    # sudo PIPX_HOME=/opt/pipx PIPX_BIN_DIR=/usr/local/bin pipx install pywal
     if confirm "Do you want to install Nerd Font?"; then
-      install_nerd_font
+      source fonts.sh
     fi
 
     if confirm "Do you want to install Zsh and setup Zap?"; then
-      install_zsh
-      install_zsh_zap
-      create_history_file
-      change_shell_to_zsh
+      source zsh_zap.sh
     fi
 
     if confirm "Do you want to install Neovim?"; then
-      remove_neovim
-      clone_neovim
-      build_neovim
-      install_neovim
-      install_vim_plugins #todo: stow is not done at this point, so lazy does not exist.
+      source neovim.sh
     fi
 
-    if confirm "Do you want to setup 1pass and ssh key?"; then
-      add_private_ssh_key
-      #change checkout from https to ssh
-      git remote set-url origin git@github.com:iamDrakkir/dotfiles.git
+    if confirm "Do you want to install 1pass?"; then
+      source 1pass.sh
     fi
 
     # disable super+p default behaviour
