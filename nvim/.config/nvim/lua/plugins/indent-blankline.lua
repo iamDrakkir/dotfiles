@@ -1,6 +1,7 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
   cond = vim.g.vscode == nil,
+  enabled = false,
   event = "BufRead",
   opts = {
     indent = {

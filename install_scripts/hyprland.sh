@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Hyprland ecosystem
-HYPRLAND_VERSION='v0.44.1'
+HYPRLAND_VERSION='v0.44.0'
 HYPRCURSOR_VERSION='v0.1.9'
 HYPRPAPER_VERSION='v0.7.1'
 HYPRIDLE_VERSION='v0.1.2'
@@ -10,7 +10,7 @@ HYPRPICKER_VERSION='v0.4.1'
 HYPRUTILS_VERSION='v0.2.3'
 
 # Dependencies
-AQUAMARINE_VERSION='v0.4.1'
+AQUAMARINE_VERSION='v0.4.2'
 LIBINPUT_VERSION='1.26.2'
 LIBXCB_ERROR_VERSION='xcb-util-errors-1.0.1'
 HYPRLANG_VERSION='v0.5.2'
@@ -76,8 +76,8 @@ build-tomlpp() {
 build-wayland() {
   wget https://gitlab.freedesktop.org/wayland/wayland/-/releases/$WAYLAND_VERSION/downloads/wayland-$WAYLAND_VERSION.tar.xz
   tar -xvJf wayland-$WAYLAND_VERSION.tar.xz
-
   cd wayland-$WAYLAND_VERSION
+
   mkdir build
   cd build
 
@@ -85,7 +85,7 @@ build-wayland() {
   ninja
   sudo ninja install
 
-  popd
+  cd ../..
 }
 
 build-wayland-protocols() {
@@ -100,7 +100,7 @@ build-wayland-protocols() {
   ninja
   sudo ninja install
 
-  popd
+  cd ../..
 
 }
 build-hyprland-protocols() {
@@ -123,7 +123,7 @@ build-hyprutils() {
   sudo cmake --install build
   popd
 }
-build-hypwayland-scanner() {
+build-hyprwayland-scanner() {
   clone-or-pull https://github.com/hyprwm/hyprwayland-scanner hyprwayland-scanner $HYPRWAYLAND_SCANNER_VERSION
   sudo nala install libpugixml-dev -y
   cmake -DCMAKE_INSTALL_PREFIX=/usr -B build
@@ -204,31 +204,61 @@ build-deps () {
   #   libwlroots-dev libpipewire-0.3-dev qt6-base-dev librsvg2-dev libpam0g-dev libmagic-dev libzip-dev waybar wlogout
 
   echo "------------ tomlplusplus ---------------"
+
+if confirm "Do you want to build tomlpp?"; then
   build-tomlpp # in nala, but not working?
+fi
   # echo "------------ libdrm ---------------"
   # build-libdrm, in nala
+if confirm "Do you want to build wayland?"; then
   echo "------------ wayland ---------------"
   build-wayland
+fi
+
+if confirm "Do you want to build wayland-protocols?"; then
   echo "------------ wayland-protocols ---------------"
   build-wayland-protocols
+fi
+
+if confirm "Do you want to build hyprland-protocols"; then
   echo "------------ hyprland-protocols ---------------"
   build-hyprland-protocols
+fi
+
+if confirm "Do you want to build hyprutils"; then
   echo "------------ hyprutils ---------------"
   build-hyprutils
-  echo "------------ hypwayland-scanner ---------------"
-  build-hypwayland-scanner
+fi
+
+if confirm "Do you want to build hyprwayland-scanner"; then
+  echo "------------ hyprwaylandiscanner ---------------"
+  build-hyprwayland-scanner
+fi
   # echo "------------ libdisplayinfo ---------------"
   # build-libdisplayinfo
   # echo "------------ sdbus-cpp ---------------"
   # build-sdbus-cpp
+
+if confirm "Do you want to build libinput"; then
   echo "------------ libinput ---------------"
   build-libinput
+fi
+
+if confirm "Do you want to build aquamarine"; then
   echo "------------ aquamarine ---------------"
   build-aquamarine
+fi
+
+if confirm "Do you want to build libxcb-errors"; then
   echo "------------ libxcb-errors ---------------"
   build-libxcb-errors
+fi
+
+
+if confirm "Do you want to build cmake"; then
   echo "------------ cmake >= 3.30 ---------------"
   install-cmake
+fi
   echo "------------ deps done ---------------"
 }
 
@@ -254,9 +284,9 @@ build-hyprlang() {
     cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
     cmake --build ./build --config Release --target hyprlang -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
     sudo cmake --install ./build
-    popd
     builtHyprlang=1
     echo "Hyprlang built ---------------------------------------------------------"
+    popd
 }
 
 build-hyprpaper() {
@@ -282,6 +312,14 @@ build-hypridle() {
 
 build-xdg-desktop-portal-hyprland() {
   sudo nala install -y qt6-wayland
+  wget http://deb.debian.org/debian/pool/main/p/pipewire/pipewire_1.2.5.orig.tar.bz2
+  tar -xvjf pipewire_1.2.5.orig.tar.bz2
+  cd pipewire-1.2.5
+  ./autogen.sh
+  make all
+  sudo make install
+  cd ..
+
   clone-or-pull https://github.com/hyprwm/xdg-desktop-portal-hyprland.git xdg-desktop-portal-hyprland $XDG_DESKTOP_PORTAL_HYPRLAND_VERSION
 
   cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build

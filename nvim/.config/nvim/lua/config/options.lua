@@ -16,16 +16,19 @@ opt.wrap = false          -- No line wrap
 opt.splitbelow = true     -- Put new windows below current
 opt.splitright = true     -- Put new windows right of current
 opt.list = true           -- Show invisible charachters (tabs, space...)
-opt.listchars = {
-  tab = ">-",
-  extends = ">",
-  precedes = "<",
-  nbsp = "+",
-  space = "⋅",
-  trail = "⋅",
-  -- eol = "↴",
-}
-opt.fillchars = { eob = " " } -- No tilde at the end of the file
+
+-- if vim.fn.has('termguicolors') == 1 then
+--   opt.listchars = {
+--     tab = ">-",
+--     extends = ">",
+--     precedes = "<",
+--     nbsp = "+",
+--     space = "⋅",
+--     trail = "⋅",
+--     -- eol = "↴",
+--   }
+-- end
+-- opt.fillchars = { eob = " " } -- No tilde at the end of the file
 
 -- Search
 opt.hlsearch = true            -- Highlight all matches from search pattern
@@ -46,6 +49,7 @@ opt.shiftwidth = 2     -- Size of indents
 opt.completeopt = "menu,menuone,noselect" -- mostly for cmp
 opt.autowrite = true                      -- Enable auto write
 opt.clipboard = "unnamedplus"             -- Sync with system clipboard
+opt.swapfile = false
 opt.undofile = true                       -- Persistant unto
 opt.updatetime = 200                      -- Faster completion
 opt.diffopt:append({
