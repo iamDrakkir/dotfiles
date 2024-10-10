@@ -1,18 +1,18 @@
-import = ["/home/drakkir/.config/alacritty/rose-pine.toml"]
+import = ["~/.config/alacritty/rose-pine.toml"]
 
-[font]
-size = 12.0
-
-[font.bold]
-family = "JetBrainsMono Nerd Font Mono"
-style = "Bold"
-
-[font.italic]
-family = "JetBrainsMono Nerd Font Mono"
-
-[font.normal]
-family = "JetBrainsMono Nerd Font Mono"
-style = "Regular"
+# [font]
+# size = 12.0
+#
+# [font.bold]
+# family = "JetBrainsMono Nerd Font Mono"
+# style = "Bold"
+#
+# [font.italic]
+# family = "JetBrainsMono Nerd Font Mono"
+#
+# [font.normal]
+# family = "JetBrainsMono Nerd Font Mono"
+# style = "Regular"
 
 [[hints.enabled]]
 command = "xdg-open"
@@ -63,8 +63,6 @@ action = "ToggleFullscreen"
 key = "F11"
 mods = "Control"
 
-[mouse]
-hide_when_typing = true
 
 [[mouse.bindings]]
 action = "ExpandSelection"

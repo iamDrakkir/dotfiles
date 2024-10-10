@@ -58,6 +58,19 @@ return {
         path_display = { "truncate" },
         prompt_prefix = " ",
         selection_caret = " ",
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--trim",
+          "--hidden",
+          "-g",
+          "!.git/"
+        },
         mappings = {
           i = {
             ["<C-P>"] = action_layout.toggle_preview,
@@ -75,7 +88,7 @@ return {
 
       pickers = {
         find_files = {
-          find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "-E", ".git" },
+          find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "-E", ".git", "-E", ".venv" },
         },
         buffers = {
           sort_lastused = true,

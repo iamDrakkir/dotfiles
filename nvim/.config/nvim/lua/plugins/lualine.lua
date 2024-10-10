@@ -11,7 +11,7 @@ return {
     local function lsp_provider()
       local filetype = vim.bo.filetype
       local clients = {}
-      for _, client in ipairs(vim.lsp.get_active_clients()) do
+      for _, client in ipairs(vim.lsp.get_clients()) do
         local filetypes = client.config.filetypes
         if filetypes and vim.fn.index(filetypes, filetype) ~= -1 then
           clients[#clients + 1] = client.name

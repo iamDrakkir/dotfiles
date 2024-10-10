@@ -1,0 +1,139 @@
+/* Import Pywal colors */
+/* @import 'style-light.css'; */
+@define-color backgroundlight #FFFFFF;
+@define-color backgrounddark #000000;
+@define-color workspacesbackground1 #CCCCCC;
+@define-color textcolorBlack #000000;
+@define-color textcolorWhite #FFFFFF;
+@define-color iconcolor #FFFFFF;
+
+/* General */
+* {
+  border: none;
+  border-radius: 15px;
+  font-family: "JetBrainsMono Nerd Font";
+  font-weight: bold;
+  font-size: 13px;
+  color: @textcolorBlack;
+}
+
+#battery,
+#battery.charging,
+#battery.critical:not(.charging),
+#battery.plugged,
+#bluetooth,
+#bluetooth.connected,
+#bluetooth.off,
+#bluetooth.on,
+#clock,
+#cpu,
+#disk,
+#language,
+#memory,
+#network,
+#network.ethernet,
+#network.wifi,
+#pulseaudio,
+#pulseaudio.muted,
+#tray,
+#window,
+#custom-appmenu,
+#custom-browser,
+#custom-keybindings,
+#custom-filemanager,
+#custom-chatgpt,
+#custom-cliphist,
+#custom-wallpaper,
+#custom-system,
+#custom-exit,
+#custom-updates,
+#custom-updates.green {
+  background: @backgroundlight;
+  border-radius: 15px;
+  padding: 0px 14px 0px 9px;
+  margin: 4px 3px 0px 3px;
+}
+
+window#waybar {
+  background-color: transparent;
+  transition-property: background-color;
+  transition-duration: .5s;
+}
+window#waybar.empty #window {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+#workspaces {
+  margin: 4px 3px 0px 3px;
+  border: 0px;
+  background-color: @backgroundlight;
+  font-weight: bold;
+  font-style: normal;
+}
+#workspaces button {
+  padding: 0px 5px;
+  margin: 2px 3px;
+  border: 0px;
+  transition: all 0.3s ease-in-out;
+}
+#workspaces button.active {
+  background: @workspacesbackground1;
+  min-width: 40px;
+}
+#workspaces button:hover {
+  background: @workspacesbackground1;
+}
+
+tooltip {
+  background-color: @backgrounddark;
+  color: @textcolorWhite;
+  opacity: 0.9;
+  padding: 20px;
+  margin: 0px;
+}
+tooltip * {
+  color: @textcolorWhite;
+}
+
+#taskbar {
+  margin: 4px 5px 0px 5px;
+  padding: 0px 1px;
+  border-radius: 15px;
+  border: 0px;
+  background: @backgroundlight;
+  font-weight: bold;
+  font-style: normal;
+}
+#taskbar button {
+  padding: 0px 5px;
+  margin: 2px 3px;
+  transition: all 0.3s ease-in-out;
+}
+#taskbar button.active {
+  background: @workspacesbackground1;
+}
+#taskbar button:hover {
+  background: @workspacesbackground1;
+}
+#taskbar.empty {
+  background: transparent;
+}
+
+#custom-updates.yellow {
+  background: #FF9A3C;
+}
+#custom-updates.red {
+  background: #DC2F2F;
+}
+
+#tray menu * {
+  color: @textcolorWhite;
+}
+#tray menu separator {
+  min-height: 3px;
+}
+#tray menu :hover {
+  background-color: @workspacesbackground1;
+}

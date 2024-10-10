@@ -16,12 +16,10 @@ alias vim='nvim'
 alias vi='nvim'
 alias v='nvim'
 
-# Folders
-alias dot='$HOME/.dotfiles'
-
 # Quick cd
 alias cdd='cd $HOME/.dotfiles'
 alias cdn='cd $HOME/.dotfiles/nvim/.config/nvim'
+alias cdg='cd $HOME/git'
 
 # Oxidize
 alias ls='exa --grid --color auto --icons --sort=type'
@@ -29,7 +27,9 @@ alias ll='exa --long --color always --icons --sort=type'
 alias la='exa --grid --all --color auto --icons --sort=type'
 alias lla='exa --long --all --color auto --icons --sort=type'
 alias tree='exa --tree'
-alias cat='bat'
+if command -v batcat &> /dev/null; then
+    alias bat='batcat'
+fi
 
 # Git aliases
 alias gs='git status'
@@ -51,4 +51,5 @@ alias glo='git log --pretty="oneline"'
 alias glol='git log --graph --oneline --decorate'
 
 # Zellij
+alias ze='zellij'
 alias zz='zellij a $(zellij list-sessions | fzf)'
