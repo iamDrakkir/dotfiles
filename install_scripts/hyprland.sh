@@ -169,7 +169,7 @@ build-libinput() {
   popd
 }
 build-libxcb-errors() {
-  sudo nala install -y dh-autoreconf xutils-dev
+  sudo nala install -y dh-autoreconf xutils-dev xcb-proto
   clone-or-pull https://gitlab.freedesktop.org/xorg/lib/libxcb-errors.git libxcb-errors $LIBXCB_ERROR_VERSION
   ./autogen.sh --prefix=/usr
   sudo make install
@@ -191,7 +191,8 @@ build-deps () {
     glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev \
     libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev \
     libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev \
-    xdg-desktop-portal-wlr libtomlplusplus3 g++-14 gcc-14
+    xdg-desktop-portal-wlr libtomlplusplus3 g++-14 gcc-14 libmagic-dev libsdbus-c++-dev \
+    libpam0g-dev qt6-base-dev
   #  missing? :
   # libvulkan-dev libvulkan-volk-dev vulkan-utility-libraries-dev libvkfft-dev libgulkan-dev
   # libxcb-icccm4-dev
@@ -295,7 +296,8 @@ build-hyprpaper() {
   clone-or-pull https://github.com/hyprwm/hyprpaper hyprpaper $HYPRPAPER_VERSION
   cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
   cmake --build ./build --config Release --target hyprpaper -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
-  sudo cmake --install ./build/
+
+  sudo cmake --install ./build
   popd
 }
 

@@ -137,7 +137,6 @@ install_nerd_font() {
 # Main function
 main() {
     packages=(
-      nala
       firefox
       zsh
       stow
@@ -168,7 +167,7 @@ main() {
       fonts-noto
       fonts-font-awesome
       dunst
-      lactd
+      # lactd
       mangohud
     )
     if confirm "Do you want to install packages?"; then
