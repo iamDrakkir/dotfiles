@@ -59,6 +59,10 @@ fi
 if confirm "Do you want to install swaync?"; then
   source swaync.sh
 fi
+
+if confirm "Do you want to install Zen browser?"; then
+  source zen_browser.sh
+fi
 popd
 
 pushd ~/.dotfiles/
