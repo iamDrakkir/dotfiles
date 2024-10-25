@@ -18,6 +18,7 @@ build_neovim() {
 
 install_neovim() {
     sudo make install -C "$HOME/git/neovim"
+    popd
 }
 
 install_vim_plugins() {

@@ -20,6 +20,7 @@ build-rofi-wayland() {
   meson setup .. --prefix=/usr
   ninja
   sudo ninja install
+  popd
 }
 
 install-dependencies() {

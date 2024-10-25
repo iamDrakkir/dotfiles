@@ -56,7 +56,7 @@ if confirm "Do you want to install waybar?"; then
   source waybar.sh
 fi
 
-if confirm "Do you want to install waybar?"; then
+if confirm "Do you want to install swaync?"; then
   source swaync.sh
 fi
 popd

@@ -339,7 +339,7 @@ if confirm "Do you want to build xdg-desktop-portal-hyprland?"; then
 fi
 
 if confirm "Do you want to install wlogout?"; then
-  sudo nala intall wlogout -y
+  sudo nala install wlogout -y
 fi
 if confirm "Do you want to build Swappy?"; then
   build-swappy

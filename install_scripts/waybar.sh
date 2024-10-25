@@ -20,6 +20,7 @@ build-waybar() {
   meson setup .. --prefix=/usr
   ninja -C build
   sudo ninja install
+  popd
 }
 
 install-dependencies() {

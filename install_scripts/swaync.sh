@@ -1,3 +1,3 @@
 #!/bin/bash
-sudo nala intall sway-notification-center -y
+sudo nala install sway-notification-center -y
 
