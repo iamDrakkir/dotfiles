@@ -2,7 +2,7 @@ return {
   {
     "sainnhe/gruvbox-material",
     cond = vim.g.vscode == nil,
-    enabled = false,
+    enabled = true,
     lazy = false,
     priority = 1000,
     config = function()
@@ -14,59 +14,45 @@ return {
       vim.g.gruvbox_italicize_comments = 0
       vim.g.gruvbox_material_foreground = "original"
 
-      vim.cmd("colorscheme gruvbox-material")
+      -- vim.cmd("colorscheme gruvbox-material")
     end,
   },
   {
     "rose-pine/neovim",
     cond = vim.g.vscode == nil,
     name = "rose-pine",
-    enabled = false,
+    enabled = true,
     lazy = false,
     priority = 1000,
     config = function()
       require("rose-pine").setup({
-        dark_variant = "main", -- "main" | "moon"
+        dark_variant = "main",
+        styles = {
+          bold = true,
+          italic = false,
+          transparency = false,
+        },
       })
-      vim.cmd("colorscheme rose-pine")
-    end,
-  },
-  {
-    "arturgoms/moonbow.nvim",
-    cond = vim.g.vscode == nil,
-    enabled = false,
-    lazy = false,
-    priority = 1000,
-  },
-  {
-    'ribru17/bamboo.nvim',
-    enabled = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('bamboo').setup {
-        -- optional configuration here
-      }
-      require('bamboo').load()
+      -- vim.cmd("colorscheme rose-pine")
     end,
   },
   {
     "folke/tokyonight.nvim",
     enabled = true,
-    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      -- load the colorscheme here
-      vim.cmd([[colorscheme tokyonight-night]])
-    end,
-  },
-  {
-    "luisiacc/gruvbox-baby",
-    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd("colorscheme rose-pine")
+      -- vim.cmd("colorscheme tokyonight-night")
+    end,
+  },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    enabled = true,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme catppuccin")
     end
   },
 }

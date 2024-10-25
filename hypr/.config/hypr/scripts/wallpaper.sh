@@ -1,78 +1,55 @@
 #!/bin/bash
-# Cache file for holding the current wallpaper
-cache_file="$HOME/.cache/current_wallpaper"
+cache_file="$HOME/.cache/current_wallpaper.jpg"
 rasi_file="$HOME/.cache/current_wallpaper.rasi"
+wallpaper_folder="$HOME/wallpaper/"
+default_wallpaper="$wallpaper_folder/flying-comets-clouds.jpg"
 
 # Create cache file if not exists
+echo "1"
 if [ ! -f $cache_file ] ;then
-    touch $cache_file
-    echo "$HOME/wallpaper/default.jpg" > "$cache_file"
+    ln -s "$default_wallpaper" "$cache_file"
 fi
-
-# Create rasi file if not exists
 if [ ! -f $rasi_file ] ;then
     touch $rasi_file
-    echo "* { current-image: url(\"$HOME/wallpaper/default.jpg\", height); }" > "$rasi_file"
+    echo "* { current-image: url(\"$default_wallpaper\", height); }" > "$rasi_file"
 fi
+echo "2"
 
-current_wallpaper=$(cat "$cache_file")
 case $1 in
     # Load wallpaper from .cache of last session
     "init")
-        if [ -f $cache_file ]; then
-            wal -q -i $current_wallpaper
-        else
-            wal -q -i ~/wallpaper/
-        fi
+        exit
     ;;
 
     # Select wallpaper with rofi
     "select")
-        selected=$( find "$HOME/wallpaper/" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec basename {} \; | sort -R | while read rfile
+        selected=$( find "$wallpaper_folder" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec basename {} \; | sort -R | while read rfile
         do
-            echo -en "${rfile}\x00icon\x1f$HOME/wallpaper/${rfile}\n"
+            echo -en "${rfile}\x00icon\x1f$wallpaper_folder${rfile}\n"
         done | rofi -dmenu -replace -config $HOME/.config/rofi/config-wallpaper.rasi)
         echo "Selected wallpaper" "$selected"
         if [ ! "$selected" ]; then
             echo "No wallpaper selected"
             exit
         fi
-        wal -q -i ~/wallpaper/$selected
+        wallpaper=$wallpaper_folder$selected
     ;;
 
     # Randomly select wallpaper
     *)
-        wal -q -i ~/wallpaper/
+        selected=$(find "$wallpaper_folder" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | shuf -n 1)
+        echo "Randomly selected wallpaper" "$selected"
+        wallpaper=$selected
     ;;
-
 esac
 
-# -----------------------------------------------------
-# Load current pywal color scheme
-# -----------------------------------------------------
-source "$HOME/.cache/wal/colors.sh"
-echo ":: Wallpaper: $wallpaper"
 
-# -----------------------------------------------------
 # Write selected wallpaper into .cache files
-# -----------------------------------------------------
-echo "$wallpaper" > "$cache_file"
+ln -s "$wallpaper" "$cache_file" -f
 echo "* { current-image: url(\"$wallpaper\", height); }" > "$rasi_file"
 
-# -----------------------------------------------------
-# get wallpaper image name
-# -----------------------------------------------------
-newwall=$(echo $wallpaper | sed "s|$HOME/wallpaper/||g")
 
-# -----------------------------------------------------
-# Reload waybar with new colors
-# -----------------------------------------------------
-# ~/.config/waybar/launch.sh
-
-# -----------------------------------------------------
 # Set the new wallpaper
-# -----------------------------------------------------
-
 wallpaper_engine=hyprpaper
 if [ "$wallpaper_engine" == "swww" ] ;then
     echo ":: Using swww"
@@ -87,20 +64,15 @@ elif [ "$wallpaper_engine" == "hyprpaper" ] ;then
     echo ":: Using hyprpaper"
     killall hyprpaper
     sleep 0.1
-    wal_tpl="\
-      preload = $wallpaper
-      wallpaper = ,$wallpaper
-      splash = false"
-    echo "$wal_tpl" > $HOME/.config/hypr/hyprpaper.conf
     hyprpaper &
 else
     echo ":: Wallpaper Engine disabled"
 fi
 
-# -----------------------------------------------------
-# Send notification
-# -----------------------------------------------------
+# get wallpaper image name
+newwall=$(readlink -f $cache_file | sed "s|$HOME/wallpaper/||g")
 
+# Send notification
 if [ "$1" == "init" ] ;then
     echo ":: Init"
 else

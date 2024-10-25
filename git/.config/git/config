@@ -3,3 +3,5 @@
 	name = iamDrakkir
 [core]
 	editor = nvim
+[advice]
+  detachedHead = false

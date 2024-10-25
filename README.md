@@ -3,8 +3,6 @@
 Write a proper readme
 
 
-git remote set-url origin git@github.com:iamDrakkir/dotfiles.git
-
 # Nvim TODO:
 
 - [ ] Fix hidden files
@@ -12,10 +10,18 @@ git remote set-url origin git@github.com:iamDrakkir/dotfiles.git
 - [x] Change from config -> opts
 
 # Alacritty TODO:
-
 - [ ] Fix keybindings
 
-echo "options cfg80211 ieee80211_regdom=SE"|sudo tee /etc/modprobe.d/cfg80211.conf
 
+# install TODO:
+- [ ] disable super+p default behaviour
+- [ ] settings set org.gnome.mutter.keybindings switch-monitor "['XF86Display']"
+- [ ] rustup and rustup default stable
+- [x] fix fd-find symlink
+bash <(curl https://updates.zen-browser.app/appimage.sh)
+
+# wifi 6e so swedish:
+- [ ] echo "options cfg80211 ieee80211_regdom=SE"|sudo tee /etc/modprobe.d/cfg80211.conf
+
+# packages to test:
 cargo install --git https://github.com/knarkzel/raise
-

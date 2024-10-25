@@ -6,6 +6,7 @@
     "~/.config/waybar/modules.jsonc"
   ],
   "modules-left": [
+    "custom/notification",
     "custom/appmenu",
     // "group/quicklinks",
     "wlr/taskbar",

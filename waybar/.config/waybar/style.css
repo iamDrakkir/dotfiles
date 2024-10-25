@@ -1,20 +1,13 @@
-/* Import Pywal colors */
-/* @import 'style-light.css'; */
-@define-color backgroundlight #FFFFFF;
-@define-color backgrounddark #000000;
-@define-color workspacesbackground1 #CCCCCC;
-@define-color textcolorBlack #000000;
-@define-color textcolorWhite #FFFFFF;
-@define-color iconcolor #FFFFFF;
+@import 'mocha.css';
+@define-color workspacesbackground1 @surface1;
 
-/* General */
 * {
   border: none;
   border-radius: 15px;
   font-family: "JetBrainsMono Nerd Font";
   font-weight: bold;
   font-size: 13px;
-  color: @textcolorBlack;
+  color: @text;
 }
 
 #battery,
@@ -37,6 +30,7 @@
 #pulseaudio.muted,
 #tray,
 #window,
+#custom-notification,
 #custom-appmenu,
 #custom-browser,
 #custom-keybindings,
@@ -48,14 +42,15 @@
 #custom-exit,
 #custom-updates,
 #custom-updates.green {
-  background: @backgroundlight;
+  background: @base;
   border-radius: 15px;
-  padding: 0px 14px 0px 9px;
-  margin: 4px 3px 0px 3px;
+  padding: 0px 14px 0px 14px;
+  margin: 0px 3px 0px 3px;
 }
 
 window#waybar {
-  background-color: transparent;
+  background-color: alpha(@surface0, .4);
+  border-radius: 0px;
   transition-property: background-color;
   transition-duration: .5s;
 }
@@ -66,15 +61,15 @@ window#waybar.empty #window {
 }
 
 #workspaces {
-  margin: 4px 3px 0px 3px;
+  margin: 0px 3px 0px 3px;
   border: 0px;
-  background-color: @backgroundlight;
+  background-color: @base;
   font-weight: bold;
   font-style: normal;
 }
 #workspaces button {
   padding: 0px 5px;
-  margin: 2px 3px;
+  margin: 0px 3px;
   border: 0px;
   transition: all 0.3s ease-in-out;
 }
@@ -87,28 +82,28 @@ window#waybar.empty #window {
 }
 
 tooltip {
-  background-color: @backgrounddark;
-  color: @textcolorWhite;
+  background-color: @base;
+  color: @text;
   opacity: 0.9;
   padding: 20px;
   margin: 0px;
 }
 tooltip * {
-  color: @textcolorWhite;
+  color: @text;
 }
 
 #taskbar {
-  margin: 4px 5px 0px 5px;
+  margin: 0px 5px 0px 5px;
   padding: 0px 1px;
   border-radius: 15px;
   border: 0px;
-  background: @backgroundlight;
+  background: @base;
   font-weight: bold;
   font-style: normal;
 }
 #taskbar button {
   padding: 0px 5px;
-  margin: 2px 3px;
+  margin: 0px 3px;
   transition: all 0.3s ease-in-out;
 }
 #taskbar button.active {
@@ -129,10 +124,10 @@ tooltip * {
 }
 
 #tray menu * {
-  color: @textcolorWhite;
+  color: @text;
 }
 #tray menu separator {
-  min-height: 3px;
+  min-height: 0px;
 }
 #tray menu :hover {
   background-color: @workspacesbackground1;

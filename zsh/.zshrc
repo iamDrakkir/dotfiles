@@ -3,23 +3,28 @@
 
 zle_highlight=('paste:none')
 
-# source
-plug "$HOME/.config/zsh/options.zsh"
+# local sources
 plug "$HOME/.config/zsh/aliases.zsh"
 plug "$HOME/.config/zsh/exports.zsh"
-# plug "$HOME/.config/zsh/prompt.zsh"
 
 # Plugins
-plug "zsh-users/zsh-autosuggestions"
-plug "zdharma-continuum/fast-syntax-highlighting"
 plug "zap-zsh/supercharge"
+plug "zsh-users/zsh-autosuggestions"
+plug "Aloxaf/fzf-tab"
+plug "zdharma-continuum/fast-syntax-highlighting"
 plug "zap-zsh/vim"
-plug "zap-zsh/fzf"
 
 # Edit line in nvim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-source /etc/bash_completion.d/azure-cli
+if [ -f /etc/bash_completion.d/azure-cli ]; then
+    source /etc/bash_completion.d/azure-cli
+fi
 
-eval "$(starship init zsh)"
+# Check if Starship is installed
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init zsh)"
+else
+    plug "$HOME/.config/zsh/prompt.zsh"
+fi
