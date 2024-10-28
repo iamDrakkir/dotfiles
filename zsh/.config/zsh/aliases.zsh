@@ -20,6 +20,7 @@ alias v='nvim'
 alias cdd='cd $HOME/.dotfiles'
 alias cdn='cd $HOME/.dotfiles/nvim/.config/nvim'
 alias cdg='cd $HOME/git'
+alias cdw='cd $HOME/git/work'
 
 # Oxidize
 alias ls='exa --grid --color auto --icons --sort=type'
