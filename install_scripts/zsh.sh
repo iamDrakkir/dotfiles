@@ -1,3 +1,4 @@
+#!/bin/bash
 create_history_file() {
     if [ ! -f $HOME/.zsh_history ]; then
       touch "$HOME/.zsh_history"

@@ -19,7 +19,7 @@ export fntSize=$(( y_mon * 2 / 100 ))
 hypr_border="$(hyprctl -j getoption decoration:rounding | jq '.int')"
 export active_rad=$(( ${hypr_border} * 5 ))
 export button_rad=$(( ${hypr_border} * 8 ))
-export BtnCol="white"
+# export BtnCol="white"
 
 #// eval config files
 wlTmplt="$HOME/.config/wlogout/style.css"

@@ -1,24 +1,23 @@
 #!/bin/bash
 cache_file="$HOME/.cache/current_wallpaper.jpg"
-rasi_file="$HOME/.cache/current_wallpaper.rasi"
+# rasi_file="$HOME/.cache/current_wallpaper.rasi"
 wallpaper_folder="$HOME/wallpaper/"
 default_wallpaper="$wallpaper_folder/flying-comets-clouds.jpg"
 
 # Create cache file if not exists
-echo "1"
 if [ ! -f $cache_file ] ;then
     ln -s "$default_wallpaper" "$cache_file"
 fi
-if [ ! -f $rasi_file ] ;then
-    touch $rasi_file
-    echo "* { current-image: url(\"$default_wallpaper\", height); }" > "$rasi_file"
-fi
-echo "2"
+# if [ ! -f $rasi_file ] ;then
+#     touch $rasi_file
+#     # echo "* { current-image: url(\"$default_wallpaper\", height); }" > "$rasi_file"
+# fi
 
 case $1 in
     # Load wallpaper from .cache of last session
+    # or default_wallpaper
     "init")
-        exit
+        continue
     ;;
 
     # Select wallpaper with rofi
@@ -46,7 +45,7 @@ esac
 
 # Write selected wallpaper into .cache files
 ln -s "$wallpaper" "$cache_file" -f
-echo "* { current-image: url(\"$wallpaper\", height); }" > "$rasi_file"
+# echo "* { current-image: url(\"$wallpaper\", height); }" > "$rasi_file"
 
 
 # Set the new wallpaper

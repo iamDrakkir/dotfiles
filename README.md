@@ -18,6 +18,7 @@ Write a proper readme
 - [ ] settings set org.gnome.mutter.keybindings switch-monitor "['XF86Display']"
 - [ ] rustup and rustup default stable
 - [x] fix fd-find symlink
+- [ ] switch to eza
 bash <(curl https://updates.zen-browser.app/appimage.sh)
 
 # wifi 6e so swedish:
