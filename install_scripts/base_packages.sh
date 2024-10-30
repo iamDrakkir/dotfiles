@@ -48,6 +48,7 @@ packages=(
   curl
   vlc
   bibata-cursor-theme
+  fonts-inter-variable
   pavucontrol
   wl-clipboard
   cliphist

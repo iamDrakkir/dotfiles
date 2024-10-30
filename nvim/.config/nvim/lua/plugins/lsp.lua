@@ -19,6 +19,7 @@ return {
     { "<leader>cl", "<cmd>LspInfo<cr>", desc = "LspInfo open" },
   },
   config = function()
+    local mason = require("mason")
     local mason_lspconfig = require("mason-lspconfig")
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
@@ -34,7 +35,6 @@ return {
           telemetry = { enable = false },
         },
       },
-      ruff = {},
       ruff_lsp = {},
       rust_analyzer = {},
       yamlls = {},
@@ -89,5 +89,12 @@ return {
         }
       end,
     }
+
+    mason.setup {
+      ui = {
+        border = 'rounded'
+      }
+    }
+    require('lspconfig.ui.windows').default_options.border = 'rounded'
   end,
 }

@@ -63,7 +63,7 @@ return {
         { name = "buffer" },
         { name = "path" },
       }),
-      formatting = {
+      formattingConfig = {
         fields = { "abbr", "menu", "kind" },
         format = function(_, item)
           local kinds = {
