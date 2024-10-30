@@ -48,20 +48,24 @@ if confirm "Do you want to install Hyprland?"; then
   source hyprland.sh
 fi
 
-if confirm "Do you want to install rofi-wayland?"; then
+if confirm "Do you want to install Rofi-wayland?"; then
   source rofi_wayland.sh
 fi
 
-if confirm "Do you want to install waybar?"; then
+if confirm "Do you want to install Waybar?"; then
   source waybar.sh
 fi
 
-if confirm "Do you want to install swaync?"; then
+if confirm "Do you want to install Swaync?"; then
   source swaync.sh
 fi
 
 if confirm "Do you want to install Zen browser?"; then
   source zen_browser.sh
+fi
+
+if confirm "Do you want to install Grub-theme?"; then
+  source grub_theme.sh
 fi
 popd
 
