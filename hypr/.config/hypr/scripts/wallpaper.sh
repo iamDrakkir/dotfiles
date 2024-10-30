@@ -69,7 +69,7 @@ else
 fi
 
 # get wallpaper image name
-newwall=$(readlink -f $cache_file | sed "s|$HOME/wallpaper/||g")
+newwall=$(basename "$(readlink -f "$cache_file")")
 
 # Send notification
 if [ "$1" == "init" ] ;then
