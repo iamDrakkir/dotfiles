@@ -1,0 +1,35 @@
+configuration {
+    modi: "drun";
+    icon-theme:  "Oranchelo";
+    show-icons: true;
+    terminal: "kitty";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "   Apps ";
+    sidebar-mode: false;
+}
+
+@theme "~/.config/rofi/themes/catppuchin-mocha.rasi"
+
+
+* {
+    font: "JetBrainsMono Nerd Font 9";
+}
+
+window {
+    height: 30%;
+    width: 30%;
+    border: 3px;
+}
+
+element {
+    padding: 1px;
+    background-color: @bg-col;
+    text-color: @fg-col;
+}
+
+element-icon {
+    size: 0;
+}
