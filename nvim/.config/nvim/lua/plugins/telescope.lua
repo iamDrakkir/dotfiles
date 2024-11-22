@@ -7,8 +7,14 @@ return {
     "cljoly/telescope-repo.nvim",
     "debugloop/telescope-undo.nvim",
     "tsakirist/telescope-lazy.nvim",
-    { "AckslD/nvim-neoclip.lua",                  config = true },
-    { "nvim-telescope/telescope-fzf-native.nvim", build = 'make' },
+    {
+      "AckslD/nvim-neoclip.lua",
+      config = true
+    },
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = 'make'
+    },
   },
   cmd = "Telescope",
   keys = {

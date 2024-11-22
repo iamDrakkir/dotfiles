@@ -7,7 +7,5 @@ return {
     "nvim-tree/nvim-web-devicons", -- optional dependency
   },
   event = { 'BufReadPre', 'BufNewFile' },
-  opts = {
-    -- configurations go here
-  },
+  opts = {},
 }
