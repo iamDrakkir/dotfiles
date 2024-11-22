@@ -43,6 +43,9 @@ fi
 if confirm "Do you want to add ssh key from 1pass?"; then
   source ssh_key.sh
 fi
+if confirm "Do you want to install Rust?"; then
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
 
 if confirm "Do you want to install Hyprland?"; then
   source hyprland.sh

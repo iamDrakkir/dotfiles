@@ -1,8 +1,8 @@
 return {
   "folke/which-key.nvim",
   cond = vim.g.vscode == nil,
-  keys = { "<leader>", "g", "z", "[", "]" },
-  -- lazy = true,
+  -- keys = { "<leader>", "g", "z", "[", "]" },
+  event = "VeryLazy",
   config = function()
     local wk = require("which-key")
     wk.add({
@@ -25,5 +25,10 @@ return {
       { "g",             group = "goto" },
       { "gz",            group = "surround" },
     })
+    wk.setup {
+      preset = 'helix',
+      show_help = false,
+      show_keys = false,
+    }
   end,
 }

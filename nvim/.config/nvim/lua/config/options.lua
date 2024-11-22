@@ -16,6 +16,7 @@ opt.wrap = false          -- No line wrap
 opt.splitbelow = true     -- Put new windows below current
 opt.splitright = true     -- Put new windows right of current
 opt.list = true           -- Show invisible charachters (tabs, space...)
+opt.laststatus = 3
 
 -- if vim.fn.has('termguicolors') == 1 then
 --   opt.listchars = {
