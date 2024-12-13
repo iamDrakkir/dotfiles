@@ -63,6 +63,10 @@ if confirm "Do you want to install Swaync?"; then
   source swaync.sh
 fi
 
+if confirm "Do you want to install nvm?"; then
+  source nvm.sh
+fi
+
 if confirm "Do you want to install Zen browser?"; then
   source zen_browser.sh
 fi
