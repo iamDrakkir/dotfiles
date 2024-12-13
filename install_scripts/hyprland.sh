@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Hyprland ecosystem
-HYPRLAND_VERSION='v0.44.0'
+HYPRLAND_VERSION='v0.45.2'
 HYPRCURSOR_VERSION='v0.1.9'
 HYPRPAPER_VERSION='v0.7.1'
 HYPRIDLE_VERSION='v0.1.2'
@@ -245,7 +245,7 @@ build-hypridle() {
 }
 
 build-xdg-desktop-portal-hyprland() {
-  sudo nala install -y qt6-wayland
+  sudo nala install -y qt6-wayland libspa-0.2-dev
   clone-or-pull https://github.com/hyprwm/xdg-desktop-portal-hyprland.git xdg-desktop-portal-hyprland $XDG_DESKTOP_PORTAL_HYPRLAND_VERSION
   cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build
   cmake --build build
@@ -286,6 +286,7 @@ build-satty() {
   sudo PREFIX=/usr/local make install
   popd
 }
+
 export CXX=/usr/bin/g++-14
 export CXXFLAGS=-std=gnu++26
 export CC=/usr/bin/gcc-14

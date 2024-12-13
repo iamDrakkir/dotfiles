@@ -1,3 +1,4 @@
+#!/bin/bash
 sleep 1
 
 # kill all possible running xdg-desktop-portals
@@ -21,4 +22,3 @@ fi
 
 # start xdg-desktop-portal
 /usr/lib/xdg-desktop-portal &
-sleep 1

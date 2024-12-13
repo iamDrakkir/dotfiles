@@ -37,7 +37,7 @@ return {
       },
       ruff_lsp = {},
       rust_analyzer = {},
-      yamlls = {},
+      -- yamlls = {},
       bicep = {},
     }
 
