@@ -2,7 +2,6 @@ return {
   "folke/noice.nvim",
   dependencies = {
     "MunifTanjim/nui.nvim",
-    -- "rcarriga/nvim-notify",
   },
   enabled = true,
   event = "VeryLazy",
@@ -14,7 +13,6 @@ return {
         ["cmp.entry.get_documentation"] = true,
       },
     },
-    -- you can enable a preset for easier configuration
     presets = {
       bottom_search = true,         -- use a classic bottom cmdline for search
       command_palette = true,       -- position the cmdline and popupmenu together

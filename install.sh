@@ -67,6 +67,10 @@ if confirm "Do you want to install nvm?"; then
   source nvm.sh
 fi
 
+if confirm "Do you want to install lazygit?"; then
+  source lazygit.sh
+fi
+
 if confirm "Do you want to install Zen browser?"; then
   source zen_browser.sh
 fi

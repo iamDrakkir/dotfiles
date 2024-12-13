@@ -18,18 +18,18 @@ opt.splitright = true     -- Put new windows right of current
 opt.list = true           -- Show invisible charachters (tabs, space...)
 opt.laststatus = 3
 
--- if vim.fn.has('termguicolors') == 1 then
---   opt.listchars = {
---     tab = ">-",
---     extends = ">",
---     precedes = "<",
---     nbsp = "+",
---     space = "⋅",
---     trail = "⋅",
---     -- eol = "↴",
---   }
--- end
--- opt.fillchars = { eob = " " } -- No tilde at the end of the file
+if vim.fn.has('termguicolors') == 1 then
+  opt.listchars = {
+    tab = ">-",
+    extends = ">",
+    precedes = "<",
+    nbsp = "+",
+    space = "⋅",
+    trail = "⋅",
+    -- eol = "↴",
+  }
+end
+opt.fillchars = { eob = " " } -- No tilde at the end of the file
 
 -- Search
 opt.hlsearch = true            -- Highlight all matches from search pattern

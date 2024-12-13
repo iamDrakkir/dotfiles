@@ -107,6 +107,17 @@ return {
       filetypes = { "TelescopePrompt" }
     }
 
+    local dashboard_extension = {
+      sections = {
+        lualine_a = { function()
+          return "Dashboad"
+        end
+        },
+        lualine_b = { branch },
+      },
+      filetypes = { "snacks_dashboard" }
+    }
+
     lualine.setup({
       options = {
         theme = "auto",
@@ -139,7 +150,7 @@ return {
       --   lualine_z = { "tabs" },
       -- },
       -- winbar = {},
-      extensions = { "lazy", "quickfix", "mason", "oil", telescope_extension },
+      extensions = { "lazy", "quickfix", "mason", "oil", telescope_extension, dashboard_extension },
     })
   end,
 }

@@ -1,5 +1,5 @@
 return {
   "Bekaboo/dropbar.nvim",
-  enabled = false,
+  enabled = true,
   setup = true,
 }

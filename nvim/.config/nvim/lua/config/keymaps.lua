@@ -52,14 +52,6 @@ map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous [D]iagnostic message
 map('n', ']d', vim.diagnostic.goto_next, { desc = 'Next [D]iagnostic message' })
 map('n', '<leader>xe', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 map('n', '<leader>xq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
--- toggle options
--- map("n", "<leader>uf", require("lazyvim.plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
--- map("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
--- map("n", "<leader>uw", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
--- map("n", "<leader>ul", function() Util.toggle("relativenumber", true) Util.toggle("number") end, { desc = "Toggle Line Numbers" })
--- map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
--- local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
--- map("n", "<leader>uc", function() Util.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })
 -- windows
 map("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete window" })

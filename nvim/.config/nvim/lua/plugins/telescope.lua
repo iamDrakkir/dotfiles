@@ -26,7 +26,6 @@ return {
     { "<Leader>fr", "<cmd>Telescope repo list<cr>",                          desc = "Find Repos" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>",                           desc = "Old files" },
     { "<leader>fu", "<cmd>Telescope undo<cr>",                               desc = "Undo tree" },
-    { "<leader>/",  "<cmd>Telescope live_grep<cr>",                          desc = "Find in Files (Grep)" },
     { "<leader>p",  "<cmd>Telescope neoclip<cr>",                            desc = "Open neoclip" },
     -- git
     { "<leader>gc", "<cmd>Telescope git_commits<cr>",                        desc = "commits" },

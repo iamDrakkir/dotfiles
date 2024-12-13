@@ -74,7 +74,6 @@ autocmd("FileType", {
     "qf",
     "help",
     "man",
-    "notify",
     "lspinfo",
     "spectre_panel",
     "startuptime",
