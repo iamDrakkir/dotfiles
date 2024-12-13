@@ -23,8 +23,7 @@ TOMLPLUSPLUS_VERSION='v3.4.0'
 SDBUS_CPP_VERSION='1.6.0'
 
 # Screenshot annotation tool
-SWAPPY_VERSION='1.5.1'
-SATTY_VERSION='0.12.0'
+SATTY_VERSION='v0.14.0'
 
 
 confirm() {
@@ -121,6 +120,7 @@ build-sdbus-cpp() {
 
 build-aquamarine() {
   sudo nala install -y libdisplay-info-dev libgbm-dev
+  build-libinput
   clone-or-pull https://github.com/hyprwm/aquamarine.git aquamarine $AQUAMARINE_VERSION
   cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
   cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf _NPROCESSORS_CONF`
@@ -154,8 +154,8 @@ install-cmake() {
 
 build-deps () {
   sudo apt-get install -y nala
-  sudo nala install -y meson wget build-essential ninja-build cmake-extras \
-    cmake gettext gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev \
+  sudo nala install -y meson wget ninja-build  \
+     gettext gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev \
     libdrm-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev \
     libudev-dev libseat-dev seatd libxcb-dri3-dev libegl-dev libgles2 libegl1-mesa-dev \
     glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev \
@@ -163,7 +163,7 @@ build-deps () {
     libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev \
     xdg-desktop-portal-wlr libtomlplusplus3 g++-14 gcc-14 libmagic-dev libsdbus-c++-dev \
     libpam0g-dev qt6-base-dev
-
+# build-essential cmake cmake-extras
 
 if confirm "Do you want to build tomlplusplus?"; then
   echo "------------ tomlplusplus ---------------"
@@ -246,13 +246,6 @@ build-hypridle() {
 
 build-xdg-desktop-portal-hyprland() {
   sudo nala install -y qt6-wayland
-  # wget http://deb.debian.org/debian/pool/main/p/pipewire/pipewire_1.2.5.orig.tar.bz2
-  # tar -xvjf pipewire_1.2.5.orig.tar.bz2
-  # cd pipewire-1.2.5
-  # ./autogen.sh
-  # make all
-  # sudo make install
-  # cd ..
   clone-or-pull https://github.com/hyprwm/xdg-desktop-portal-hyprland.git xdg-desktop-portal-hyprland $XDG_DESKTOP_PORTAL_HYPRLAND_VERSION
   cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build
   cmake --build build
@@ -286,16 +279,8 @@ build-hyprcursor() {
   popd
 }
 
-build-swappy() {
-  clone-or-pull https://github.com/jtheoof/swappy swappy
-  meson build
-  ninja -C build
-  sudo ninja -C build install
-  popd
-}
-
 build-satty() {
-  clone-or-pull https://github.com/gabm/Satty satty
+  clone-or-pull https://github.com/gabm/Satty satty $SATTY_VERSION
   sudo nala install libepoxy-dev librust-gdk4-sys-dev libadwaita-1-dev slurp
   make build-release
   sudo PREFIX=/usr/local make install
@@ -340,9 +325,6 @@ fi
 
 if confirm "Do you want to install wlogout?"; then
   sudo nala install wlogout -y
-fi
-if confirm "Do you want to build Swappy?"; then
-  build-swappy
 fi
 if confirm "Do you want to build Satty?"; then
   build-satty

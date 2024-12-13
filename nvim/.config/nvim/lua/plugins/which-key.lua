@@ -1,7 +1,6 @@
 return {
   "folke/which-key.nvim",
   cond = vim.g.vscode == nil,
-  -- keys = { "<leader>", "g", "z", "[", "]" },
   event = "VeryLazy",
   config = function()
     local wk = require("which-key")
