@@ -80,7 +80,7 @@ autocmd("FileType", {
     "tsplayground",
     "PlenaryTestPopup",
     "lazy",
-    "oil",
+    "minifiles",
   },
   desc = "Close more filetypes with <q> and <esc>",
   callback = function(event)

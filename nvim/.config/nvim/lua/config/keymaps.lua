@@ -13,8 +13,6 @@ map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
 map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
-map("n", "<C-d>", "<C-d>zz", { desc = "Scroll window downwards" })
-map("n", "<C-u>", "<C-u>zz", { desc = "Scroll window upwards" })
 map("n", "n", "nzzzv", { desc = "Go to next match" })
 map("n", "N", "Nzzzv", { desc = "Go to previous match" })
 -- Navigate wrapped lines
@@ -47,6 +45,7 @@ map("v", "Y", "myY`y", { desc = "Yank without changing cursor position" })
 -- Lists
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
+map("n", "<leader>xx", "<cmd>cclose<cr><cmd>lclose<cr>", { desc = "Close Lists" })
 -- Diagnostic
 map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous [D]iagnostic message' })
 map('n', ']d', vim.diagnostic.goto_next, { desc = 'Next [D]iagnostic message' })

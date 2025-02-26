@@ -104,7 +104,7 @@
     "format": "",
     "tooltip": false
   },
-  "custom/notification" : {
+  "custom/notification": {
     "tooltip": false,
     "format": "{icon}",
     "format-icons": {
@@ -120,8 +120,8 @@
     "return-type": "json",
     "exec-if": "which swaync-client",
     "exec": "swaync-client -swb",
-    "on-click" : "sleep 0.1 && swaync-client -t -sw",
-    "on-click-right" : "sleep 0.1 && swaync-client -d -sw",
+    "on-click": "sleep 0.1 && swaync-client -t -sw",
+    "on-click-right": "sleep 0.1 && swaync-client -d -sw",
     "escape": true
   },
   /* ------------------------------------------------------------------------ */
@@ -135,6 +135,7 @@
     "format": "{:%R}",
     "format-alt": "{:%R 󰃭 %d·%m·%y}",
     "tooltip-format": "<tt>{calendar}</tt>",
+    "timezone": "Europe/Stockholm",
     "calendar": {
       "mode": "month",
       "mode-mon-col": 3,

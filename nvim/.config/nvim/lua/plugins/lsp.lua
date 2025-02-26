@@ -35,10 +35,19 @@ return {
           telemetry = { enable = false },
         },
       },
-      ruff_lsp = {},
       rust_analyzer = {},
       -- yamlls = {},
       bicep = {},
+      basedpyright = {
+        analysis = {
+          autoSearchPaths = true,
+          diagnosticMode = "workspace",
+          useLibraryCodeForTypes = true,
+          typeCheckingMode = "off",
+        },
+
+      },
+      -- pyright = {},
     }
 
     local on_attach = function(_, bufnr)
