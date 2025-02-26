@@ -5,7 +5,9 @@ return {
   priority = 900,
   opts = {
     options = {
-      multilines = true
+      multilines = {
+        enable = true
+      }
     }
   },
 }

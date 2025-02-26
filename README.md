@@ -1,28 +1,29 @@
-# TODO:
+# Dotfiles
 
-Write a proper readme
-
-
-# Nvim TODO:
-
-- [ ] Fix hidden files
-- [ ] Fix yml schemas
-- [x] Change from config -> opts
-
-# Alacritty TODO:
-- [ ] Fix keybindings
+This repository contains my personal configuration files (dotfiles) for various tools and applications. These dotfiles help to set up a consistent development environment across different machines.
 
 
-# install TODO:
-- [ ] disable super+p default behaviour
-- [ ] settings set org.gnome.mutter.keybindings switch-monitor "['XF86Display']"
-- [ ] rustup and rustup default stable
-- [x] fix fd-find symlink
+## Installation
+
+To install the dotfiles, follow these steps:
+
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/iamDrakkir/dotfiles.git ~/.dotfiles
+    cd ~/.dotfiles
+    ```
+
+2. **Run the installation script**:
+    ```bash
+    ./install.sh
+    ```
+
+### install TODO:
 - [ ] switch to eza
-bash <(curl https://updates.zen-browser.app/appimage.sh)
 
-# wifi 6e so swedish:
+### wifi 6e to swedish:
 - [ ] echo "options cfg80211 ieee80211_regdom=SE"|sudo tee /etc/modprobe.d/cfg80211.conf
 
-# packages to test:
-cargo install --git https://github.com/knarkzel/raise
+## Usage
+
+After installation, the dotfiles will be symlinked to the appropriate locations in your home directory. You can customize them further by editing the files directly.
