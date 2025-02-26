@@ -1,7 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
-    'AndreM222/copilot-lualine'
+    "AndreM222/copilot-lualine"
   },
   cond = vim.g.vscode == nil,
   event = "VeryLazy",
@@ -9,15 +9,18 @@ return {
     local lualine = require("lualine")
 
     local function lsp_provider()
-      local filetype = vim.bo.filetype
-      local clients = {}
-      for _, client in ipairs(vim.lsp.get_clients()) do
-        local filetypes = client.config.filetypes
-        if filetypes and vim.fn.index(filetypes, filetype) ~= -1 then
-          clients[#clients + 1] = client.name
+      local clients = vim.lsp.get_clients({ bufnr = 0 })
+      if #clients == 0 then
+        return ''
+      end
+
+      local c = {}
+      for _, client in pairs(clients) do
+        if client.name ~= "copilot" then
+          table.insert(c, client.name)
         end
       end
-      return table.concat(clients, '-')
+      return table.concat(c, ' / ')
     end
 
     local function formatter()
@@ -25,8 +28,7 @@ return {
       if not status_ok then
         return
       end
-      local bufnr = vim.api.nvim_get_current_buf()
-      return table.concat(conform.list_formatters_for_buffer(bufnr))
+      return table.concat(conform.list_formatters_for_buffer(0))
     end
 
     local function diff_source()
@@ -137,7 +139,7 @@ return {
             end
           }
         },
-        lualine_y = { "filetype", formatter, { lsp_provider, separator = "" }, copilot, "encoding" },
+        lualine_y = { "filetype", formatter, lsp_provider, copilot, "encoding" },
         lualine_z = { location, "progress" },
       },
       inactive_sections = {},
@@ -150,7 +152,7 @@ return {
       --   lualine_z = { "tabs" },
       -- },
       -- winbar = {},
-      extensions = { "lazy", "quickfix", "mason", "oil", telescope_extension, dashboard_extension },
+      extensions = { "lazy", "quickfix", "mason", telescope_extension, dashboard_extension },
     })
   end,
 }

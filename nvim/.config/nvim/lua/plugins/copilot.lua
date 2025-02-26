@@ -6,11 +6,11 @@ return {
   opts = {
     suggestion = {
       enabled = false,
-      auto_trigger = true,
+      auto_trigger = false,
       keymap = {
-        accept = "<Tab>",
+        -- accept = "<Tab>",
         -- accept_line = "<M-l>",
-        accept_word = "<S-Tab>",
+        -- accept_word = "<S-Tab>",
         -- next = "<M-]>",
         -- prev = "<M-[>",
         -- dismiss = "<M-c>",
