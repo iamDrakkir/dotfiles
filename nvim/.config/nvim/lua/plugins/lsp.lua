@@ -38,6 +38,7 @@ return {
       rust_analyzer = {},
       -- yamlls = {},
       bicep = {},
+      ruff = {},
       basedpyright = {
         analysis = {
           autoSearchPaths = true,

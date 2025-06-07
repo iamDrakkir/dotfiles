@@ -1,0 +1,75 @@
+{
+  "bar.customModules.storage.paths": [
+    "/"
+  ],
+  "theme.font.name": "JetBrainsMono Nerd Font",
+  "theme.font.label": "JetBrainsMono Nerd Font",
+  "theme.font.size": "0.9rem",
+  "theme.font.weight": 600,
+  "theme.bar.menus.enableShadow": false,
+  "menus.clock.time.military": true,
+  "menus.clock.time.hideSeconds": true,
+  "menus.clock.weather.location": "Kimstad",
+  "menus.clock.weather.unit": "metric",
+  "wallpaper.image": "",
+  "menus.dashboard.powermenu.avatar.image": "/home/drakkir/.face",
+  "theme.bar.menus.menu.dashboard.profile.radius": "2.4em",
+  "theme.bar.menus.menu.dashboard.profile.size": "8.5em",
+  "menus.dashboard.powermenu.confirmation": false,
+  "theme.bar.buttons.modules.power.enableBorder": false,
+  "theme.bar.floating": false,
+  "theme.bar.buttons.enableBorders": false,
+  "theme.bar.border.location": "none",
+  "theme.bar.enableShadow": false,
+  "theme.bar.location": "top",
+  "bar.autoHide": "never",
+  "theme.notification.enableShadow": true,
+  "notifications.showActionsOnHover": false,
+  "theme.osd.enable": true,
+  "theme.osd.duration": 2000,
+  "theme.osd.orientation": "horizontal",
+  "theme.osd.location": "bottom",
+  "theme.osd.enableShadow": true,
+  "menus.power.lowBatteryNotification": true,
+  "theme.bar.transparent": true,
+  "scalingPriority": "hyprland",
+  "theme.notification.border_radius": "2.6em",
+  "theme.bar.buttons.borderSize": "0.1em",
+  "theme.bar.buttons.modules.microphone.enableBorder": false,
+  "theme.bar.buttons.modules.cpu.enableBorder": false,
+  "bar.customModules.weather.unit": "metric",
+  "bar.battery.hideLabelWhenFull": false,
+  "bar.clock.format": "%a %b %d  %H:%M",
+  "bar.clock.showIcon": true,
+  "bar.clock.showTime": true,
+  "bar.layouts": {
+    "*": {
+      "left": [
+        "dashboard",
+        "workspaces",
+        "windowtitle"
+      ],
+      "middle": [
+        "media"
+      ],
+      "right": [
+        "volume",
+        "network",
+        "bluetooth",
+        "battery",
+        "systray",
+        "clock",
+        "notifications"
+      ]
+    }
+  },
+  "bar.network.truncation_size": 9,
+  "menus.dashboard.controls.enabled": false,
+  "menus.dashboard.stats.enabled": false,
+  "menus.dashboard.stats.enable_gpu": false,
+  "menus.dashboard.shortcuts.left.shortcut1.tooltip": "Zen Browser",
+  "menus.dashboard.shortcuts.left.shortcut1.command": "zen",
+  "menus.clock.weather.enabled": true,
+  "menus.clock.weather.interval": 60000,
+  "bar.customModules.netstat.dynamicIcon": true
+}

@@ -6,7 +6,7 @@
 }
 {
     "label" : "logout",
-    "action" : "sleep 1; killall -9 Hyprland",
+    "action" : "sleep 1; hyprctl dispatch exit",
     "text" : "Logout",
     "keybind" : "e"
 }
