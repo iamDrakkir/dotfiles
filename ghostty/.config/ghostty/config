@@ -5,5 +5,5 @@ gtk-adwaita = false
 gtk-titlebar = false
 window-decoration = false
 theme = catppuccin-mocha
-# theme = catppuccin-frappe
 confirm-close-surface=false
+command = zsh
