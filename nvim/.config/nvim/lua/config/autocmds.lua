@@ -81,6 +81,7 @@ autocmd("FileType", {
     "PlenaryTestPopup",
     "lazy",
     "minifiles",
+    "lazygit",
   },
   desc = "Close more filetypes with <q> and <esc>",
   callback = function(event)

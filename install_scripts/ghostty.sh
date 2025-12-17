@@ -31,7 +31,7 @@ install_deps() {
 
 
 install_deps
-clone-or-pull https://github.com/ghostty-org/ghostty.git "$HOME/git/ghostty" v1.0.0
+clone-or-pull https://github.com/ghostty-org/ghostty.git "$HOME/git/ghostty" v1.1.2
 build_ghostty
 # install_ghostty
 popd
