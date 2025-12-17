@@ -1,6 +1,7 @@
 return {
-  "Bekaboo/dropbar.nvim",
-  event = { "BufReadPost", "BufNewFile" },
-  enabled = true,
-  setup = true,
+    "Bekaboo/dropbar.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    cond = vim.g.vscode == nil,
+    enabled = true,
+    setup = true,
 }

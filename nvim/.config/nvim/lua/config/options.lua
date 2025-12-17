@@ -43,8 +43,8 @@ opt.grepprg = "rg --vimgrep"   -- use rg for grep
 opt.expandtab = true   -- Use spaces instead of tabs
 opt.smartindent = true -- Insert indentation automatically
 opt.shiftround = true  -- Round indent to multiple of 'shiftwidth'.
-opt.tabstop = 2        -- Number of spaces tabs count for
-opt.shiftwidth = 2     -- Size of indents
+opt.tabstop = 4        -- Number of spaces tabs count for
+opt.shiftwidth = 4     -- Size of indents
 
 -- System
 opt.completeopt = "menu,menuone,noselect" -- mostly for cmp
