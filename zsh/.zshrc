@@ -27,3 +27,5 @@ else
     plug "$HOME/.config/zsh/prompt.zsh"
 fi
 
+
+. "$HOME/.local/share/../bin/env"

@@ -54,3 +54,5 @@ alias glol='git log --graph --oneline --decorate'
 # Zellij
 alias ze='zellij'
 alias zz='zellij a $(zellij list-sessions | fzf)'
+
+alias pre='uvx --with pre-commit-uv pre-commit run --all-files'

@@ -26,6 +26,14 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
 --multi"
 
+export UV_INDEX="https://ctek:$AZURE_PIP_PAT@pkgs.dev.azure.com/CTEKSwedenAB/_packaging/ctek/pypi/simple/"
+export PIP_INDEX_URL="https://ctek:$AZURE_PIP_PAT@pkgs.dev.azure.com/CTEKSwedenAB/_packaging/ctek/pypi/simple/"
+
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 # Load zoxide
 eval "$(zoxide init zsh)"
 
@@ -34,3 +42,5 @@ if [ -d $HOME/.config/nvm ]; then
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
+
+export PATH=/home/rhagelin.creatorctek.local/.opencode/bin:$PATH
